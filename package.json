@@ -1,0 +1,15 @@
+{
+  "name": "pildun-by-ikanx101",
+  "version": "1.0.0",
+  "description": "FIFA World Cup 2026 Analytics & Prediction — Landing Page",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
