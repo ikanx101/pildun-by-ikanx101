@@ -146,7 +146,7 @@
     }
 
     .headline {
-      font-size: clamp(52px, 6.5vw, 78px);
+      font-size: clamp(40px, 9vw, 78px);
       font-weight: 300;
       line-height: 0.9;
       letter-spacing: -0.04em;
@@ -238,7 +238,7 @@
     }
 
     .section-headline {
-      font-size: clamp(36px, 4.5vw, 52px);
+      font-size: clamp(26px, 5.5vw, 52px);
       font-weight: 300;
       line-height: 1.05;
       letter-spacing: -0.04em;
@@ -309,45 +309,112 @@
     }
 
     /* ── Responsive ── */
+
+    /* Tablet: 600–900px */
     @media (max-width: 900px) {
-      .nav {
-        padding: 16px 24px;
-      }
+      .nav { padding: 16px 28px; }
 
       .hero-inner {
         grid-template-columns: 1fr;
-        padding: 100px 24px 60px;
+        padding: 100px 28px 64px;
         gap: 0;
       }
 
-      .hero-content {
-        max-width: 100%;
-      }
+      /* hide the empty visual placeholder column */
+      .hero-inner > div[aria-hidden] { display: none; }
 
-      .why-section {
-        padding: 60px 24px 80px;
-      }
+      .hero-content { max-width: 100%; }
 
-      .cards {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
+      .why-section { padding: 60px 28px 80px; }
+
+      /* 2-column cards on tablet */
+      .cards { grid-template-columns: repeat(2, 1fr); gap: 16px; }
 
       footer {
         flex-direction: column;
         align-items: flex-start;
-        padding: 24px;
+        padding: 24px 28px;
+        gap: 10px;
       }
     }
 
-    @media (max-width: 480px) {
-      .nav-logo-text {
-        font-size: 16px;
-      }
+    /* Mobile: < 600px */
+    @media (max-width: 599px) {
+      .nav { padding: 13px 20px; }
+
+      .nav-logo-text { font-size: 15px; }
 
       .nav-pill {
-        font-size: 11px;
-        padding: 8px 14px;
+        font-size: 10px;
+        padding: 8px 12px;
+        letter-spacing: 0.03em;
+      }
+
+      .hero-inner { padding: 86px 20px 52px; }
+
+      .eyebrow {
+        font-size: 10px;
+        margin-bottom: 16px;
+      }
+
+      .body-text {
+        font-size: 15px;
+        max-width: 100%;
+        margin-bottom: 30px;
+      }
+
+      .coming-soon-tag {
+        font-size: 10px;
+        padding: 10px 14px;
+        gap: 8px;
+      }
+
+      .coming-soon-dot { width: 6px; height: 6px; }
+
+      .status-caption { font-size: 12px; }
+
+      .why-section { padding: 48px 20px 60px; }
+
+      .section-headline { margin-bottom: 40px; }
+
+      /* 1-column cards on mobile */
+      .cards { grid-template-columns: 1fr; gap: 12px; }
+
+      .card { padding: 20px 18px; }
+
+      .card-title { font-size: 16px; }
+
+      .card-text { font-size: 13px; }
+
+      footer { padding: 20px; gap: 8px; }
+    }
+
+    /* Soft dark veil behind text on mobile so particles don't bleed into copy */
+    @media (max-width: 599px) {
+      .hero-content {
+        position: relative;
+      }
+
+      .hero-content::before {
+        content: '';
+        position: absolute;
+        inset: -28px -20px;
+        background: rgba(0, 0, 0, 0.52);
+        filter: blur(22px);
+        border-radius: 16px;
+        z-index: -1;
+        pointer-events: none;
+      }
+    }
+
+    /* Very small screens: < 380px */
+    @media (max-width: 379px) {
+      /* Truncate pill so logo stays visible */
+      .nav-pill {
+        max-width: 90px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
     }
   </style>
@@ -479,10 +546,15 @@
       function rand(min, max) { return min + Math.random() * (max - min); }
 
       function spawnParticle() {
-        // Globe cluster centred at ~72% x, 50% y of the viewport
-        const cx = W * 0.72;
-        const cy = H * 0.50;
-        const maxR = Math.min(W, H) * 0.32;
+        // Responsive cluster centre: right-heavy on desktop, centred-top on mobile
+        let cx, cy, maxR;
+        if (W < 600) {
+          cx = W * 0.50; cy = H * 0.36; maxR = Math.min(W, H) * 0.44;
+        } else if (W < 900) {
+          cx = W * 0.62; cy = H * 0.46; maxR = Math.min(W, H) * 0.38;
+        } else {
+          cx = W * 0.72; cy = H * 0.50; maxR = Math.min(W, H) * 0.32;
+        }
 
         const angle = Math.random() * Math.PI * 2;
 
