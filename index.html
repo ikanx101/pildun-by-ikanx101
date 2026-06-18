@@ -3,428 +3,165 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pildun 2026 — Analitik & Prediksi Piala Dunia FIFA</title>
-  <meta name="description" content="Analisis statistik dan prediksi juara Piala Dunia FIFA 2026 berbasis data pertandingan nyata. Segera hadir." />
+  <title>Pildun 2026 — Analitik &amp; Prediksi Piala Dunia FIFA</title>
+  <meta name="description" content="Analisis statistik dan prediksi juara Piala Dunia FIFA 2026 berbasis data pertandingan nyata." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
   <style>
     :root {
-      --color-void: #000000;
-      --color-bone: #ffffff;
-      --color-ash: #bdbdbd;
-      --color-smoke: #9a9a9a;
-      --color-plum-voltage: #8052ff;
-      --color-amber-spark: #ffb829;
-      --color-lichen: #15846e;
-
-      --font-main: 'Space Grotesk', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-
-      --spacing-6: 6px;
-      --spacing-12: 12px;
-      --spacing-18: 18px;
-      --spacing-24: 24px;
-      --spacing-30: 30px;
-      --spacing-36: 36px;
-      --spacing-60: 60px;
-      --spacing-96: 96px;
-      --spacing-120: 120px;
-      --page-max-width: 1200px;
-      --radius: 24px;
+      --void: #000;
+      --bone: #fff;
+      --ash: #bdbdbd;
+      --smoke: #9a9a9a;
+      --plum: #8052ff;
+      --amber: #ffb829;
+      --lichen: #15846e;
+      --font: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+      --max: 1200px;
+      --r: 24px;
     }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    html, body { height: 100%; }
+    body { background: var(--void); color: var(--bone); font-family: var(--font); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    /* NAV */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; border-bottom: 1px solid rgba(255,255,255,.06); background: rgba(0,0,0,.8); backdrop-filter: blur(16px); }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-icon { width: 26px; height: 26px; flex-shrink: 0; }
+    .nav-logo-text { font-size: 18px; font-weight: 600; color: var(--bone); letter-spacing: .021em; }
+    .nav-pill { font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--bone); background: var(--plum); padding: 10px 18px; border-radius: var(--r); white-space: nowrap; }
 
-    html, body {
-      height: 100%;
-    }
+    /* HERO */
+    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
+    #particle-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+    .hero-inner { position: relative; z-index: 1; width: 100%; max-width: var(--max); margin: 0 auto; padding: 120px 40px 80px; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 60px; }
+    .hero-content { max-width: 520px; }
+    .eyebrow { display: block; font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--plum); margin-bottom: 20px; }
+    .headline { font-size: clamp(40px,9vw,78px); font-weight: 300; line-height: .9; letter-spacing: -.04em; color: var(--bone); margin-bottom: 28px; }
+    .headline em { font-style: normal; color: var(--plum); }
+    .body-text { font-size: 16px; line-height: 1.6; letter-spacing: .025em; color: var(--ash); max-width: 52ch; margin-bottom: 40px; }
+    .body-text strong { color: var(--bone); font-weight: 600; }
+    .status-block { display: flex; flex-direction: column; gap: 16px; }
+    .live-tag { display: inline-flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--bone); border: 1px solid rgba(21,132,110,.4); background: rgba(21,132,110,.08); border-radius: var(--r); padding: 12px 20px; width: fit-content; }
+    .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--lichen); flex-shrink: 0; animation: pulse 2.4s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.35;transform:scale(.75)} }
+    .status-caption { font-size: 13px; letter-spacing: .025em; color: var(--smoke); line-height: 1.6; }
+    .scroll-cta { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--plum); text-decoration: none; margin-top: 4px; transition: opacity .2s; }
+    .scroll-cta:hover { opacity: .7; }
 
-    body {
-      background: var(--color-void);
-      color: var(--color-bone);
-      font-family: var(--font-main);
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+    /* SECTIONS */
+    .section { max-width: var(--max); margin: 0 auto; padding: 80px 40px; }
+    .section-divider { border-top: 1px solid rgba(255,255,255,.06); }
+    .sec-eye { display: block; font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--smoke); margin-bottom: 14px; }
+    .sec-head { font-size: clamp(26px,5.5vw,52px); font-weight: 300; line-height: 1.05; letter-spacing: -.04em; color: var(--bone); margin-bottom: 48px; }
+    .sec-head em { font-style: normal; color: var(--plum); }
 
-    /* ── Navigation ── */
-    .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 40px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-    }
+    /* STAT OVERVIEW */
+    .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+    .stat-card { border: 1px solid rgba(255,255,255,.08); border-radius: var(--r); padding: 24px 22px; position: relative; overflow: hidden; }
+    .stat-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
+    .stat-card.plum::before { background: var(--plum); }
+    .stat-card.amber::before { background: var(--amber); }
+    .stat-card.lichen::before { background: var(--lichen); }
+    .stat-card.bone::before { background: rgba(255,255,255,.3); }
+    .stat-value { font-size: 36px; font-weight: 700; letter-spacing: -.03em; }
+    .stat-label { font-size: 13px; color: var(--smoke); margin-top: 6px; letter-spacing: .025em; }
 
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
+    /* CHART CARD */
+    .chart-card { border: 1px solid rgba(255,255,255,.08); border-radius: var(--r); padding: 28px; }
+    .chart-title { font-size: 16px; font-weight: 600; letter-spacing: .021em; margin-bottom: 6px; }
+    .chart-sub { font-size: 13px; color: var(--smoke); margin-bottom: 24px; line-height: 1.5; }
+    .chart-wrap { position: relative; height: 380px; }
+    .chart-wrap.tall { height: 480px; }
+    .insight { margin-top: 20px; padding: 14px 18px; border: 1px solid rgba(255,255,255,.06); border-left: 3px solid var(--plum); border-radius: 12px; background: rgba(128,82,255,.04); }
+    .insight.amber { border-left-color: var(--amber); background: rgba(255,184,41,.04); }
+    .insight.lichen { border-left-color: var(--lichen); background: rgba(21,132,110,.04); }
+    .insight p { font-size: 13px; color: var(--ash); line-height: 1.6; }
+    .insight strong { color: var(--bone); }
 
-    .nav-logo-icon {
-      width: 26px;
-      height: 26px;
-      flex-shrink: 0;
-    }
+    /* TWO-COL */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
-    .nav-logo-text {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--color-bone);
-      letter-spacing: 0.021em;
-    }
+    /* KLASEMEN */
+    .group-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .gtab { font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--smoke); background: transparent; border: 1px solid rgba(255,255,255,.1); border-radius: 100px; padding: 8px 16px; cursor: pointer; transition: all .2s; }
+    .gtab:hover { border-color: rgba(255,255,255,.25); color: var(--ash); }
+    .gtab.active { color: var(--bone); background: var(--plum); border-color: var(--plum); }
+    .gpanel { display: none; }
+    .gpanel.active { display: block; animation: fadeIn .3s ease; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+    .s-table { width: 100%; border-collapse: collapse; }
+    .s-table th { text-align: left; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--smoke); padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .s-table th:not(:first-child) { text-align: center; }
+    .s-table td { padding: 14px 12px; border-bottom: 1px solid rgba(255,255,255,.04); font-size: 14px; color: var(--ash); }
+    .s-table td:not(:first-child) { text-align: center; }
+    .s-table tr:last-child td { border-bottom: none; }
+    .s-table tr:nth-child(1) td, .s-table tr:nth-child(2) td { color: var(--bone); }
+    .s-table tr:nth-child(1) td:first-child { border-left: 3px solid var(--lichen); padding-left: 9px; }
+    .s-table tr:nth-child(2) td:first-child { border-left: 3px solid rgba(21,132,110,.35); padding-left: 9px; }
+    .pts { display: inline-block; padding: 3px 9px; border-radius: 100px; font-size: 12px; font-weight: 600; }
+    .pts3 { background: rgba(21,132,110,.2); color: #4ecba3; }
+    .pts1 { background: rgba(255,184,41,.15); color: var(--amber); }
+    .pts0 { background: rgba(255,255,255,.06); color: var(--smoke); }
+    .s-wrap { overflow-x: auto; }
 
-    .nav-pill {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--color-bone);
-      background: var(--color-plum-voltage);
-      padding: 10px 18px;
-      border-radius: var(--radius);
-      white-space: nowrap;
-    }
+    /* WHY CARDS */
+    .cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .card { border: 1px solid rgba(255,255,255,.08); border-radius: var(--r); padding: 28px; }
+    .card-icon { width: 44px; height: 44px; margin-bottom: 20px; }
+    .card-title { font-size: 18px; font-weight: 600; letter-spacing: .021em; margin-bottom: 10px; }
+    .card-text { font-size: 14px; line-height: 1.6; letter-spacing: .025em; color: var(--ash); }
 
-    /* ── Hero ── */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-    }
+    /* FOOTER */
+    footer { border-top: 1px solid rgba(255,255,255,.06); padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    footer p { font-size: 13px; color: var(--smoke); line-height: 1.5; }
+    footer a { color: var(--smoke); text-decoration: none; transition: color .2s; }
+    footer a:hover { color: var(--bone); }
 
-    #particle-canvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-    }
-
-    .hero-inner {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: var(--page-max-width);
-      margin: 0 auto;
-      padding: 120px 40px 80px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: var(--spacing-60);
-    }
-
-    .hero-content {
-      max-width: 520px;
-    }
-
-    .eyebrow {
-      display: block;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--color-plum-voltage);
-      margin-bottom: 20px;
-    }
-
-    .headline {
-      font-size: clamp(40px, 9vw, 78px);
-      font-weight: 300;
-      line-height: 0.9;
-      letter-spacing: -0.04em;
-      color: var(--color-bone);
-      margin-bottom: 28px;
-    }
-
-    .headline em {
-      font-style: normal;
-      color: var(--color-plum-voltage);
-    }
-
-    .body-text {
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 1.6;
-      letter-spacing: 0.025em;
-      color: var(--color-ash);
-      max-width: 52ch;
-      margin-bottom: 40px;
-    }
-
-    .body-text strong {
-      color: var(--color-bone);
-      font-weight: 600;
-    }
-
-    .status-block {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .coming-soon-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--color-bone);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: var(--radius);
-      padding: 12px 20px;
-      width: fit-content;
-    }
-
-    .coming-soon-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--color-amber-spark);
-      flex-shrink: 0;
-      animation: pulse 2.4s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: 0.35; transform: scale(0.75); }
-    }
-
-    .status-caption {
-      font-size: 13px;
-      font-weight: 400;
-      letter-spacing: 0.025em;
-      color: var(--color-smoke);
-      line-height: 1.6;
-    }
-
-    /* ── Why section ── */
-    .why-section {
-      position: relative;
-      z-index: 1;
-      max-width: var(--page-max-width);
-      margin: 0 auto;
-      padding: 80px 40px 120px;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .section-eyebrow {
-      display: block;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--color-smoke);
-      margin-bottom: 14px;
-    }
-
-    .section-headline {
-      font-size: clamp(26px, 5.5vw, 52px);
-      font-weight: 300;
-      line-height: 1.05;
-      letter-spacing: -0.04em;
-      color: var(--color-bone);
-      margin-bottom: 60px;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .card {
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: var(--radius);
-      padding: 28px;
-    }
-
-    .card-icon {
-      width: 44px;
-      height: 44px;
-      margin-bottom: 20px;
-    }
-
-    .card-title {
-      font-size: 18px;
-      font-weight: 600;
-      letter-spacing: 0.021em;
-      color: var(--color-bone);
-      margin-bottom: 10px;
-    }
-
-    .card-text {
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 1.6;
-      letter-spacing: 0.025em;
-      color: var(--color-ash);
-    }
-
-    /* ── Footer ── */
-    footer {
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 28px 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    footer p {
-      font-size: 13px;
-      font-weight: 400;
-      letter-spacing: 0.025em;
-      color: var(--color-smoke);
-      line-height: 1.5;
-    }
-
-    footer a {
-      color: var(--color-smoke);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    footer a:hover {
-      color: var(--color-bone);
-    }
-
-    /* ── Responsive ── */
-
-    /* Tablet: 600–900px */
+    /* RESPONSIVE */
     @media (max-width: 900px) {
       .nav { padding: 16px 28px; }
-
-      .hero-inner {
-        grid-template-columns: 1fr;
-        padding: 100px 28px 64px;
-        gap: 0;
-      }
-
-      /* hide the empty visual placeholder column */
+      .hero-inner { grid-template-columns: 1fr; padding: 100px 28px 64px; gap: 0; }
       .hero-inner > div[aria-hidden] { display: none; }
-
       .hero-content { max-width: 100%; }
-
-      .why-section { padding: 60px 28px 80px; }
-
-      /* 2-column cards on tablet */
-      .cards { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-
-      footer {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 24px 28px;
-        gap: 10px;
-      }
+      .section { padding: 60px 28px; }
+      .stats-grid { grid-template-columns: repeat(2,1fr); }
+      .two-col { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: repeat(2,1fr); gap: 16px; }
+      footer { flex-direction: column; align-items: flex-start; padding: 24px 28px; gap: 10px; }
     }
-
-    /* Mobile: < 600px */
     @media (max-width: 599px) {
       .nav { padding: 13px 20px; }
-
       .nav-logo-text { font-size: 15px; }
-
-      .nav-pill {
-        font-size: 10px;
-        padding: 8px 12px;
-        letter-spacing: 0.03em;
-      }
-
+      .nav-pill { font-size: 10px; padding: 8px 12px; }
       .hero-inner { padding: 86px 20px 52px; }
-
-      .eyebrow {
-        font-size: 10px;
-        margin-bottom: 16px;
-      }
-
-      .body-text {
-        font-size: 15px;
-        max-width: 100%;
-        margin-bottom: 30px;
-      }
-
-      .coming-soon-tag {
-        font-size: 10px;
-        padding: 10px 14px;
-        gap: 8px;
-      }
-
-      .coming-soon-dot { width: 6px; height: 6px; }
-
-      .status-caption { font-size: 12px; }
-
-      .why-section { padding: 48px 20px 60px; }
-
-      .section-headline { margin-bottom: 40px; }
-
-      /* 1-column cards on mobile */
+      .eyebrow { font-size: 10px; margin-bottom: 16px; }
+      .body-text { font-size: 15px; margin-bottom: 30px; }
+      .live-tag { font-size: 10px; padding: 10px 14px; }
+      .section { padding: 48px 20px; }
+      .stats-grid { grid-template-columns: repeat(2,1fr); gap: 12px; }
+      .stat-value { font-size: 28px; }
+      .chart-wrap { height: 280px; }
+      .chart-wrap.tall { height: 380px; }
       .cards { grid-template-columns: 1fr; gap: 12px; }
-
       .card { padding: 20px 18px; }
-
-      .card-title { font-size: 16px; }
-
-      .card-text { font-size: 13px; }
-
-      footer { padding: 20px; gap: 8px; }
+      footer { padding: 20px; }
+      .hero-content { position: relative; }
+      .hero-content::before { content:''; position:absolute; inset:-28px -20px; background:rgba(0,0,0,.52); filter:blur(22px); border-radius:16px; z-index:-1; pointer-events:none; }
     }
-
-    /* Soft dark veil behind text on mobile so particles don't bleed into copy */
-    @media (max-width: 599px) {
-      .hero-content {
-        position: relative;
-      }
-
-      .hero-content::before {
-        content: '';
-        position: absolute;
-        inset: -28px -20px;
-        background: rgba(0, 0, 0, 0.52);
-        filter: blur(22px);
-        border-radius: 16px;
-        z-index: -1;
-        pointer-events: none;
-      }
-    }
-
-    /* Very small screens: < 380px */
     @media (max-width: 379px) {
-      /* Truncate pill so logo stays visible */
-      .nav-pill {
-        max-width: 90px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-      }
+      .nav-pill { max-width: 90px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
   <nav class="nav">
     <a href="#" class="nav-logo">
-      <svg class="nav-logo-icon" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="nav-logo-icon" viewBox="0 0 26 26" fill="none">
         <circle cx="13" cy="13" r="11.5" stroke="#8052ff" stroke-width="1.4"/>
         <path d="M13 4.5 L15 9.5 L20.5 9.5 L16.2 12.8 L17.8 18 L13 15 L8.2 18 L9.8 12.8 L5.5 9.5 L11 9.5 Z" stroke="#8052ff" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
       </svg>
@@ -433,234 +170,464 @@
     <span class="nav-pill">FIFA World Cup 2026</span>
   </nav>
 
-  <!-- Hero Section -->
   <section class="hero">
     <canvas id="particle-canvas"></canvas>
-
     <div class="hero-inner">
       <div class="hero-content">
         <span class="eyebrow">Analitik &amp; Prediksi · Piala Dunia FIFA 2026</span>
-        <h1 class="headline">
-          Data nyata.<br>
-          Prediksi <em>akurat.</em>
-        </h1>
+        <h1 class="headline">Data nyata.<br>Prediksi <em>akurat.</em></h1>
         <p class="body-text">
-          Analisis statistik mendalam dan prediksi juara Piala Dunia berbasis data pertandingan sesungguhnya.
-          <strong>Performa di turnamen nyata jauh lebih bermakna daripada data kualifikasi</strong> —
-          itulah mengapa kami menunggu hingga setiap tim menyelesaikan minimal 2 pertandingan di fase grup
-          sebelum model prediksi dijalankan.
+          Analisis statistik mendalam berbasis data pertandingan sesungguhnya.
+          <strong>24 pertandingan fase grup pertama sudah selesai</strong> —
+          155 variabel statistik dari setiap tim kini tersedia.
         </p>
         <div class="status-block">
-          <div class="coming-soon-tag">
-            <span class="coming-soon-dot"></span>
-            Segera Hadir · Coming Soon
-          </div>
-          <p class="status-caption">
-            Sedang mengumpulkan data dari seluruh tim peserta.<br>
-            Analisis akan tayang setelah minimal 2 pertandingan per tim tersedia.
-          </p>
+          <div class="live-tag"><span class="live-dot"></span>Data Live · 24 Pertandingan</div>
+          <p class="status-caption">Matchday 1 selesai · 48 tim · 155 variabel FIFA.<br>Data diperbarui otomatis setelah setiap pertandingan.</p>
+          <a href="#analytics" class="scroll-cta">Lihat Analisa ↓</a>
         </div>
       </div>
-      <!-- Right side: owned by the particle canvas -->
       <div aria-hidden="true"></div>
     </div>
   </section>
 
-  <!-- Why Section -->
-  <section class="why-section">
-    <span class="section-eyebrow">Kenapa harus menunggu?</span>
-    <h2 class="section-headline">
-      Metodologi berbasis<br>data turnamen nyata.
-    </h2>
-
-    <div class="cards">
-
-      <div class="card">
-        <svg class="card-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="1" y="1" width="42" height="42" rx="9" stroke="#8052ff" stroke-width="1.4"/>
-          <path d="M11 30 L11 22 M18 30 L18 16 M25 30 L25 20 M32 30 L32 12" stroke="#8052ff" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        <h3 class="card-title">Data Real, Bukan Estimasi</h3>
-        <p class="card-text">Data kualifikasi tidak mencerminkan performa tim di tekanan turnamen sesungguhnya. Kami hanya menggunakan statistik dari pertandingan Piala Dunia 2026 itu sendiri.</p>
-      </div>
-
-      <div class="card">
-        <svg class="card-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="22" cy="22" r="19" stroke="#15846e" stroke-width="1.4"/>
-          <path d="M22 13 L22 22 L29 26" stroke="#15846e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="22" cy="22" r="2" fill="#15846e"/>
-        </svg>
-        <h3 class="card-title">Minimal 2 Pertandingan</h3>
-        <p class="card-text">Satu pertandingan bisa jadi anomali. Dengan minimal 2 match per tim, pola performa mulai terlihat dan prediksi menjadi jauh lebih dapat diandalkan.</p>
-      </div>
-
-      <div class="card">
-        <svg class="card-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M7 38 L22 7 L37 38 Z" stroke="#ffb829" stroke-width="1.4" stroke-linejoin="round"/>
-          <path d="M14 28 L30 28" stroke="#ffb829" stroke-width="1.3" stroke-linecap="round"/>
-          <circle cx="22" cy="18" r="2" fill="#ffb829"/>
-        </svg>
-        <h3 class="card-title">Prediksi Berbasis Statistik</h3>
-        <p class="card-text">Dari xG, ball possession, hingga defensive line — model prediksi kami mempertimbangkan puluhan metrik untuk menghitung peluang juara setiap tim.</p>
-      </div>
-
+  <!-- Stats Overview -->
+  <section id="analytics" class="section section-divider">
+    <span class="sec-eye">Fase Grup · Matchday 1</span>
+    <h2 class="sec-head">Analisa <em>Live</em></h2>
+    <div class="stats-grid">
+      <div class="stat-card plum"><div class="stat-value">24</div><div class="stat-label">Pertandingan Selesai</div></div>
+      <div class="stat-card lichen"><div class="stat-value">48</div><div class="stat-label">Tim Terdata</div></div>
+      <div class="stat-card amber"><div class="stat-value">155</div><div class="stat-label">Variabel per Tim</div></div>
+      <div class="stat-card bone"><div class="stat-value" style="font-size:22px;line-height:1.3">18 Juni 2026</div><div class="stat-label">Terakhir Diperbarui</div></div>
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- Klasemen -->
+  <section class="section section-divider">
+    <span class="sec-eye">Standings</span>
+    <h2 class="sec-head">Klasemen <em>Sementara</em></h2>
+    <div class="group-tabs" id="group-tabs"></div>
+    <div class="chart-card">
+      <div class="s-wrap"><div id="group-panels"></div></div>
+    </div>
+  </section>
+
+  <!-- xG vs Goals -->
+  <section class="section section-divider">
+    <span class="sec-eye">Expected Goals Analysis</span>
+    <h2 class="sec-head">xG vs <em>Gol Aktual</em></h2>
+    <div class="chart-card">
+      <div class="chart-title">Efisiensi Finishing Semua Tim</div>
+      <div class="chart-sub">Titik di atas garis diagonal = lebih klinis dari ekspektasi (overperformer). Di bawah = belum memanfaatkan peluang.</div>
+      <div class="chart-wrap"><canvas id="chart-xg"></canvas></div>
+      <div class="insight lichen" id="insight-xg"><p>Memuat insight…</p></div>
+    </div>
+  </section>
+
+  <!-- Threat + Pressing -->
+  <section class="section section-divider">
+    <span class="sec-eye">Dominasi &amp; Gaya Bermain</span>
+    <h2 class="sec-head">Ancaman &amp; <em>Karakter Tim</em></h2>
+    <div class="two-col">
+      <div class="chart-card">
+        <div class="chart-title">Threat Score — Top 10</div>
+        <div class="chart-sub">Indeks ancaman ke gawang lawan versi FIFA, mencakup kualitas dan posisi setiap tembakan.</div>
+        <div class="chart-wrap"><canvas id="chart-threat"></canvas></div>
+        <div class="insight" id="insight-threat"><p>Memuat insight…</p></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Pressing vs Penguasaan Bola</div>
+        <div class="chart-sub">X = possession (%). Y = jumlah pressing defensif. Setiap titik = satu tim.</div>
+        <div class="chart-wrap"><canvas id="chart-pressing"></canvas></div>
+        <div class="insight amber" id="insight-pressing"><p>Memuat insight…</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Conversion + Speed -->
+  <section class="section section-divider">
+    <span class="sec-eye">Efisiensi &amp; Fisik</span>
+    <h2 class="sec-head">Klinisitas &amp; <em>Kecepatan</em></h2>
+    <div class="two-col">
+      <div class="chart-card">
+        <div class="chart-title">Shot Conversion Rate — Top 10</div>
+        <div class="chart-sub">Persentase tembakan yang berbuah gol. Hanya tim yang sudah mencetak gol ditampilkan.</div>
+        <div class="chart-wrap"><canvas id="chart-conversion"></canvas></div>
+        <div class="insight amber" id="insight-conversion"><p>Memuat insight…</p></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Top Speed — Top 10</div>
+        <div class="chart-sub">Kecepatan lari tertinggi yang tercatat GPS tracking FIFA selama pertandingan berlangsung.</div>
+        <div class="chart-wrap"><canvas id="chart-speed"></canvas></div>
+        <div class="insight lichen" id="insight-speed"><p>Memuat insight…</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Power Ranking -->
+  <section class="section section-divider">
+    <span class="sec-eye">Prediksi Awal · Matchday 1</span>
+    <h2 class="sec-head">Indeks Kekuatan <em>Sementara</em></h2>
+    <div class="chart-card">
+      <div class="chart-title">Power Ranking — Top 15</div>
+      <div class="chart-sub">Gabungan xG (30%) + Threat Score (25%) + Konversi (20%) + Poin (25%). Berdasarkan performa Matchday 1.</div>
+      <div class="chart-wrap tall"><canvas id="chart-ranking"></canvas></div>
+      <div class="insight" id="insight-ranking"><p>Memuat insight…</p></div>
+    </div>
+  </section>
+
+  <!-- Why -->
+  <section class="section section-divider">
+    <span class="sec-eye">Metodologi</span>
+    <h2 class="sec-head">Kapan <em>prediksi</em> dirilis?</h2>
+    <div class="chart-card" style="display:flex;align-items:flex-start;gap:32px;flex-wrap:wrap;">
+      <div style="flex-shrink:0;width:56px;height:56px;border-radius:16px;background:rgba(128,82,255,.12);border:1px solid rgba(128,82,255,.25);display:flex;align-items:center;justify-content:center;">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <circle cx="14" cy="14" r="11" stroke="#8052ff" stroke-width="1.5"/>
+          <path d="M14 9 L14 14 L18 17" stroke="#8052ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div style="flex:1;min-width:260px;">
+        <p style="font-size:18px;font-weight:600;color:#fff;letter-spacing:.021em;margin-bottom:12px;">Prediksi juara tayang setelah Matchday 2</p>
+        <p style="font-size:15px;color:#bdbdbd;line-height:1.7;max-width:68ch;">
+          Satu pertandingan belum cukup — hasilnya bisa jadi anomali. Saya akan menjalankan model prediksi juara <strong style="color:#fff">setelah setiap tim menyelesaikan minimal 2 pertandingan</strong> di fase grup.
+          Dengan dua data poin per tim, pola performa mulai terlihat: mana tim yang konsisten, mana yang hanya beruntung di laga pertama.
+        </p>
+        <p style="font-size:15px;color:#bdbdbd;line-height:1.7;max-width:68ch;margin-top:14px;">
+          Yang membuat prediksi ini berbeda: <strong style="color:#fff">model tidak statis</strong>. Setiap kali pertandingan baru selesai, data scraper dijalankan ulang dan model diperbarui otomatis — sehingga prediksi ikut bergerak mengikuti performa terkini setiap tim. Tim yang tampil buruk di awal masih bisa naik peringkat jika performa membaik, begitu pula sebaliknya.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <footer>
     <p>© 2026 Pildun by <a href="https://ikanx101.com" target="_blank" rel="noopener">ikanx101</a>. Analitik Piala Dunia FIFA 2026.</p>
-    <p>Data diperbarui secara berkala selama turnamen berlangsung.</p>
+    <p>Data: FIFA Official API · Diperbarui berkala selama turnamen</p>
   </footer>
 
   <script>
-    (function () {
-      const canvas = document.getElementById('particle-canvas');
-      const ctx = canvas.getContext('2d');
+  // ── PARTICLE CANVAS ───────────────────────────────────────────────────────
+  (function(){
+    const canvas=document.getElementById('particle-canvas'),ctx=canvas.getContext('2d');
+    const COLORS=[{hex:'#8052ff',w:5},{hex:'#ffb829',w:2},{hex:'#15846e',w:2},{hex:'#ffffff',w:3},{hex:'#bdbdbd',w:1}];
+    const POOL=[];COLORS.forEach(c=>{for(let i=0;i<c.w;i++)POOL.push(c.hex);});
+    const SH=['circle','circle','circle','triangle','diamond','square'];
+    let pts=[],W=0,H=0,aid;
+    const rnd=(a,b)=>a+Math.random()*(b-a);
+    function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+    function spawn(){
+      let cx,cy,mr;
+      if(W<600){cx=W*.5;cy=H*.36;mr=Math.min(W,H)*.44;}
+      else if(W<900){cx=W*.62;cy=H*.46;mr=Math.min(W,H)*.38;}
+      else{cx=W*.72;cy=H*.5;mr=Math.min(W,H)*.32;}
+      const a=Math.random()*Math.PI*2,d=Math.random();
+      const r=d<.55?Math.sqrt(Math.random())*mr*.65:d<.82?mr*.65+Math.random()*mr*.28:mr*.93+Math.random()*mr*.35;
+      const x=cx+Math.cos(a)*r,y=cy+Math.sin(a)*r;
+      return{x,y,ox:x,oy:y,size:rnd(1.2,4.5),color:POOL[Math.floor(Math.random()*POOL.length)],opacity:rnd(.12,.72),shape:SH[Math.floor(Math.random()*SH.length)],phase:rnd(0,Math.PI*2),freq:rnd(.0015,.006),amp:rnd(.8,2.8)};
+    }
+    function init(n){pts=[];for(let i=0;i<n;i++)pts.push(spawn());}
+    let t=0;
+    function draw(p){
+      const dx=Math.sin(t*p.freq+p.phase)*p.amp,dy=Math.cos(t*p.freq*1.3+p.phase+1.1)*p.amp;
+      const x=p.ox+dx,y=p.oy+dy,s=p.size;
+      ctx.globalAlpha=p.opacity*(0.65+0.35*Math.sin(t*p.freq*2+p.phase));
+      ctx.fillStyle=p.color;
+      if(p.shape==='circle'){ctx.beginPath();ctx.arc(x,y,s*.5,0,Math.PI*2);ctx.fill();}
+      else if(p.shape==='triangle'){ctx.beginPath();ctx.moveTo(x,y-s*.6);ctx.lineTo(x+s*.5,y+s*.45);ctx.lineTo(x-s*.5,y+s*.45);ctx.closePath();ctx.fill();}
+      else if(p.shape==='diamond'){ctx.beginPath();ctx.moveTo(x,y-s*.65);ctx.lineTo(x+s*.42,y);ctx.lineTo(x,y+s*.65);ctx.lineTo(x-s*.42,y);ctx.closePath();ctx.fill();}
+      else{ctx.fillRect(x-s*.38,y-s*.38,s*.76,s*.76);}
+    }
+    function frame(){ctx.clearRect(0,0,W,H);t++;pts.forEach(draw);ctx.globalAlpha=1;aid=requestAnimationFrame(frame);}
+    function cnt(){return W<600?900:W<1000?1500:2200;}
+    resize();init(cnt());frame();
+    let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{cancelAnimationFrame(aid);resize();init(cnt());frame();},200);});
+  })();
 
-      const COLORS = [
-        { hex: '#8052ff', weight: 5 }, // Plum Voltage — most prominent
-        { hex: '#ffb829', weight: 2 }, // Amber Spark
-        { hex: '#15846e', weight: 2 }, // Lichen
-        { hex: '#ffffff', weight: 3 }, // Bone
-        { hex: '#bdbdbd', weight: 1 }, // Ash
-      ];
+  // ── DATA ──────────────────────────────────────────────────────────────────
+  const TD = {
+    "Mexico":{"group":"Group A","matches":1,"wins":1,"draws":0,"losses":0,"goals_for":2,"goals_against":0,"xg":1.78,"shots":16,"threat":65,"pressing":170,"top_speed":33.3,"points":3,"gd":2,"possession_avg":57.1,"conversion":12.5},
+    "South Africa":{"group":"Group A","matches":1,"wins":0,"draws":0,"losses":1,"goals_for":0,"goals_against":2,"xg":0.1,"shots":3,"threat":35,"pressing":306,"top_speed":34.4,"points":0,"gd":-2,"possession_avg":36.1,"conversion":0},
+    "Korea Republic":{"group":"Group A","matches":1,"wins":1,"draws":0,"losses":0,"goals_for":2,"goals_against":1,"xg":1.77,"shots":15,"threat":55,"pressing":147,"top_speed":35.2,"points":3,"gd":1,"possession_avg":55.8,"conversion":13.3},
+    "Czechia":{"group":"Group A","matches":1,"wins":0,"draws":0,"losses":1,"goals_for":1,"goals_against":2,"xg":0.64,"shots":7,"threat":45,"pressing":301,"top_speed":34.0,"points":0,"gd":-1,"possession_avg":34.2,"conversion":14.3},
+    "Canada":{"group":"Group B","matches":1,"wins":0,"draws":1,"losses":0,"goals_for":1,"goals_against":1,"xg":1.49,"shots":13,"threat":68,"pressing":160,"top_speed":34.6,"points":1,"gd":0,"possession_avg":52.8,"conversion":7.7},
+    "Bosnia and Herzegovina":{"group":"Group B","matches":1,"wins":0,"draws":1,"losses":0,"goals_for":1,"goals_against":1,"xg":0.76,"shots":8,"threat":32,"pressing":203,"top_speed":34.8,"points":1,"gd":0,"possession_avg":29.9,"conversion":12.5},
+    "Qatar":{"group":"Group B","matches":1,"wins":0,"draws":1,"losses":0,"goals_for":1,"goals_against":1,"xg":0.52,"shots":6,"threat":20,"pressing":294,"top_speed":32.6,"points":1,"gd":0,"possession_avg":28.8,"conversion":16.7},
+    "Switzerland":{"group":"Group B","matches":1,"wins":0,"draws":1,"losses":0,"goals_for":1,"goals_against":1,"xg":3.14,"shots":26,"threat":80,"pressing":165,"top_speed":33.0,"points":1,"gd":0,"possession_avg":58.7,"conversion":3.8},
+    "Brazil":{"group":"Group C","matches":1,"wins":0,"draws":1,"losses":0,"goals_for":1,"goals_against":1,"xg":0.99,"shots":12,"threat":51,"pressing":315,"top_speed":34.1,"points":1,"gd":0,"possession_avg":46.7,"conversion":8.3},
+    "Morocco":{"group":"Group C","matches":1,"wins":0,"draws":1,"losses":0,"goals_for":1,"goals_against":1,"xg":1.33,"shots":14,"threat":49,"pressing":285,"top_speed":33.7,"points":1,"gd":0,"possession_avg":45.2,"conversion":7.1},
+    "Haiti":{"group":"Group C","matches":1,"wins":0,"draws":0,"losses":1,"goals_for":0,"goals_against":1,"xg":0.7,"shots":15,"threat":63,"pressing":185,"top_speed":34.2,"points":0,"gd":-1,"possession_avg":51.6,"conversion":0},
+    "Scotland":{"group":"Group C","matches":1,"wins":1,"draws":0,"losses":0,"goals_for":1,"goals_against":0,"xg":0.91,"shots":9,"threat":37,"pressing":230,"top_speed":32.9,"points":3,"gd":1,"possession_avg":40.5,"conversion":11.1},
+    "Australia":{"group":"Group D","matches":1,"wins":1,"draws":0,"losses":0,"goals_for":2,"goals_against":0,"xg":0.99,"shots":9,"threat":19,"pressing":384,"top_speed":36.7,"points":3,"gd":2,"possession_avg":27.0,"conversion":22.2},
+    "Türkiye":{"group":"Group D","matches":1,"wins":0,"draws":0,"losses":1,"goals_for":0,"goals_against":2,"xg":1.66,"shots":30,"threat":81,"pressing":170,"top_speed":34.7,"points":0,"gd":-2,"possession_avg":62.9,"conversion":0},
+    "USA":{"group":"Group D","matches":1,"wins":1,"draws":0,"losses":0,"goals_for":4,"goals_against":1,"xg":1.88,"shots":16,"threat":75,"pressing":204,"top_speed":34.0,"points":3,"gd":3,"possession_avg":59.5,"conversion":25.0},
+    "Paraguay":{"group":"Group D","matches":1,"wins":0,"draws":0,"losses":1,"goals_for":1,"goals_against":4,"xg":0.6,"shots":9,"threat":25,"pressing":360,"top_speed":33.3,"points":0,"gd":-3,"possession_avg":28.7,"conversion":11.1},
+    "Germany":{"group":"Group E","matches":1,"wins":1,"draws":0,"losses":0,"goals_for":7,"goals_against":1,"xg":4.17,"shots":26,"threat":71,"pressing":227,"top_speed":33.8,"points":3,"gd":6,"possession_avg":57.8,"conversion":26.9},
+    "Curaçao":{"group":"Group E","matches":1,"wins":0,"draws":0,"losses":1,"goals_for":1,"goals_against":7,"xg":0.4,"shots":8,"threat":29,"pressing":339,"top_speed":33.3,"points":0,"gd":-6,"possession_avg":35.3,"conversion":12.5},
+    "Côte d'Ivoire":{"group":"Group E","matches":1,"wins":1,"draws":0,"losses":0,"goals_for":1,"goals_against":0,"xg":1.88,"shots":15,"threat":51,"pressing":288,"top_speed":34.6,"points":3,"gd":1,"possession_avg":41.9,"conversion":6.7},
+    "Ecuador":{"group":"Group E","matches":1,"wins":0,"draws":0,"losses":1,"goals_for":0,"goals_against":1,"xg":1.36,"shots":12,"threat":49,"pressing":280,"top_speed":35.5,"points":0,"gd":-1,"possession_avg":49.9,"conversion":0},
+    "Netherlands":{"group":"Group F","matches":1,"wins":0,"draws":1,"losses":0,"goals_for":2,"goals_against":2,"xg":0.63,"shots":10,"threat":57,"pressing":194,"top_speed":35.6,"points":1,"gd":0,"possession_avg":54.9,"conversion":20.0},
+    "Japan":{"group":"Group F","matches":1,"wins":0,"draws":1,"losses":0,"goals_for":2,"goals_against":2,"xg":0.34,"shots":9,"threat":43,"pressing":316,"top_speed":33.5,"points":1,"gd":0,"possession_avg":37.5,"conversion":22.2},
+    "Sweden":{"group":"Group F","matches":1,"wins":1,"draws":0,"losses":0,"goals_for":5,"goals_against":1,"xg":2.09,"shots":13,"threat":50,"pressing":172,"top_speed":32.8,"points":3,"gd":4,"possession_avg":47.4,"conversion":38.5},
+    "Tunisia":{"group":"Group F","matches":1,"wins":0,"draws":0,"losses":1,"goals_for":1,"goals_against":5,"xg":0.34,"shots":6,"threat":50,"pressing":223,"top_speed":33.9,"points":0,"gd":-4,"possession_avg":42.7,"conversion":16.7},
+    "Belgium":{"group":"Group G","matches":1,"wins":0,"draws":1,"losses":0,"goals_for":1,"goals_against":1,"xg":1.07,"shots":15,"threat":64,"pressing":0,"top_speed":34.5,"points":1,"gd":0,"possession_avg":52.0,"conversion":6.7},
+    "Egypt":{"group":"Group G","matches":1,"wins":0,"draws":1,"losses":0,"goals_for":1,"goals_against":1,"xg":0.81,"shots":14,"threat":36,"pressing":0,"top_speed":33.6,"points":1,"gd":0,"possession_avg":38.0,"conversion":7.1},
+    "IR Iran":{"group":"Group G","matches":1,"wins":0,"draws":1,"losses":0,"goals_for":2,"goals_against":2,"xg":1.85,"shots":17,"threat":51,"pressing":253,"top_speed":32.6,"points":1,"gd":0,"possession_avg":43.3,"conversion":11.8},
+    "New Zealand":{"group":"Group G","matches":1,"wins":0,"draws":1,"losses":0,"goals_for":2,"goals_against":2,"xg":1.47,"shots":14,"threat":49,"pressing":234,"top_speed":32.4,"points":1,"gd":0,"possession_avg":45.3,"conversion":14.3},
+    "Spain":{"group":"Group H","matches":1,"wins":0,"draws":1,"losses":0,"goals_for":0,"goals_against":0,"xg":2.26,"shots":27,"threat":90,"pressing":200,"top_speed":32.6,"points":1,"gd":0,"possession_avg":65.7,"conversion":0},
+    "Cabo Verde":{"group":"Group H","matches":1,"wins":0,"draws":1,"losses":0,"goals_for":0,"goals_against":0,"xg":0.13,"shots":6,"threat":10,"pressing":398,"top_speed":33.6,"points":1,"gd":0,"possession_avg":25.4,"conversion":0},
+    "Saudi Arabia":{"group":"Group H","matches":1,"wins":0,"draws":1,"losses":0,"goals_for":1,"goals_against":1,"xg":1.06,"shots":7,"threat":23,"pressing":318,"top_speed":33.8,"points":1,"gd":0,"possession_avg":27.1,"conversion":14.3},
+    "Uruguay":{"group":"Group H","matches":1,"wins":0,"draws":1,"losses":0,"goals_for":1,"goals_against":1,"xg":1.5,"shots":27,"threat":77,"pressing":157,"top_speed":34.6,"points":1,"gd":0,"possession_avg":63.3,"conversion":3.7},
+    "France":{"group":"Group I","matches":1,"wins":1,"draws":0,"losses":0,"goals_for":3,"goals_against":1,"xg":1.62,"shots":11,"threat":54,"pressing":277,"top_speed":35.1,"points":3,"gd":2,"possession_avg":49.4,"conversion":27.3},
+    "Senegal":{"group":"Group I","matches":1,"wins":0,"draws":0,"losses":1,"goals_for":1,"goals_against":3,"xg":0.39,"shots":6,"threat":46,"pressing":308,"top_speed":33.8,"points":0,"gd":-2,"possession_avg":44.5,"conversion":16.7},
+    "Iraq":{"group":"Group I","matches":1,"wins":0,"draws":0,"losses":1,"goals_for":1,"goals_against":4,"xg":1.2,"shots":11,"threat":40,"pressing":288,"top_speed":33.5,"points":0,"gd":-3,"possession_avg":34.7,"conversion":9.1},
+    "Norway":{"group":"Group I","matches":1,"wins":1,"draws":0,"losses":0,"goals_for":4,"goals_against":1,"xg":2.41,"shots":11,"threat":60,"pressing":173,"top_speed":36.5,"points":3,"gd":3,"possession_avg":57.2,"conversion":36.4},
+    "Argentina":{"group":"Group J","matches":1,"wins":1,"draws":0,"losses":0,"goals_for":3,"goals_against":0,"xg":1.58,"shots":10,"threat":39,"pressing":288,"top_speed":33.7,"points":3,"gd":3,"possession_avg":44.6,"conversion":30.0},
+    "Algeria":{"group":"Group J","matches":1,"wins":0,"draws":0,"losses":1,"goals_for":0,"goals_against":3,"xg":0.41,"shots":7,"threat":61,"pressing":332,"top_speed":33.0,"points":0,"gd":-3,"possession_avg":50.8,"conversion":0},
+    "Austria":{"group":"Group J","matches":1,"wins":1,"draws":0,"losses":0,"goals_for":3,"goals_against":1,"xg":1.93,"shots":10,"threat":64,"pressing":206,"top_speed":34.1,"points":3,"gd":2,"possession_avg":53.3,"conversion":30.0},
+    "Jordan":{"group":"Group J","matches":1,"wins":0,"draws":0,"losses":1,"goals_for":1,"goals_against":3,"xg":0.53,"shots":11,"threat":36,"pressing":322,"top_speed":34.5,"points":0,"gd":-2,"possession_avg":33.0,"conversion":9.1},
+    "Portugal":{"group":"Group K","matches":1,"wins":0,"draws":1,"losses":0,"goals_for":1,"goals_against":1,"xg":0.57,"shots":7,"threat":72,"pressing":183,"top_speed":34.8,"points":1,"gd":0,"possession_avg":68.8,"conversion":14.3},
+    "Congo DR":{"group":"Group K","matches":1,"wins":0,"draws":1,"losses":0,"goals_for":1,"goals_against":1,"xg":0.54,"shots":8,"threat":28,"pressing":407,"top_speed":33.4,"points":1,"gd":0,"possession_avg":25.4,"conversion":12.5},
+    "Uzbekistan":{"group":"Group K","matches":1,"wins":0,"draws":0,"losses":1,"goals_for":1,"goals_against":3,"xg":0.98,"shots":9,"threat":39,"pressing":0,"top_speed":36.6,"points":0,"gd":-2,"possession_avg":41.0,"conversion":11.1},
+    "Colombia":{"group":"Group K","matches":1,"wins":1,"draws":0,"losses":0,"goals_for":3,"goals_against":1,"xg":1.14,"shots":15,"threat":61,"pressing":0,"top_speed":34.7,"points":3,"gd":2,"possession_avg":50.0,"conversion":20.0},
+    "Croatia":{"group":"Group L","matches":1,"wins":0,"draws":0,"losses":1,"goals_for":2,"goals_against":4,"xg":0.82,"shots":10,"threat":53,"pressing":295,"top_speed":34.1,"points":0,"gd":-2,"possession_avg":43.5,"conversion":20.0},
+    "Ghana":{"group":"Group L","matches":1,"wins":1,"draws":0,"losses":0,"goals_for":1,"goals_against":0,"xg":1.07,"shots":8,"threat":41,"pressing":294,"top_speed":34.5,"points":3,"gd":1,"possession_avg":35.6,"conversion":12.5},
+    "Panama":{"group":"Group L","matches":1,"wins":0,"draws":0,"losses":1,"goals_for":0,"goals_against":1,"xg":0.77,"shots":11,"threat":59,"pressing":201,"top_speed":33.8,"points":0,"gd":-1,"possession_avg":55.5,"conversion":0},
+    "England":{"group":"Group L","matches":1,"wins":1,"draws":0,"losses":0,"goals_for":4,"goals_against":2,"xg":3.33,"shots":22,"threat":47,"pressing":262,"top_speed":35.2,"points":3,"gd":2,"possession_avg":49.0,"conversion":18.2}
+  };
 
-      // Build weighted color array
-      const COLOR_POOL = [];
-      for (const c of COLORS) {
-        for (let i = 0; i < c.weight; i++) COLOR_POOL.push(c.hex);
-      }
+  const TEAMS = Object.entries(TD).map(([name,d])=>({name,...d}));
+  const GROUPS = ['Group A','Group B','Group C','Group D','Group E','Group F','Group G','Group H','Group I','Group J','Group K','Group L'];
 
-      const SHAPES = ['circle', 'circle', 'circle', 'triangle', 'diamond', 'square'];
+  // ── CHART DEFAULTS ────────────────────────────────────────────────────────
+  Chart.defaults.color = '#9a9a9a';
+  Chart.defaults.borderColor = 'rgba(255,255,255,0.06)';
+  Chart.defaults.font.family = "'Space Grotesk', ui-sans-serif, system-ui";
 
-      let particles = [];
-      let W = 0, H = 0;
-      let animId;
+  const TT = {
+    backgroundColor:'#111', borderColor:'rgba(255,255,255,.12)', borderWidth:1,
+    titleColor:'#fff', bodyColor:'#bdbdbd', padding:12, cornerRadius:8,
+    titleFont:{weight:'600',size:13}, bodyFont:{size:12}
+  };
 
-      function resize() {
-        W = canvas.width  = window.innerWidth;
-        H = canvas.height = window.innerHeight;
-      }
+  // ── KLASEMEN ──────────────────────────────────────────────────────────────
+  const tabsEl=document.getElementById('group-tabs');
+  const panelsEl=document.getElementById('group-panels');
+  GROUPS.forEach((g,i)=>{
+    const letter=g.replace('Group ','');
+    const tab=document.createElement('button');
+    tab.className='gtab'+(i===0?' active':'');
+    tab.textContent=letter;
+    tab.addEventListener('click',()=>{
+      document.querySelectorAll('.gtab').forEach(t=>t.classList.remove('active'));
+      document.querySelectorAll('.gpanel').forEach(p=>p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('gp-'+g.replace(' ','-')).classList.add('active');
+    });
+    tabsEl.appendChild(tab);
 
-      function rand(min, max) { return min + Math.random() * (max - min); }
+    const gt=TEAMS.filter(t=>t.group===g).sort((a,b)=>b.points-a.points||b.gd-a.gd||b.goals_for-a.goals_for);
+    const panel=document.createElement('div');
+    panel.className='gpanel'+(i===0?' active':'');
+    panel.id='gp-'+g.replace(' ','-');
+    panel.innerHTML=`<table class="s-table">
+      <thead><tr><th>Tim</th><th>Main</th><th>M</th><th>S</th><th>K</th><th>GM</th><th>GK</th><th>SG</th><th>Pts</th></tr></thead>
+      <tbody>${gt.map(t=>`<tr>
+        <td>${t.name}</td><td>${t.matches}</td><td>${t.wins}</td><td>${t.draws}</td><td>${t.losses}</td>
+        <td>${t.goals_for}</td><td>${t.goals_against}</td>
+        <td>${t.gd>0?'+':''}${t.gd}</td>
+        <td><span class="pts pts${t.points}">${t.points}</span></td>
+      </tr>`).join('')}</tbody>
+    </table>`;
+    panelsEl.appendChild(panel);
+  });
 
-      function spawnParticle() {
-        // Responsive cluster centre: right-heavy on desktop, centred-top on mobile
-        let cx, cy, maxR;
-        if (W < 600) {
-          cx = W * 0.50; cy = H * 0.36; maxR = Math.min(W, H) * 0.44;
-        } else if (W < 900) {
-          cx = W * 0.62; cy = H * 0.46; maxR = Math.min(W, H) * 0.38;
-        } else {
-          cx = W * 0.72; cy = H * 0.50; maxR = Math.min(W, H) * 0.32;
+  // ── LAZY INIT HELPER ─────────────────────────────────────────────────────
+  function lazy(id, fn){
+    const el=document.getElementById(id);
+    if(!el)return;
+    const ob=new IntersectionObserver(e=>{if(e[0].isIntersecting){fn(el);ob.disconnect();}},{threshold:.1});
+    ob.observe(el);
+  }
+
+  // ── xG vs GOALS ───────────────────────────────────────────────────────────
+  lazy('chart-xg', el=>{
+    const axMax=Math.max(...TEAMS.map(t=>Math.max(t.xg,t.goals_for)))+0.5;
+    const names=TEAMS.map(t=>t.name);
+    new Chart(el,{
+      type:'scatter',
+      data:{datasets:[
+        {
+          label:'Tim',
+          data:TEAMS.map(t=>({x:t.xg,y:t.goals_for})),
+          backgroundColor:TEAMS.map(t=>t.goals_for>=t.xg?'rgba(21,132,110,.85)':'rgba(128,82,255,.75)'),
+          pointRadius:7, pointHoverRadius:11, pointBorderWidth:0
+        },
+        {
+          label:'Garis Ekspektasi',type:'line',
+          data:[{x:0,y:0},{x:axMax,y:axMax}],
+          borderColor:'rgba(255,255,255,.18)',borderDash:[4,4],
+          pointRadius:0,borderWidth:1.5,fill:false,tension:0
         }
-
-        const angle = Math.random() * Math.PI * 2;
-
-        let r;
-        const dice = Math.random();
-        if (dice < 0.55) {
-          r = Math.sqrt(Math.random()) * maxR * 0.65; // dense core
-        } else if (dice < 0.82) {
-          r = maxR * 0.65 + Math.random() * maxR * 0.28; // mid ring
-        } else {
-          r = maxR * 0.93 + Math.random() * maxR * 0.35; // sparse outer drift
-        }
-
-        const x = cx + Math.cos(angle) * r;
-        const y = cy + Math.sin(angle) * r;
-
-        return {
-          x,
-          y,
-          ox: x, // origin for oscillation
-          oy: y,
-          size: rand(1.2, 4.5),
-          color: COLOR_POOL[Math.floor(Math.random() * COLOR_POOL.length)],
-          opacity: rand(0.12, 0.72),
-          shape: SHAPES[Math.floor(Math.random() * SHAPES.length)],
-          phase: rand(0, Math.PI * 2),
-          freq: rand(0.0015, 0.006),
-          amp: rand(0.8, 2.8),
-        };
-      }
-
-      function init(count) {
-        particles = [];
-        for (let i = 0; i < count; i++) particles.push(spawnParticle());
-      }
-
-      function drawParticle(p, t) {
-        const dx = Math.sin(t * p.freq       + p.phase)       * p.amp;
-        const dy = Math.cos(t * p.freq * 1.3 + p.phase + 1.1) * p.amp;
-        const x  = p.ox + dx;
-        const y  = p.oy + dy;
-        const s  = p.size;
-
-        ctx.globalAlpha = p.opacity * (0.65 + 0.35 * Math.sin(t * p.freq * 2 + p.phase));
-        ctx.fillStyle   = p.color;
-
-        switch (p.shape) {
-          case 'circle':
-            ctx.beginPath();
-            ctx.arc(x, y, s * 0.5, 0, Math.PI * 2);
-            ctx.fill();
-            break;
-          case 'triangle':
-            ctx.beginPath();
-            ctx.moveTo(x,           y - s * 0.6);
-            ctx.lineTo(x + s * 0.5, y + s * 0.45);
-            ctx.lineTo(x - s * 0.5, y + s * 0.45);
-            ctx.closePath();
-            ctx.fill();
-            break;
-          case 'diamond':
-            ctx.beginPath();
-            ctx.moveTo(x,           y - s * 0.65);
-            ctx.lineTo(x + s * 0.42, y);
-            ctx.lineTo(x,           y + s * 0.65);
-            ctx.lineTo(x - s * 0.42, y);
-            ctx.closePath();
-            ctx.fill();
-            break;
-          case 'square':
-            ctx.fillRect(x - s * 0.38, y - s * 0.38, s * 0.76, s * 0.76);
-            break;
+      ]},
+      options:{
+        responsive:true, maintainAspectRatio:false,
+        animation:{duration:1000,easing:'easeOutQuart'},
+        scales:{
+          x:{title:{display:true,text:'Expected Goals (xG)',color:'#9a9a9a',font:{size:12}},min:0,max:axMax,grid:{color:'rgba(255,255,255,.05)'}},
+          y:{title:{display:true,text:'Gol Aktual',color:'#9a9a9a',font:{size:12}},min:0,max:axMax,ticks:{stepSize:1},grid:{color:'rgba(255,255,255,.05)'}}
+        },
+        plugins:{
+          tooltip:{...TT,callbacks:{label:c=>{
+            if(c.datasetIndex===1)return null;
+            const n=names[c.dataIndex],d=(c.parsed.y-c.parsed.x).toFixed(2),s=d>=0?'+':'';
+            return[n,`xG: ${c.parsed.x}  →  Gol: ${c.parsed.y}  (${s}${d})`];
+          }}},
+          legend:{display:false}
         }
       }
+    });
+    const over=TEAMS.reduce((a,b)=>(b.goals_for-b.xg)>(a.goals_for-a.xg)?b:a);
+    const under=TEAMS.reduce((a,b)=>(b.xg-b.goals_for)>(a.xg-a.goals_for)?b:a);
+    document.getElementById('insight-xg').innerHTML=`<p>
+      <strong>Overperformer terbesar:</strong> ${over.name} — cetak ${over.goals_for} gol padahal xG hanya ${over.xg} (+${(over.goals_for-over.xg).toFixed(2)}).&nbsp;
+      <strong>Underperformer terbesar:</strong> ${under.name} — xG ${under.xg} tapi hanya ${under.goals_for} gol (-${(under.xg-under.goals_for).toFixed(2)}).
+      <span style="color:#15846e">●</span> hijau = lebih klinis dari ekspektasi. <span style="color:#8052ff">●</span> ungu = belum memanfaatkan peluang.
+    </p>`;
+  });
 
-      let t = 0;
-
-      function frame() {
-        ctx.clearRect(0, 0, W, H);
-        t++;
-        for (const p of particles) drawParticle(p, t);
-        ctx.globalAlpha = 1;
-        animId = requestAnimationFrame(frame);
+  // ── THREAT TOP 10 ─────────────────────────────────────────────────────────
+  lazy('chart-threat', el=>{
+    const top=[...TEAMS].sort((a,b)=>b.threat-a.threat).slice(0,10);
+    new Chart(el,{
+      type:'bar',
+      data:{labels:top.map(t=>t.name),datasets:[{
+        data:top.map(t=>t.threat),
+        backgroundColor:top.map((_,i)=>`rgba(128,82,255,${.95-i*.07})`),
+        borderRadius:6,borderSkipped:false
+      }]},
+      options:{
+        indexAxis:'y',responsive:true,maintainAspectRatio:false,
+        animation:{duration:1000,easing:'easeOutQuart'},
+        scales:{x:{grid:{color:'rgba(255,255,255,.05)'}},y:{grid:{display:false},ticks:{color:'#bdbdbd',font:{size:12}}}},
+        plugins:{tooltip:{...TT,callbacks:{label:c=>` Threat: ${c.parsed.x}`}},legend:{display:false}}
       }
+    });
+    const t1=top[0];
+    document.getElementById('insight-threat').innerHTML=`<p><strong>${t1.name}</strong> memimpin dengan Threat Score <strong>${t1.threat}</strong> — tertinggi di turnamen. Menariknya, threat score tinggi tidak selalu berujung kemenangan.</p>`;
+  });
 
-      function particleCount() {
-        // Fewer particles on smaller screens for performance
-        return W < 600 ? 900 : W < 1000 ? 1500 : 2200;
+  // ── PRESSING vs POSSESSION ────────────────────────────────────────────────
+  lazy('chart-pressing', el=>{
+    const flt=TEAMS.filter(t=>t.pressing>50);
+    const names=flt.map(t=>t.name);
+    new Chart(el,{
+      type:'scatter',
+      data:{datasets:[{
+        label:'Tim',
+        data:flt.map(t=>({x:t.possession_avg,y:t.pressing})),
+        backgroundColor:'rgba(255,184,41,.78)',
+        pointRadius:7,pointHoverRadius:11,pointBorderWidth:0
+      }]},
+      options:{
+        responsive:true,maintainAspectRatio:false,
+        animation:{duration:1000,easing:'easeOutQuart'},
+        scales:{
+          x:{title:{display:true,text:'Penguasaan Bola (%)',color:'#9a9a9a',font:{size:12}},grid:{color:'rgba(255,255,255,.05)'}},
+          y:{title:{display:true,text:'Jumlah Pressing',color:'#9a9a9a',font:{size:12}},grid:{color:'rgba(255,255,255,.05)'}}
+        },
+        plugins:{
+          tooltip:{...TT,callbacks:{label:c=>{const n=names[c.dataIndex];return[n,`Possession: ${c.parsed.x}%  |  Pressing: ${c.parsed.y}`];}}},
+          legend:{display:false}
+        }
       }
+    });
+    const mp=flt.reduce((a,b)=>b.pressing>a.pressing?b:a);
+    const pp=flt.reduce((a,b)=>b.possession_avg>a.possession_avg?b:a);
+    document.getElementById('insight-pressing').innerHTML=`<p><strong>${mp.name}</strong> melakukan pressing terbanyak (${mp.pressing}×) dengan hanya ${mp.possession_avg}% possession. <strong>${pp.name}</strong> mendominasi bola (${pp.possession_avg}%) dengan pressing minimal — dua filosofi bermain yang berlawanan.</p>`;
+  });
 
-      resize();
-      init(particleCount());
-      frame();
+  // ── CONVERSION TOP 10 ─────────────────────────────────────────────────────
+  lazy('chart-conversion', el=>{
+    const top=[...TEAMS].filter(t=>t.goals_for>0).sort((a,b)=>b.conversion-a.conversion).slice(0,10);
+    new Chart(el,{
+      type:'bar',
+      data:{labels:top.map(t=>t.name),datasets:[{
+        data:top.map(t=>t.conversion),
+        backgroundColor:top.map((_,i)=>`rgba(255,184,41,${.95-i*.07})`),
+        borderRadius:6,borderSkipped:false
+      }]},
+      options:{
+        indexAxis:'y',responsive:true,maintainAspectRatio:false,
+        animation:{duration:1000,easing:'easeOutQuart'},
+        scales:{x:{grid:{color:'rgba(255,255,255,.05)'},ticks:{callback:v=>v+'%'}},y:{grid:{display:false},ticks:{color:'#bdbdbd',font:{size:12}}}},
+        plugins:{tooltip:{...TT,callbacks:{label:c=>` Konversi: ${c.parsed.x}%`}},legend:{display:false}}
+      }
+    });
+    const t1=top[0];
+    document.getElementById('insight-conversion').innerHTML=`<p><strong>${t1.name}</strong> paling klinis: <strong>${t1.conversion}%</strong> conversion rate — ${t1.goals_for} gol dari ${t1.shots} tembakan. Tim dengan konversi rendah menyia-nyiakan banyak peluang berbahaya.</p>`;
+  });
 
-      let resizeTimer;
-      window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-          cancelAnimationFrame(animId);
-          resize();
-          init(particleCount());
-          frame();
-        }, 200);
-      });
-    })();
+  // ── TOP SPEED ─────────────────────────────────────────────────────────────
+  lazy('chart-speed', el=>{
+    const top=[...TEAMS].sort((a,b)=>b.top_speed-a.top_speed).slice(0,10);
+    new Chart(el,{
+      type:'bar',
+      data:{labels:top.map(t=>t.name),datasets:[{
+        data:top.map(t=>t.top_speed),
+        backgroundColor:top.map((_,i)=>`rgba(21,132,110,${.95-i*.07})`),
+        borderRadius:6,borderSkipped:false
+      }]},
+      options:{
+        indexAxis:'y',responsive:true,maintainAspectRatio:false,
+        animation:{duration:1000,easing:'easeOutQuart'},
+        scales:{
+          x:{min:32,max:38,grid:{color:'rgba(255,255,255,.05)'},ticks:{callback:v=>v+' km/h'}},
+          y:{grid:{display:false},ticks:{color:'#bdbdbd',font:{size:12}}}
+        },
+        plugins:{tooltip:{...TT,callbacks:{label:c=>` Top Speed: ${c.parsed.x} km/h`}},legend:{display:false}}
+      }
+    });
+    const t1=top[0];
+    document.getElementById('insight-speed').innerHTML=`<p>Pemain dari <strong>${t1.name}</strong> mencatat kecepatan tertinggi: <strong>${t1.top_speed} km/h</strong> — direkam melalui GPS tracking FIFA selama pertandingan berlangsung.</p>`;
+  });
+
+  // ── POWER RANKING ─────────────────────────────────────────────────────────
+  lazy('chart-ranking', el=>{
+    const mxg=Math.max(...TEAMS.map(t=>t.xg));
+    const mthr=Math.max(...TEAMS.map(t=>t.threat));
+    const mcnv=Math.max(...TEAMS.map(t=>t.conversion));
+    const ranked=[...TEAMS].map(t=>({
+      ...t,
+      score:Math.round(((t.xg/mxg)*.30+(t.threat/mthr)*.25+(t.conversion/mcnv)*.20+(t.points/3)*.25)*100*10)/10
+    })).sort((a,b)=>b.score-a.score).slice(0,15);
+
+    new Chart(el,{
+      type:'bar',
+      data:{labels:ranked.map(t=>t.name),datasets:[{
+        data:ranked.map(t=>t.score),
+        backgroundColor:ranked.map((_,i)=>i===0?'rgba(255,184,41,.95)':i<=2?'rgba(128,82,255,.9)':`rgba(128,82,255,${.72-i*.03})`),
+        borderRadius:6,borderSkipped:false
+      }]},
+      options:{
+        indexAxis:'y',responsive:true,maintainAspectRatio:false,
+        animation:{duration:1200,easing:'easeOutQuart'},
+        scales:{
+          x:{title:{display:true,text:'Indeks Kekuatan (0–100)',color:'#9a9a9a',font:{size:12}},grid:{color:'rgba(255,255,255,.05)'}},
+          y:{grid:{display:false},ticks:{color:'#bdbdbd',font:{size:13}}}
+        },
+        plugins:{
+          tooltip:{...TT,callbacks:{label:c=>{
+            const t=ranked[c.dataIndex];
+            return[` Indeks: ${c.parsed.x}`,` xG: ${t.xg}  |  Threat: ${t.threat}  |  Konversi: ${t.conversion}%  |  Poin: ${t.points}`];
+          }}},
+          legend:{display:false}
+        }
+      }
+    });
+    const t1=ranked[0];
+    document.getElementById('insight-ranking').innerHTML=`<p><strong>${t1.name}</strong> memimpin Power Ranking sementara dengan indeks <strong>${t1.score}</strong> — unggul dalam kombinasi xG, threat score, dan efisiensi konversi. Peringkat ini akan berubah signifikan setelah Matchday 2 dan 3.</p>`;
+  });
   </script>
-
 </body>
 </html>

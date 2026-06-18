@@ -53,22 +53,19 @@ Setiap pertandingan menghasilkan **2 baris** di CSV — satu untuk tim tuan ruma
 - `not win` — jika kalah **atau** seri (draw dianggap bukan kemenangan)
 
 ### 5. Simpan ke CSV
-File disimpan otomatis ke `data/fifa_worldcup2026_stats.csv` di lokasi yang sama dengan skrip, terlepas dari direktori mana skrip dijalankan.
+File disimpan otomatis ke `fifa_worldcup2026_stats.csv` di **direktori kerja saat skrip dijalankan** (current working directory), sehingga lokasi output mengikuti posisi folder saat ini.
 
 ---
 
 ## Cara Menjalankan
 
-```bash
-python3 data/fifa_scraper.py
-```
-
-Atau dari dalam folder `data/`:
+Jalankan dari **folder root proyek** agar CSV tersimpan di sana:
 
 ```bash
-cd data
-python3 fifa_scraper.py
+python3 scraper/data/fifa_scraper.py
 ```
+
+CSV akan tersimpan di direktori aktif saat skrip dijalankan (`fifa_worldcup2026_stats.csv`).
 
 Skrip dapat dijalankan ulang kapan saja. Setiap run akan **menimpa** file CSV dengan data terbaru (termasuk pertandingan yang baru selesai).
 

@@ -20,8 +20,7 @@ CALENDAR_API = (
 )
 STATS_API = "https://fdh-api.fifa.com/v1/stats/match/{id_ifes}/teams.json"
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-OUTPUT_FILE = os.path.join(SCRIPT_DIR, "fifa_worldcup2026_stats.csv")
+OUTPUT_FILE = os.path.join(os.getcwd(), "fifa_worldcup2026_stats.csv")
 
 
 def get_finished_matches():
