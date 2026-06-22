@@ -178,12 +178,12 @@
         <h1 class="headline">Data nyata.<br>Prediksi <em>akurat.</em></h1>
         <p class="body-text">
           Analisis statistik mendalam berbasis data pertandingan sesungguhnya.
-          <strong>36 pertandingan fase grup sudah selesai</strong> —
+          <strong>39 pertandingan fase grup sudah selesai</strong> —
           155 variabel statistik dari setiap tim kini tersedia.
         </p>
         <div class="status-block">
-          <div class="live-tag"><span class="live-dot"></span>Data Live · 36 Pertandingan</div>
-          <p class="status-caption">Matchday 1 &amp; 2 (Grup A–F selesai) · 48 tim · 155 variabel FIFA.<br>Data diperbarui otomatis setelah setiap pertandingan.</p>
+          <div class="live-tag"><span class="live-dot"></span>Data Live · 39 Pertandingan</div>
+          <p class="status-caption">MD1 &amp; MD2 Grup A–F selesai · MD2 Grup G–H sedang berjalan · MD1 Grup I–L selesai · 48 tim · 155 variabel FIFA.<br>Data diperbarui otomatis setelah setiap pertandingan.</p>
           <a href="#analytics" class="scroll-cta">Lihat Analisa ↓</a>
         </div>
       </div>
@@ -193,13 +193,13 @@
 
   <!-- Stats Overview -->
   <section id="analytics" class="section section-divider">
-    <span class="sec-eye">Fase Grup · Matchday 1 &amp; 2</span>
+    <span class="sec-eye">Fase Grup · Matchday 1, 2 &amp; 3 (awal)</span>
     <h2 class="sec-head">Analisa <em>Live</em></h2>
     <div class="stats-grid">
-      <div class="stat-card plum"><div class="stat-value">36</div><div class="stat-label">Pertandingan Selesai</div></div>
+      <div class="stat-card plum"><div class="stat-value">39</div><div class="stat-label">Pertandingan Selesai</div></div>
       <div class="stat-card lichen"><div class="stat-value">48</div><div class="stat-label">Tim Terdata</div></div>
       <div class="stat-card amber"><div class="stat-value">155</div><div class="stat-label">Variabel per Tim</div></div>
-      <div class="stat-card bone"><div class="stat-value" style="font-size:22px;line-height:1.3">21 Juni 2026</div><div class="stat-label">Terakhir Diperbarui</div></div>
+      <div class="stat-card bone"><div class="stat-value" style="font-size:22px;line-height:1.3">22 Juni 2026</div><div class="stat-label">Terakhir Diperbarui</div></div>
     </div>
   </section>
 
@@ -267,11 +267,11 @@
 
   <!-- Power Ranking -->
   <section class="section section-divider">
-    <span class="sec-eye">Prediksi Awal · Matchday 1 &amp; 2</span>
+    <span class="sec-eye">Prediksi Awal · 39 Pertandingan Selesai</span>
     <h2 class="sec-head">Indeks Kekuatan <em>Sementara</em></h2>
     <div class="chart-card">
       <div class="chart-title">Power Ranking — Top 15</div>
-      <div class="chart-sub">Gabungan xG (30%) + Threat Score (25%) + Konversi (20%) + Poin (25%). Berdasarkan performa Matchday 1 &amp; 2 (36 pertandingan).</div>
+      <div class="chart-sub">Gabungan xG (30%) + Threat Score (25%) + Konversi (20%) + Poin (25%). Berdasarkan performa 39 pertandingan yang telah selesai.</div>
       <div class="chart-wrap tall"><canvas id="chart-ranking"></canvas></div>
       <div class="insight" id="insight-ranking"><p>Memuat insight…</p></div>
     </div>
@@ -289,13 +289,12 @@
         </svg>
       </div>
       <div style="flex:1;min-width:260px;">
-        <p style="font-size:18px;font-weight:600;color:#fff;letter-spacing:.021em;margin-bottom:12px;">Prediksi juara tayang setelah Matchday 2</p>
+        <p style="font-size:18px;font-weight:600;color:#fff;letter-spacing:.021em;margin-bottom:12px;">Analisa berjalan — Matchday 2 hampir tuntas</p>
         <p style="font-size:15px;color:#bdbdbd;line-height:1.7;max-width:68ch;">
-          Satu pertandingan belum cukup — hasilnya bisa jadi anomali. Saya akan menjalankan model prediksi juara <strong style="color:#fff">setelah setiap tim menyelesaikan minimal 2 pertandingan</strong> di fase grup.
-          Dengan dua data poin per tim, pola performa mulai terlihat: mana tim yang konsisten, mana yang hanya beruntung di laga pertama.
+          Dari 39 pertandingan yang telah selesai, Grup A–F sudah tuntas Matchday 2. Grup G–H sedang Matchday 2, sementara Grup I–L masih di Matchday 1. <strong style="color:#fff">Saat seluruh 48 tim menyelesaikan Matchday 2</strong>, model prediksi juara akan dijalankan untuk pertama kalinya.
         </p>
         <p style="font-size:15px;color:#bdbdbd;line-height:1.7;max-width:68ch;margin-top:14px;">
-          Yang membuat prediksi ini berbeda: <strong style="color:#fff">model tidak statis</strong>. Setiap kali pertandingan baru selesai, data scraper dijalankan ulang dan model diperbarui otomatis — sehingga prediksi ikut bergerak mengikuti performa terkini setiap tim. Tim yang tampil buruk di awal masih bisa naik peringkat jika performa membaik, begitu pula sebaliknya.
+          Yang membuat prediksi ini berbeda: <strong style="color:#fff">model tidak statis</strong>. Setiap kali pertandingan baru selesai, data scraper dijalankan ulang dan model diperbarui otomatis — sehingga power ranking dan prediksi ikut bergerak mengikuti performa terkini setiap tim.
         </p>
       </div>
     </div>
@@ -348,51 +347,51 @@
   const TD = {
     "Algeria":{"group":"Group J","matches":1,"wins":0,"draws":0,"losses":1,"goals_for":0,"goals_against":3,"xg":0.41,"shots":7.0,"threat":61,"pressing":332,"top_speed":33.0,"points":0,"gd":-3,"possession_avg":50.8,"conversion":0.0},
     "Argentina":{"group":"Group J","matches":1,"wins":1,"draws":0,"losses":0,"goals_for":3,"goals_against":0,"xg":1.58,"shots":10.0,"threat":39,"pressing":288,"top_speed":33.7,"points":3,"gd":3,"possession_avg":44.6,"conversion":30.0},
-    "Australia":{"group":"Group D","matches":2,"wins":1,"draws":0,"losses":1,"goals_for":2,"goals_against":2,"xg":0.65,"shots":7.0,"threat":26,"pressing":323,"top_speed":36.7,"points":3,"gd":0,"possession_avg":28.7,"conversion":14.3},
+    "Australia":{"group":"Group D","matches":2,"wins":1,"draws":0,"losses":1,"goals_for":2,"goals_against":2,"xg":0.65,"shots":7.0,"threat":53,"pressing":323,"top_speed":36.7,"points":3,"gd":0,"possession_avg":28.7,"conversion":14.3},
     "Austria":{"group":"Group J","matches":1,"wins":1,"draws":0,"losses":0,"goals_for":3,"goals_against":1,"xg":1.93,"shots":10.0,"threat":64,"pressing":206,"top_speed":34.1,"points":3,"gd":2,"possession_avg":53.3,"conversion":30.0},
-    "Belgium":{"group":"Group G","matches":1,"wins":0,"draws":1,"losses":0,"goals_for":1,"goals_against":1,"xg":1.07,"shots":15.0,"threat":64,"pressing":0,"top_speed":34.5,"points":1,"gd":0,"possession_avg":52.0,"conversion":6.7},
-    "Bosnia and Herzegovina":{"group":"Group B","matches":2,"wins":0,"draws":1,"losses":1,"goals_for":2,"goals_against":5,"xg":0.53,"shots":6.5,"threat":32,"pressing":271,"top_speed":34.8,"points":1,"gd":-3,"possession_avg":32.0,"conversion":15.4},
-    "Brazil":{"group":"Group C","matches":2,"wins":1,"draws":1,"losses":0,"goals_for":4,"goals_against":1,"xg":1.2,"shots":9.5,"threat":50,"pressing":255,"top_speed":34.1,"points":4,"gd":3,"possession_avg":47.9,"conversion":21.1},
-    "Cabo Verde":{"group":"Group H","matches":1,"wins":0,"draws":1,"losses":0,"goals_for":0,"goals_against":0,"xg":0.13,"shots":6.0,"threat":10,"pressing":398,"top_speed":33.6,"points":1,"gd":0,"possession_avg":25.4,"conversion":0.0},
-    "Canada":{"group":"Group B","matches":2,"wins":1,"draws":1,"losses":0,"goals_for":7,"goals_against":1,"xg":2.7,"shots":23.0,"threat":81,"pressing":134,"top_speed":34.6,"points":4,"gd":6,"possession_avg":59.3,"conversion":15.2},
+    "Belgium":{"group":"Group G","matches":2,"wins":0,"draws":2,"losses":0,"goals_for":1,"goals_against":1,"xg":1.28,"shots":19.0,"threat":141,"pressing":60,"top_speed":34.5,"points":2,"gd":0,"possession_avg":55.6,"conversion":2.6},
+    "Bosnia and Herzegovina":{"group":"Group B","matches":2,"wins":0,"draws":1,"losses":1,"goals_for":2,"goals_against":5,"xg":0.53,"shots":6.5,"threat":64,"pressing":271,"top_speed":34.8,"points":1,"gd":-3,"possession_avg":32.0,"conversion":15.4},
+    "Brazil":{"group":"Group C","matches":2,"wins":1,"draws":1,"losses":0,"goals_for":4,"goals_against":1,"xg":1.2,"shots":9.5,"threat":100,"pressing":255,"top_speed":34.1,"points":4,"gd":3,"possession_avg":47.9,"conversion":21.1},
+    "Cabo Verde":{"group":"Group H","matches":2,"wins":0,"draws":2,"losses":0,"goals_for":2,"goals_against":2,"xg":0.34,"shots":9.0,"threat":36,"pressing":315,"top_speed":35.0,"points":2,"gd":0,"possession_avg":29.4,"conversion":11.1},
+    "Canada":{"group":"Group B","matches":2,"wins":1,"draws":1,"losses":0,"goals_for":7,"goals_against":1,"xg":2.7,"shots":23.0,"threat":162,"pressing":133,"top_speed":34.6,"points":4,"gd":6,"possession_avg":59.3,"conversion":15.2},
     "Colombia":{"group":"Group K","matches":1,"wins":1,"draws":0,"losses":0,"goals_for":3,"goals_against":1,"xg":1.16,"shots":15.0,"threat":60,"pressing":160,"top_speed":34.6,"points":3,"gd":2,"possession_avg":56.7,"conversion":20.0},
     "Congo DR":{"group":"Group K","matches":1,"wins":0,"draws":1,"losses":0,"goals_for":1,"goals_against":1,"xg":0.54,"shots":8.0,"threat":28,"pressing":407,"top_speed":33.4,"points":1,"gd":0,"possession_avg":25.3,"conversion":12.5},
     "Croatia":{"group":"Group L","matches":1,"wins":0,"draws":0,"losses":1,"goals_for":2,"goals_against":4,"xg":0.82,"shots":10.0,"threat":53,"pressing":295,"top_speed":34.1,"points":0,"gd":-2,"possession_avg":43.5,"conversion":20.0},
-    "Curaçao":{"group":"Group E","matches":2,"wins":0,"draws":1,"losses":1,"goals_for":1,"goals_against":7,"xg":0.52,"shots":9.0,"threat":26,"pressing":342,"top_speed":34.7,"points":1,"gd":-6,"possession_avg":29.4,"conversion":5.6},
-    "Czechia":{"group":"Group A","matches":2,"wins":0,"draws":1,"losses":1,"goals_for":2,"goals_against":3,"xg":1.0,"shots":10.5,"threat":41,"pressing":322,"top_speed":34.0,"points":1,"gd":-1,"possession_avg":33.3,"conversion":9.5},
-    "Côte d'Ivoire":{"group":"Group E","matches":2,"wins":1,"draws":0,"losses":1,"goals_for":2,"goals_against":2,"xg":1.58,"shots":12.0,"threat":44,"pressing":302,"top_speed":34.6,"points":3,"gd":0,"possession_avg":41.6,"conversion":8.3},
-    "Ecuador":{"group":"Group E","matches":2,"wins":0,"draws":1,"losses":1,"goals_for":0,"goals_against":1,"xg":2.06,"shots":19.5,"threat":64,"pressing":218,"top_speed":35.5,"points":1,"gd":-1,"possession_avg":57.8,"conversion":0.0},
+    "Curaçao":{"group":"Group E","matches":2,"wins":0,"draws":1,"losses":1,"goals_for":1,"goals_against":7,"xg":0.52,"shots":9.0,"threat":51,"pressing":342,"top_speed":34.7,"points":1,"gd":-6,"possession_avg":29.4,"conversion":5.6},
+    "Czechia":{"group":"Group A","matches":2,"wins":0,"draws":1,"losses":1,"goals_for":2,"goals_against":3,"xg":1.0,"shots":10.5,"threat":82,"pressing":322,"top_speed":34.0,"points":1,"gd":-1,"possession_avg":33.3,"conversion":9.5},
+    "Côte d'Ivoire":{"group":"Group E","matches":2,"wins":1,"draws":0,"losses":1,"goals_for":2,"goals_against":2,"xg":1.58,"shots":12.0,"threat":87,"pressing":302,"top_speed":34.6,"points":3,"gd":0,"possession_avg":41.6,"conversion":8.3},
+    "Ecuador":{"group":"Group E","matches":2,"wins":0,"draws":1,"losses":1,"goals_for":0,"goals_against":1,"xg":2.06,"shots":19.5,"threat":127,"pressing":217,"top_speed":35.5,"points":1,"gd":-1,"possession_avg":57.8,"conversion":0.0},
     "Egypt":{"group":"Group G","matches":1,"wins":0,"draws":1,"losses":0,"goals_for":1,"goals_against":1,"xg":0.81,"shots":14.0,"threat":36,"pressing":0,"top_speed":33.6,"points":1,"gd":0,"possession_avg":38.0,"conversion":7.1},
     "England":{"group":"Group L","matches":1,"wins":1,"draws":0,"losses":0,"goals_for":4,"goals_against":2,"xg":3.33,"shots":22.0,"threat":47,"pressing":262,"top_speed":35.2,"points":3,"gd":2,"possession_avg":49.0,"conversion":18.2},
     "France":{"group":"Group I","matches":1,"wins":1,"draws":0,"losses":0,"goals_for":3,"goals_against":1,"xg":1.62,"shots":11.0,"threat":54,"pressing":277,"top_speed":35.1,"points":3,"gd":2,"possession_avg":49.4,"conversion":27.3},
-    "Germany":{"group":"Group E","matches":2,"wins":2,"draws":0,"losses":0,"goals_for":9,"goals_against":2,"xg":3.32,"shots":21.0,"threat":68,"pressing":260,"top_speed":35.0,"points":6,"gd":7,"possession_avg":53.7,"conversion":21.4},
+    "Germany":{"group":"Group E","matches":2,"wins":2,"draws":0,"losses":0,"goals_for":9,"goals_against":2,"xg":3.32,"shots":21.0,"threat":135,"pressing":260,"top_speed":35.0,"points":6,"gd":7,"possession_avg":53.7,"conversion":21.4},
     "Ghana":{"group":"Group L","matches":1,"wins":1,"draws":0,"losses":0,"goals_for":1,"goals_against":0,"xg":0.98,"shots":7.0,"threat":41,"pressing":294,"top_speed":34.5,"points":3,"gd":1,"possession_avg":35.6,"conversion":14.3},
-    "Haiti":{"group":"Group C","matches":2,"wins":0,"draws":0,"losses":2,"goals_for":0,"goals_against":4,"xg":0.48,"shots":11.0,"threat":57,"pressing":240,"top_speed":34.4,"points":0,"gd":-4,"possession_avg":47.4,"conversion":0.0},
-    "IR Iran":{"group":"Group G","matches":1,"wins":0,"draws":1,"losses":0,"goals_for":2,"goals_against":2,"xg":1.85,"shots":17.0,"threat":51,"pressing":253,"top_speed":32.6,"points":1,"gd":0,"possession_avg":43.3,"conversion":11.8},
+    "Haiti":{"group":"Group C","matches":2,"wins":0,"draws":0,"losses":2,"goals_for":0,"goals_against":4,"xg":0.48,"shots":11.0,"threat":114,"pressing":239,"top_speed":34.4,"points":0,"gd":-4,"possession_avg":47.4,"conversion":0.0},
+    "IR Iran":{"group":"Group G","matches":2,"wins":0,"draws":2,"losses":0,"goals_for":2,"goals_against":2,"xg":1.17,"shots":12.0,"threat":74,"pressing":298,"top_speed":32.9,"points":2,"gd":0,"possession_avg":36.7,"conversion":8.3},
     "Iraq":{"group":"Group I","matches":1,"wins":0,"draws":0,"losses":1,"goals_for":1,"goals_against":4,"xg":1.2,"shots":11.0,"threat":40,"pressing":288,"top_speed":33.5,"points":0,"gd":-3,"possession_avg":34.7,"conversion":9.1},
-    "Japan":{"group":"Group F","matches":2,"wins":1,"draws":1,"losses":0,"goals_for":6,"goals_against":2,"xg":0.85,"shots":9.5,"threat":52,"pressing":268,"top_speed":33.6,"points":4,"gd":4,"possession_avg":46.3,"conversion":31.6},
+    "Japan":{"group":"Group F","matches":2,"wins":1,"draws":1,"losses":0,"goals_for":6,"goals_against":2,"xg":0.85,"shots":9.5,"threat":103,"pressing":267,"top_speed":33.6,"points":4,"gd":4,"possession_avg":46.3,"conversion":31.6},
     "Jordan":{"group":"Group J","matches":1,"wins":0,"draws":0,"losses":1,"goals_for":1,"goals_against":3,"xg":0.53,"shots":11.0,"threat":36,"pressing":322,"top_speed":34.5,"points":0,"gd":-2,"possession_avg":33.0,"conversion":9.1},
-    "Korea Republic":{"group":"Group A","matches":2,"wins":1,"draws":0,"losses":1,"goals_for":2,"goals_against":2,"xg":1.32,"shots":12.0,"threat":56,"pressing":182,"top_speed":35.2,"points":3,"gd":0,"possession_avg":53.8,"conversion":8.3},
-    "Mexico":{"group":"Group A","matches":2,"wins":2,"draws":0,"losses":0,"goals_for":3,"goals_against":0,"xg":1.06,"shots":12.0,"threat":54,"pressing":218,"top_speed":33.3,"points":6,"gd":3,"possession_avg":49.0,"conversion":12.5},
-    "Morocco":{"group":"Group C","matches":2,"wins":1,"draws":1,"losses":0,"goals_for":2,"goals_against":1,"xg":1.06,"shots":13.0,"threat":50,"pressing":272,"top_speed":35.1,"points":4,"gd":1,"possession_avg":50.0,"conversion":7.7},
-    "Netherlands":{"group":"Group F","matches":2,"wins":1,"draws":1,"losses":0,"goals_for":7,"goals_against":3,"xg":1.44,"shots":10.0,"threat":55,"pressing":213,"top_speed":36.8,"points":4,"gd":4,"possession_avg":51.5,"conversion":35.0},
+    "Korea Republic":{"group":"Group A","matches":2,"wins":1,"draws":0,"losses":1,"goals_for":2,"goals_against":2,"xg":1.32,"shots":12.0,"threat":113,"pressing":182,"top_speed":35.2,"points":3,"gd":0,"possession_avg":53.8,"conversion":8.3},
+    "Mexico":{"group":"Group A","matches":2,"wins":2,"draws":0,"losses":0,"goals_for":3,"goals_against":0,"xg":1.06,"shots":12.0,"threat":107,"pressing":217,"top_speed":33.3,"points":6,"gd":3,"possession_avg":49.0,"conversion":12.5},
+    "Morocco":{"group":"Group C","matches":2,"wins":1,"draws":1,"losses":0,"goals_for":2,"goals_against":1,"xg":1.06,"shots":13.0,"threat":100,"pressing":272,"top_speed":35.1,"points":4,"gd":1,"possession_avg":50.0,"conversion":7.7},
+    "Netherlands":{"group":"Group F","matches":2,"wins":1,"draws":1,"losses":0,"goals_for":7,"goals_against":3,"xg":1.44,"shots":10.0,"threat":110,"pressing":213,"top_speed":36.8,"points":4,"gd":4,"possession_avg":51.5,"conversion":35.0},
     "New Zealand":{"group":"Group G","matches":1,"wins":0,"draws":1,"losses":0,"goals_for":2,"goals_against":2,"xg":1.47,"shots":14.0,"threat":49,"pressing":234,"top_speed":32.4,"points":1,"gd":0,"possession_avg":45.3,"conversion":14.3},
     "Norway":{"group":"Group I","matches":1,"wins":1,"draws":0,"losses":0,"goals_for":4,"goals_against":1,"xg":2.41,"shots":11.0,"threat":60,"pressing":173,"top_speed":36.5,"points":3,"gd":3,"possession_avg":57.2,"conversion":36.4},
     "Panama":{"group":"Group L","matches":1,"wins":0,"draws":0,"losses":1,"goals_for":0,"goals_against":1,"xg":0.77,"shots":11.0,"threat":59,"pressing":201,"top_speed":33.8,"points":0,"gd":-1,"possession_avg":55.5,"conversion":0.0},
-    "Paraguay":{"group":"Group D","matches":2,"wins":1,"draws":0,"losses":1,"goals_for":2,"goals_against":4,"xg":0.48,"shots":8.0,"threat":20,"pressing":364,"top_speed":33.9,"points":3,"gd":-2,"possession_avg":24.0,"conversion":12.5},
+    "Paraguay":{"group":"Group D","matches":2,"wins":1,"draws":0,"losses":1,"goals_for":2,"goals_against":4,"xg":0.48,"shots":8.0,"threat":41,"pressing":363,"top_speed":33.9,"points":3,"gd":-2,"possession_avg":24.0,"conversion":12.5},
     "Portugal":{"group":"Group K","matches":1,"wins":0,"draws":1,"losses":0,"goals_for":1,"goals_against":1,"xg":0.57,"shots":7.0,"threat":72,"pressing":183,"top_speed":34.8,"points":1,"gd":0,"possession_avg":68.9,"conversion":14.3},
-    "Qatar":{"group":"Group B","matches":2,"wins":0,"draws":1,"losses":1,"goals_for":1,"goals_against":7,"xg":0.36,"shots":4.0,"threat":13,"pressing":284,"top_speed":33.2,"points":1,"gd":-6,"possession_avg":24.6,"conversion":12.5},
-    "Saudi Arabia":{"group":"Group H","matches":1,"wins":0,"draws":1,"losses":0,"goals_for":1,"goals_against":1,"xg":1.06,"shots":7.0,"threat":23,"pressing":318,"top_speed":33.8,"points":1,"gd":0,"possession_avg":27.1,"conversion":14.3},
-    "Scotland":{"group":"Group C","matches":2,"wins":1,"draws":0,"losses":1,"goals_for":1,"goals_against":1,"xg":0.83,"shots":7.5,"threat":43,"pressing":267,"top_speed":34.0,"points":3,"gd":0,"possession_avg":39.8,"conversion":6.7},
+    "Qatar":{"group":"Group B","matches":2,"wins":0,"draws":1,"losses":1,"goals_for":1,"goals_against":7,"xg":0.36,"shots":4.0,"threat":26,"pressing":284,"top_speed":33.2,"points":1,"gd":-6,"possession_avg":24.6,"conversion":12.5},
+    "Saudi Arabia":{"group":"Group H","matches":2,"wins":0,"draws":1,"losses":1,"goals_for":1,"goals_against":5,"xg":0.58,"shots":5.0,"threat":47,"pressing":365,"top_speed":33.8,"points":1,"gd":-4,"possession_avg":28.5,"conversion":10.0},
+    "Scotland":{"group":"Group C","matches":2,"wins":1,"draws":0,"losses":1,"goals_for":1,"goals_against":1,"xg":0.83,"shots":7.5,"threat":86,"pressing":267,"top_speed":34.0,"points":3,"gd":0,"possession_avg":39.8,"conversion":6.7},
     "Senegal":{"group":"Group I","matches":1,"wins":0,"draws":0,"losses":1,"goals_for":1,"goals_against":3,"xg":0.39,"shots":6.0,"threat":46,"pressing":308,"top_speed":33.8,"points":0,"gd":-2,"possession_avg":44.5,"conversion":16.7},
-    "South Africa":{"group":"Group A","matches":2,"wins":0,"draws":1,"losses":1,"goals_for":1,"goals_against":3,"xg":0.72,"shots":10.0,"threat":49,"pressing":270,"top_speed":34.4,"points":1,"gd":-2,"possession_avg":48.2,"conversion":5.0},
-    "Spain":{"group":"Group H","matches":1,"wins":0,"draws":1,"losses":0,"goals_for":0,"goals_against":0,"xg":2.26,"shots":27.0,"threat":90,"pressing":200,"top_speed":32.6,"points":1,"gd":0,"possession_avg":65.7,"conversion":0.0},
-    "Sweden":{"group":"Group F","matches":2,"wins":1,"draws":0,"losses":1,"goals_for":6,"goals_against":6,"xg":1.69,"shots":14.5,"threat":48,"pressing":200,"top_speed":36.5,"points":3,"gd":0,"possession_avg":45.4,"conversion":20.7},
-    "Switzerland":{"group":"Group B","matches":2,"wins":1,"draws":1,"losses":0,"goals_for":5,"goals_against":2,"xg":2.49,"shots":19.5,"threat":74,"pressing":200,"top_speed":34.0,"points":4,"gd":3,"possession_avg":58.3,"conversion":12.8},
-    "Tunisia":{"group":"Group F","matches":2,"wins":0,"draws":0,"losses":2,"goals_for":1,"goals_against":9,"xg":0.18,"shots":4.0,"threat":45,"pressing":228,"top_speed":34.8,"points":0,"gd":-8,"possession_avg":39.5,"conversion":12.5},
-    "Türkiye":{"group":"Group D","matches":2,"wins":0,"draws":0,"losses":2,"goals_for":0,"goals_against":3,"xg":1.89,"shots":31.0,"threat":82,"pressing":136,"top_speed":34.7,"points":0,"gd":-3,"possession_avg":65.3,"conversion":0.0},
-    "USA":{"group":"Group D","matches":2,"wins":2,"draws":0,"losses":0,"goals_for":6,"goals_against":1,"xg":1.73,"shots":13.0,"threat":70,"pressing":186,"top_speed":34.0,"points":6,"gd":5,"possession_avg":57.7,"conversion":23.1},
-    "Uruguay":{"group":"Group H","matches":1,"wins":0,"draws":1,"losses":0,"goals_for":1,"goals_against":1,"xg":1.5,"shots":27.0,"threat":77,"pressing":157,"top_speed":34.6,"points":1,"gd":0,"possession_avg":63.3,"conversion":3.7},
+    "South Africa":{"group":"Group A","matches":2,"wins":0,"draws":1,"losses":1,"goals_for":1,"goals_against":3,"xg":0.72,"shots":10.0,"threat":98,"pressing":269,"top_speed":34.4,"points":1,"gd":-2,"possession_avg":48.2,"conversion":5.0},
+    "Spain":{"group":"Group H","matches":2,"wins":1,"draws":1,"losses":0,"goals_for":4,"goals_against":0,"xg":2.73,"shots":24.5,"threat":166,"pressing":207,"top_speed":33.7,"points":4,"gd":4,"possession_avg":64.4,"conversion":8.2},
+    "Sweden":{"group":"Group F","matches":2,"wins":1,"draws":0,"losses":1,"goals_for":6,"goals_against":6,"xg":1.69,"shots":14.5,"threat":97,"pressing":200,"top_speed":36.5,"points":3,"gd":0,"possession_avg":45.4,"conversion":20.7},
+    "Switzerland":{"group":"Group B","matches":2,"wins":1,"draws":1,"losses":0,"goals_for":5,"goals_against":2,"xg":2.49,"shots":19.5,"threat":148,"pressing":199,"top_speed":34.0,"points":4,"gd":3,"possession_avg":58.3,"conversion":12.8},
+    "Tunisia":{"group":"Group F","matches":2,"wins":0,"draws":0,"losses":2,"goals_for":1,"goals_against":9,"xg":0.18,"shots":4.0,"threat":90,"pressing":228,"top_speed":34.8,"points":0,"gd":-8,"possession_avg":39.5,"conversion":12.5},
+    "Türkiye":{"group":"Group D","matches":2,"wins":0,"draws":0,"losses":2,"goals_for":0,"goals_against":3,"xg":1.89,"shots":31.0,"threat":165,"pressing":135,"top_speed":34.7,"points":0,"gd":-3,"possession_avg":65.3,"conversion":0.0},
+    "USA":{"group":"Group D","matches":2,"wins":2,"draws":0,"losses":0,"goals_for":6,"goals_against":1,"xg":1.73,"shots":13.0,"threat":141,"pressing":185,"top_speed":34.0,"points":6,"gd":5,"possession_avg":57.7,"conversion":23.1},
+    "Uruguay":{"group":"Group H","matches":2,"wins":0,"draws":2,"losses":0,"goals_for":3,"goals_against":3,"xg":1.86,"shots":22.0,"threat":151,"pressing":177,"top_speed":34.9,"points":2,"gd":0,"possession_avg":59.1,"conversion":6.8},
     "Uzbekistan":{"group":"Group K","matches":1,"wins":0,"draws":0,"losses":1,"goals_for":1,"goals_against":3,"xg":1.11,"shots":8.0,"threat":40,"pressing":264,"top_speed":36.5,"points":0,"gd":-2,"possession_avg":33.9,"conversion":12.5}
   };
 
