@@ -1,0 +1,32 @@
+{
+  "updated_at": "2026-06-24",
+  "n_samples": 92,
+  "n_features": 132,
+  "cv_folds": 10,
+  "top3": [
+    {
+      "rank": 1,
+      "model": "LightGBM",
+      "accuracy": 0.86,
+      "accuracy_std": 0.1116,
+      "f1": 0.7448,
+      "auc_roc": 0.9417
+    },
+    {
+      "rank": 2,
+      "model": "XGBoost",
+      "accuracy": 0.8478,
+      "accuracy_std": 0.1084,
+      "f1": 0.6881,
+      "auc_roc": 0.9222
+    },
+    {
+      "rank": 3,
+      "model": "Extra Trees",
+      "accuracy": 0.8156,
+      "accuracy_std": 0.0827,
+      "f1": 0.6213,
+      "auc_roc": 0.8847
+    }
+  ]
+}

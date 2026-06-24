@@ -115,6 +115,48 @@
     .card-title { font-size: 18px; font-weight: 600; letter-spacing: .021em; margin-bottom: 10px; }
     .card-text { font-size: 14px; line-height: 1.6; letter-spacing: .025em; color: var(--ash); }
 
+    /* ML MODEL PANEL */
+    .ml-podium { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 20px; }
+    .ml-card { border: 1px solid rgba(255,255,255,.08); border-radius: var(--r); padding: 28px 24px; position: relative; overflow: hidden; transition: transform .25s, box-shadow .25s; cursor: default; }
+    .ml-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,.4); }
+    .ml-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
+    .ml-card.rank-1 { border-color: rgba(255,184,41,.28); background: rgba(255,184,41,.03); }
+    .ml-card.rank-2 { border-color: rgba(128,82,255,.22); background: rgba(128,82,255,.025); }
+    .ml-card.rank-3 { border-color: rgba(21,132,110,.22); background: rgba(21,132,110,.025); }
+    .ml-card.rank-1::before { background: var(--amber); }
+    .ml-card.rank-2::before { background: var(--plum); }
+    .ml-card.rank-3::before { background: var(--lichen); }
+    .ml-rank-badge { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 10px; font-size: 13px; font-weight: 700; letter-spacing: .02em; margin-bottom: 18px; }
+    .ml-card.rank-1 .ml-rank-badge { background: rgba(255,184,41,.14); color: var(--amber); }
+    .ml-card.rank-2 .ml-rank-badge { background: rgba(128,82,255,.14); color: var(--plum); }
+    .ml-card.rank-3 .ml-rank-badge { background: rgba(21,132,110,.14); color: #4ecba3; }
+    .ml-model-name { font-size: 21px; font-weight: 700; letter-spacing: -.025em; color: var(--bone); margin-bottom: 22px; line-height: 1.2; }
+    .ml-acc-label { font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--smoke); margin-bottom: 6px; }
+    .ml-acc-value { font-size: 44px; font-weight: 700; letter-spacing: -.04em; line-height: 1; margin-bottom: 14px; }
+    .ml-acc-unit { font-size: 17px; font-weight: 400; }
+    .ml-card.rank-1 .ml-acc-value { color: var(--amber); }
+    .ml-card.rank-2 .ml-acc-value { color: var(--plum); }
+    .ml-card.rank-3 .ml-acc-value { color: #4ecba3; }
+    .ml-bar-track { height: 3px; background: rgba(255,255,255,.07); border-radius: 2px; margin-bottom: 22px; }
+    .ml-bar-fill { height: 3px; border-radius: 2px; width: 0%; transition: width 1.4s cubic-bezier(.16,1,.3,1); }
+    .ml-card.rank-1 .ml-bar-fill { background: linear-gradient(90deg, rgba(255,184,41,.5), var(--amber)); }
+    .ml-card.rank-2 .ml-bar-fill { background: linear-gradient(90deg, rgba(128,82,255,.5), var(--plum)); }
+    .ml-card.rank-3 .ml-bar-fill { background: linear-gradient(90deg, rgba(21,132,110,.5), var(--lichen)); }
+    .ml-metrics { display: flex; gap: 0; border: 1px solid rgba(255,255,255,.06); border-radius: 12px; overflow: hidden; }
+    .ml-metric { flex: 1; padding: 12px 14px; }
+    .ml-metric:not(:last-child) { border-right: 1px solid rgba(255,255,255,.06); }
+    .ml-metric-label { font-size: 9px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--smoke); margin-bottom: 5px; }
+    .ml-metric-value { font-size: 15px; font-weight: 600; color: var(--ash); }
+    .ml-meta-strip { border: 1px solid rgba(255,255,255,.06); border-radius: 14px; padding: 15px 20px; display: flex; align-items: center; flex-wrap: wrap; gap: 6px 0; }
+    .ml-meta-item { display: flex; align-items: center; gap: 8px; padding: 0 18px; border-right: 1px solid rgba(255,255,255,.07); }
+    .ml-meta-item:first-child { padding-left: 0; }
+    .ml-meta-item:last-child { border-right: none; }
+    .ml-meta-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--plum); flex-shrink: 0; }
+    .ml-meta-label { font-size: 11px; color: var(--smoke); }
+    .ml-meta-value { font-size: 11px; font-weight: 600; color: var(--ash); }
+    .ml-error { font-size: 14px; color: var(--smoke); line-height: 1.6; }
+    .ml-error code { background: rgba(255,255,255,.06); padding: 2px 7px; border-radius: 5px; font-size: 13px; color: var(--ash); }
+
     /* FOOTER */
     footer { border-top: 1px solid rgba(255,255,255,.06); padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
     footer p { font-size: 13px; color: var(--smoke); line-height: 1.5; }
@@ -132,6 +174,9 @@
       .two-col { grid-template-columns: 1fr; }
       .cards { grid-template-columns: repeat(2,1fr); gap: 16px; }
       footer { flex-direction: column; align-items: flex-start; padding: 24px 28px; gap: 10px; }
+      .ml-podium { grid-template-columns: 1fr; }
+      .ml-meta-strip { gap: 10px 0; }
+      .ml-meta-item { padding: 0 14px; }
     }
     @media (max-width: 599px) {
       .nav { padding: 13px 20px; }
@@ -151,6 +196,10 @@
       footer { padding: 20px; }
       .hero-content { position: relative; }
       .hero-content::before { content:''; position:absolute; inset:-28px -20px; background:rgba(0,0,0,.52); filter:blur(22px); border-radius:16px; z-index:-1; pointer-events:none; }
+      .ml-acc-value { font-size: 34px; }
+      .ml-model-name { font-size: 18px; }
+      .ml-meta-item { padding: 5px 10px; border-right: none; border-bottom: 1px solid rgba(255,255,255,.06); width: 50%; }
+      .ml-meta-item:nth-child(odd) { padding-left: 0; }
     }
     @media (max-width: 379px) {
       .nav-pill { max-width: 90px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
@@ -274,6 +323,15 @@
       <div class="chart-sub">Gabungan xG (30%) + Threat Score (25%) + Konversi (20%) + Poin (25%). Berdasarkan performa 46 pertandingan yang telah selesai.</div>
       <div class="chart-wrap tall"><canvas id="chart-ranking"></canvas></div>
       <div class="insight" id="insight-ranking"><p>Memuat insight…</p></div>
+    </div>
+  </section>
+
+  <!-- ML Model Comparison -->
+  <section id="ml-models" class="section section-divider">
+    <span class="sec-eye">Machine Learning · Klasifikasi Hasil Pertandingan</span>
+    <h2 class="sec-head">Top Model <em>Prediksi</em></h2>
+    <div class="chart-card" id="ml-panel">
+      <p class="ml-error">Memuat data model…</p>
     </div>
   </section>
 
@@ -627,6 +685,70 @@
     const t1=ranked[0];
     document.getElementById('insight-ranking').innerHTML=`<p><strong>${t1.name}</strong> memimpin Power Ranking sementara dengan indeks <strong>${t1.score}</strong> — unggul dalam kombinasi xG, threat score, dan efisiensi konversi. Peringkat ini akan terus diperbarui seiring berjalannya sisa Matchday 2 dan Matchday 3.</p>`;
   });
+
+  // ── ML MODEL PANEL ────────────────────────────────────────────────────────
+  (function(){
+    const panel = document.getElementById('ml-panel');
+    const RANK_CLASS = ['rank-1','rank-2','rank-3'];
+    const RANK_LABEL = ['#1','#2','#3'];
+
+    function renderML(data) {
+      const cards = data.top3.map((m, i) => `
+        <div class="ml-card ${RANK_CLASS[i]}">
+          <div class="ml-rank-badge">${RANK_LABEL[i]}</div>
+          <div class="ml-model-name">${m.model}</div>
+          <div class="ml-acc-label">Akurasi · ${data.cv_folds}-fold Stratified CV</div>
+          <div class="ml-acc-value">${(m.accuracy*100).toFixed(2)}<span class="ml-acc-unit" style="color:var(--smoke)">%</span></div>
+          <div class="ml-bar-track">
+            <div class="ml-bar-fill" data-target="${(m.accuracy*100).toFixed(4)}"></div>
+          </div>
+          <div class="ml-metrics">
+            <div class="ml-metric">
+              <div class="ml-metric-label">F1-Score</div>
+              <div class="ml-metric-value">${m.f1.toFixed(4)}</div>
+            </div>
+            <div class="ml-metric">
+              <div class="ml-metric-label">AUC-ROC</div>
+              <div class="ml-metric-value">${m.auc_roc.toFixed(4)}</div>
+            </div>
+            <div class="ml-metric">
+              <div class="ml-metric-label">±Std</div>
+              <div class="ml-metric-value">${(m.accuracy_std*100).toFixed(2)}%</div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      panel.innerHTML = `
+        <div class="ml-podium">${cards}</div>
+        <div class="ml-meta-strip">
+          <div class="ml-meta-item"><div class="ml-meta-dot"></div><span class="ml-meta-label">Diperbarui</span>&nbsp;<span class="ml-meta-value">${data.updated_at}</span></div>
+          <div class="ml-meta-item"><div class="ml-meta-dot"></div><span class="ml-meta-label">Sampel</span>&nbsp;<span class="ml-meta-value">${data.n_samples} baris</span></div>
+          <div class="ml-meta-item"><div class="ml-meta-dot"></div><span class="ml-meta-label">Fitur</span>&nbsp;<span class="ml-meta-value">${data.n_features} variabel FIFA</span></div>
+          <div class="ml-meta-item"><div class="ml-meta-dot"></div><span class="ml-meta-label">Evaluasi</span>&nbsp;<span class="ml-meta-value">${data.cv_folds}-fold CV</span></div>
+        </div>
+      `;
+
+      // Animate bars on scroll-in
+      const ob = new IntersectionObserver(entries => {
+        if (!entries[0].isIntersecting) return;
+        ob.disconnect();
+        requestAnimationFrame(() => {
+          panel.querySelectorAll('.ml-bar-fill').forEach(bar => {
+            bar.style.width = bar.dataset.target + '%';
+          });
+        });
+      }, { threshold: 0.2 });
+      ob.observe(panel);
+    }
+
+    fetch('/top_models.json')
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(renderML)
+      .catch(() => {
+        panel.innerHTML = `<p class="ml-error">Data model belum tersedia. Jalankan <code>prediksi/model_klasifikasi.py</code> untuk menghasilkan <code>top_models.json</code>.</p>`;
+      });
+  })();
   </script>
 </body>
 </html>

@@ -1,0 +1,16 @@
+feature,importance
+Assists,0.0779232363986665
+XG,0.03752199691024093
+GoalkeeperDefensiveActionsInsidePenaltyArea,0.027537676379705167
+DistanceWalking,0.02449140824367412
+AvgSpeed,0.021397857046628922
+GoalkeeperDefensiveActionsOutsidePenaltyArea,0.01990473543903951
+AttemptAtGoalInsideThePenaltyAreaOnTarget,0.019688136569124767
+TotalDistance,0.019260988687227143
+AttemptAtGoalAgainst,0.018342747522720956
+AttemptAtGoalAgainstOnTarget,0.0165460301484212
+PassesCompleted,0.01643954759071778
+Passes,0.01515615910653678
+AttemptAtGoalOnTarget,0.014972438882674386
+ReceptionsUnderNoPressure,0.013915191258095493
+Possession,0.013418713607411103
