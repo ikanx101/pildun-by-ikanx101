@@ -1,0 +1,42 @@
+{
+  "updated_at": "2026-06-24",
+  "model_used": "LightGBM",
+  "n_teams_evaluated": 48,
+  "top5": [
+    {
+      "rank": 1,
+      "team": "France",
+      "group": "Group I",
+      "matches_played": 2,
+      "win_probability": 0.9983
+    },
+    {
+      "rank": 2,
+      "team": "Germany",
+      "group": "Group E",
+      "matches_played": 2,
+      "win_probability": 0.9941
+    },
+    {
+      "rank": 3,
+      "team": "USA",
+      "group": "Group D",
+      "matches_played": 2,
+      "win_probability": 0.9919
+    },
+    {
+      "rank": 4,
+      "team": "Norway",
+      "group": "Group I",
+      "matches_played": 2,
+      "win_probability": 0.9888
+    },
+    {
+      "rank": 5,
+      "team": "Argentina",
+      "group": "Group J",
+      "matches_played": 2,
+      "win_probability": 0.9693
+    }
+  ]
+}

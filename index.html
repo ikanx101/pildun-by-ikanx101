@@ -157,6 +157,45 @@
     .ml-error { font-size: 14px; color: var(--smoke); line-height: 1.6; }
     .ml-error code { background: rgba(255,255,255,.06); padding: 2px 7px; border-radius: 5px; font-size: 13px; color: var(--ash); }
 
+    /* PREDICTION LEADERBOARD */
+    .pred-model-tag { display: inline-flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--amber); border: 1px solid rgba(255,184,41,.25); background: rgba(255,184,41,.06); border-radius: 100px; padding: 7px 14px; }
+    .pred-leaderboard { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .pred-row { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 20px; padding: 16px 20px; border: 1px solid rgba(255,255,255,.07); border-radius: 16px; position: relative; transition: border-color .2s, background .2s, transform .2s; }
+    .pred-row:hover { border-color: rgba(255,255,255,.15); background: rgba(255,255,255,.02); transform: translateX(5px); }
+    .pred-row.r1 { border-color: rgba(255,184,41,.25); background: rgba(255,184,41,.03); }
+    .pred-row.r1:hover { background: rgba(255,184,41,.055); }
+    .pred-row.r2 { border-color: rgba(128,82,255,.2); }
+    .pred-row.r3 { border-color: rgba(21,132,110,.2); }
+    .pred-left { display: flex; align-items: center; gap: 14px; min-width: 220px; }
+    .pred-rank { width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+    .pred-row.r1 .pred-rank { background: rgba(255,184,41,.14); color: var(--amber); }
+    .pred-row.r2 .pred-rank { background: rgba(128,82,255,.14); color: var(--plum); }
+    .pred-row.r3 .pred-rank { background: rgba(21,132,110,.14); color: #4ecba3; }
+    .pred-row.r4 .pred-rank, .pred-row.r5 .pred-rank { background: rgba(255,255,255,.06); color: var(--smoke); }
+    .pred-flag { font-size: 24px; line-height: 1; flex-shrink: 0; }
+    .pred-team-name { font-size: 15px; font-weight: 600; color: var(--bone); letter-spacing: .01em; }
+    .pred-team-meta { font-size: 11px; color: var(--smoke); margin-top: 3px; letter-spacing: .025em; }
+    .pred-bar-wrap { flex: 1; }
+    .pred-bar-track { height: 6px; background: rgba(255,255,255,.06); border-radius: 3px; overflow: hidden; }
+    .pred-bar-fill { height: 6px; border-radius: 3px; width: 0%; transition: width 1.7s cubic-bezier(.16,1,.3,1); }
+    .pred-row.r1 .pred-bar-fill { background: linear-gradient(90deg, rgba(255,184,41,.4), var(--amber)); box-shadow: 0 0 10px rgba(255,184,41,.5); }
+    .pred-row.r2 .pred-bar-fill { background: linear-gradient(90deg, rgba(128,82,255,.4), var(--plum)); box-shadow: 0 0 10px rgba(128,82,255,.45); }
+    .pred-row.r3 .pred-bar-fill { background: linear-gradient(90deg, rgba(21,132,110,.4), var(--lichen)); box-shadow: 0 0 10px rgba(21,132,110,.4); }
+    .pred-row.r4 .pred-bar-fill { background: linear-gradient(90deg, rgba(189,189,189,.2), rgba(189,189,189,.55)); }
+    .pred-row.r5 .pred-bar-fill { background: linear-gradient(90deg, rgba(189,189,189,.15), rgba(189,189,189,.45)); }
+    .pred-prob { text-align: right; min-width: 84px; }
+    .pred-prob-num { font-size: 26px; font-weight: 700; letter-spacing: -.03em; line-height: 1; }
+    .pred-prob-unit { font-size: 13px; font-weight: 400; color: var(--smoke); }
+    .pred-row.r1 .pred-prob-num { color: var(--amber); }
+    .pred-row.r2 .pred-prob-num { color: var(--plum); }
+    .pred-row.r3 .pred-prob-num { color: #4ecba3; }
+    .pred-row.r4 .pred-prob-num, .pred-row.r5 .pred-prob-num { color: var(--ash); }
+    .pred-explanation { border: 1px solid rgba(255,255,255,.07); border-left: 3px solid var(--amber); border-radius: 14px; background: rgba(255,184,41,.025); padding: 20px 22px; margin-top: 20px; }
+    .pred-explanation-title { font-size: 13px; font-weight: 700; color: var(--amber); letter-spacing: .015em; margin-bottom: 10px; }
+    .pred-explanation p { font-size: 13px; color: var(--ash); line-height: 1.8; }
+    .pred-explanation strong { color: var(--bone); }
+    .pred-explanation code { background: rgba(255,255,255,.07); padding: 2px 6px; border-radius: 5px; font-size: 12px; color: var(--ash); }
+
     /* FOOTER */
     footer { border-top: 1px solid rgba(255,255,255,.06); padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
     footer p { font-size: 13px; color: var(--smoke); line-height: 1.5; }
@@ -200,6 +239,11 @@
       .ml-model-name { font-size: 18px; }
       .ml-meta-item { padding: 5px 10px; border-right: none; border-bottom: 1px solid rgba(255,255,255,.06); width: 50%; }
       .ml-meta-item:nth-child(odd) { padding-left: 0; }
+      .pred-left { min-width: auto; gap: 10px; }
+      .pred-flag { font-size: 20px; }
+      .pred-row { gap: 12px; padding: 13px 14px; }
+      .pred-prob-num { font-size: 20px; }
+      .pred-prob { min-width: 68px; }
     }
     @media (max-width: 379px) {
       .nav-pill { max-width: 90px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
@@ -332,6 +376,15 @@
     <h2 class="sec-head">Top Model <em>Prediksi</em></h2>
     <div class="chart-card" id="ml-panel">
       <p class="ml-error">Memuat data model…</p>
+    </div>
+  </section>
+
+  <!-- Top 5 Prediction -->
+  <section id="top5-pred" class="section section-divider">
+    <span class="sec-eye">ML Prediction · LightGBM · Rata-rata Statistik per Tim</span>
+    <h2 class="sec-head">5 Tim Berpeluang <em>Terbaik</em></h2>
+    <div class="chart-card" id="pred-panel">
+      <p class="ml-error">Memuat prediksi…</p>
     </div>
   </section>
 
@@ -685,6 +738,105 @@
     const t1=ranked[0];
     document.getElementById('insight-ranking').innerHTML=`<p><strong>${t1.name}</strong> memimpin Power Ranking sementara dengan indeks <strong>${t1.score}</strong> — unggul dalam kombinasi xG, threat score, dan efisiensi konversi. Peringkat ini akan terus diperbarui seiring berjalannya sisa Matchday 2 dan Matchday 3.</p>`;
   });
+
+  // ── TOP 5 PREDICTION PANEL ───────────────────────────────────────────────
+  (function(){
+    const panel = document.getElementById('pred-panel');
+    const ROW_CLS = ['r1','r2','r3','r4','r5'];
+
+    const FLAGS = {
+      "Algeria":"🇩🇿","Argentina":"🇦🇷","Australia":"🇦🇺","Austria":"🇦🇹",
+      "Belgium":"🇧🇪","Bosnia and Herzegovina":"🇧🇦","Brazil":"🇧🇷","Cabo Verde":"🇨🇻",
+      "Canada":"🇨🇦","Colombia":"🇨🇴","Congo DR":"🇨🇩","Croatia":"🇭🇷",
+      "Curaçao":"🇨🇼","Czechia":"🇨🇿","Côte d'Ivoire":"🇨🇮","Ecuador":"🇪🇨",
+      "Egypt":"🇪🇬","England":"🏴󠁧󠁢󠁥󠁮󠁧󠁿","France":"🇫🇷","Germany":"🇩🇪",
+      "Ghana":"🇬🇭","Haiti":"🇭🇹","IR Iran":"🇮🇷","Iraq":"🇮🇶",
+      "Japan":"🇯🇵","Jordan":"🇯🇴","Korea Republic":"🇰🇷","Mexico":"🇲🇽",
+      "Morocco":"🇲🇦","Netherlands":"🇳🇱","New Zealand":"🇳🇿","Norway":"🇳🇴",
+      "Panama":"🇵🇦","Paraguay":"🇵🇾","Portugal":"🇵🇹","Qatar":"🇶🇦",
+      "Saudi Arabia":"🇸🇦","Scotland":"🏴󠁧󠁢󠁳󠁣󠁴󠁿","Senegal":"🇸🇳","South Africa":"🇿🇦",
+      "Spain":"🇪🇸","Sweden":"🇸🇪","Switzerland":"🇨🇭","Tunisia":"🇹🇳",
+      "Türkiye":"🇹🇷","USA":"🇺🇸","Uruguay":"🇺🇾","Uzbekistan":"🇺🇿"
+    };
+
+    function renderPred(data) {
+      const rows = data.top5.map((t, i) => {
+        const flag = FLAGS[t.team] || '🏳';
+        const pct  = (t.win_probability * 100).toFixed(1);
+        return `
+        <div class="pred-row ${ROW_CLS[i]}">
+          <div class="pred-left">
+            <div class="pred-rank">#${t.rank}</div>
+            <div class="pred-flag">${flag}</div>
+            <div>
+              <div class="pred-team-name">${t.team}</div>
+              <div class="pred-team-meta">${t.group} · ${t.matches_played} pertandingan dimainkan</div>
+            </div>
+          </div>
+          <div class="pred-bar-wrap">
+            <div class="pred-bar-track">
+              <div class="pred-bar-fill" data-target="${pct}"></div>
+            </div>
+          </div>
+          <div class="pred-prob">
+            <div class="pred-prob-num">${pct}<span class="pred-prob-unit">%</span></div>
+          </div>
+        </div>`;
+      }).join('');
+
+      panel.innerHTML = `
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:10px;">
+          <div>
+            <div class="chart-title">Peluang Menang per Pertandingan — Top 5</div>
+            <div class="chart-sub" style="margin-bottom:0">
+              Dari ${data.n_teams_evaluated} tim · diperbarui ${data.updated_at}
+            </div>
+          </div>
+          <span class="pred-model-tag">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.2"/><path d="M6 3v3l2 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            Model: ${data.model_used}
+          </span>
+        </div>
+        <div class="pred-leaderboard">${rows}</div>
+        <div class="pred-explanation">
+          <div class="pred-explanation-title">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 4.5v3M7 9.5v.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Mengapa prediksi ini akan terus berubah?
+          </div>
+          <p>
+            Probabilitas dihitung dari <strong>rata-rata seluruh statistik pertandingan tiap tim</strong>
+            (xG, passing, pressing, sprint distance, dsb.), lalu dimasukkan ke model LightGBM yang dilatih
+            pada data pertandingan nyata. Artinya, setiap kali pertandingan baru selesai dimainkan:
+            <br><br>
+            · <strong>Rata-rata bergeser</strong> — tim yang tampil gemilang di matchday berikutnya akan
+            mendorong rata-rata xG dan threat score-nya naik, sehingga probabilitasnya ikut meningkat.<br>
+            · <strong>Tim yang tampil buruk</strong> akan melihat probabilitasnya turun, bahkan bisa
+            tergeser dari 5 besar.<br>
+            · <strong>Model dilatih ulang</strong> setiap kali script dijalankan menggunakan seluruh data
+            terbaru — bukan snapshot statis.<br><br>
+            Jalankan <code>prediksi/prediksi_tim.py</code> setelah setiap update data untuk menyegarkan prediksi ini.
+          </p>
+        </div>`;
+
+      // Animate bars when scrolled into view
+      const ob = new IntersectionObserver(entries => {
+        if (!entries[0].isIntersecting) return;
+        ob.disconnect();
+        // stagger each bar slightly
+        panel.querySelectorAll('.pred-bar-fill').forEach((bar, idx) => {
+          setTimeout(() => { bar.style.width = bar.dataset.target + '%'; }, idx * 120);
+        });
+      }, { threshold: 0.2 });
+      ob.observe(panel);
+    }
+
+    fetch('/top5_predictions.json')
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(renderPred)
+      .catch(() => {
+        panel.innerHTML = `<p class="ml-error">Data prediksi belum tersedia. Jalankan <code>prediksi/prediksi_tim.py</code> terlebih dahulu.</p>`;
+      });
+  })();
 
   // ── ML MODEL PANEL ────────────────────────────────────────────────────────
   (function(){
