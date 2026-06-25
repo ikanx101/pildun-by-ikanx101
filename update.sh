@@ -45,8 +45,17 @@ else
     log_fail "generate_stats.py gagal."
 fi
 
+# ── [2.5] Update angka pertandingan & tanggal di index.html ─────────────────
+cd "$PROJ"
+if python3 update_html.py; then
+    log_ok "index.html diperbarui (angka pertandingan & tanggal)"
+else
+    log_fail "update_html.py gagal."
+fi
+
 # ── [3/4] Training & evaluasi model ML ──────────────────────────────────────
 log_step 3 "Training & evaluasi 14 model klasifikasi ML"
+cd "$PRED"
 if python3 model_klasifikasi.py 2>&1 | grep -E "(Acc=|TABEL|Model dilatih|Disimpan)"; then
     BEST=$(python3 -c "import json; d=json.load(open('../top_models.json')); m=d['top3'][0]; print(f\"{m['model']} — Acc={m['accuracy']*100:.2f}%\")")
     log_ok "top_models.json diperbarui — model terbaik: $BEST"

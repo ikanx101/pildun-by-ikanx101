@@ -52,3 +52,18 @@ with open("../stats_data.json", "w", encoding="utf-8") as f:
     json.dump(result, f, indent=2, ensure_ascii=False)
 
 print(f"stats_data.json disimpan — {len(result)} tim")
+
+# Hitung metadata untuk update index.html
+total_matches = len(df) // 2
+last_date = pd.to_datetime(df["date"]).max()
+months_id = {
+    1:"Januari",2:"Februari",3:"Maret",4:"April",5:"Mei",6:"Juni",
+    7:"Juli",8:"Agustus",9:"September",10:"Oktober",11:"November",12:"Desember"
+}
+last_date_id = f"{last_date.day} {months_id[last_date.month]} {last_date.year}"
+
+site_meta = {"match_count": total_matches, "last_match_date": last_date_id}
+with open("../site_meta.json", "w", encoding="utf-8") as f:
+    json.dump(site_meta, f, indent=2, ensure_ascii=False)
+
+print(f"site_meta.json disimpan — {total_matches} pertandingan, terakhir {last_date_id}")
