@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-26",
+  "updated_at": "2026-06-27",
   "model_used": "LightGBM",
   "n_teams_evaluated": 48,
   "top5": [
@@ -7,8 +7,8 @@
       "rank": 1,
       "team": "France",
       "group": "Group I",
-      "matches_played": 2,
-      "win_probability": 0.9983
+      "matches_played": 3,
+      "win_probability": 0.9967
     },
     {
       "rank": 2,
@@ -19,24 +19,24 @@
     },
     {
       "rank": 3,
-      "team": "Mexico",
-      "group": "Group A",
-      "matches_played": 3,
-      "win_probability": 0.9943
-    },
-    {
-      "rank": 4,
       "team": "Brazil",
       "group": "Group C",
       "matches_played": 3,
-      "win_probability": 0.9897
+      "win_probability": 0.9956
+    },
+    {
+      "rank": 4,
+      "team": "Mexico",
+      "group": "Group A",
+      "matches_played": 3,
+      "win_probability": 0.9934
     },
     {
       "rank": 5,
-      "team": "Colombia",
-      "group": "Group K",
-      "matches_played": 2,
-      "win_probability": 0.9871
+      "team": "Morocco",
+      "group": "Group C",
+      "matches_played": 3,
+      "win_probability": 0.9917
     }
   ]
 }
