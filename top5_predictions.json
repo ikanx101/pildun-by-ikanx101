@@ -8,35 +8,35 @@
       "team": "France",
       "group": "Group I",
       "matches_played": 2,
-      "win_probability": 0.9987
+      "win_probability": 0.9983
     },
     {
       "rank": 2,
-      "team": "Brazil",
-      "group": "Group C",
-      "matches_played": 3,
-      "win_probability": 0.9986
-    },
-    {
-      "rank": 3,
       "team": "Germany",
       "group": "Group E",
       "matches_played": 3,
       "win_probability": 0.9966
     },
     {
-      "rank": 4,
+      "rank": 3,
       "team": "Mexico",
       "group": "Group A",
       "matches_played": 3,
-      "win_probability": 0.9926
+      "win_probability": 0.9943
+    },
+    {
+      "rank": 4,
+      "team": "Brazil",
+      "group": "Group C",
+      "matches_played": 3,
+      "win_probability": 0.9897
     },
     {
       "rank": 5,
       "team": "Colombia",
       "group": "Group K",
       "matches_played": 2,
-      "win_probability": 0.985
+      "win_probability": 0.9871
     }
   ]
 }
