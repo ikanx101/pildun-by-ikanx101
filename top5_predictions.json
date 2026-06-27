@@ -5,38 +5,38 @@
   "top5": [
     {
       "rank": 1,
-      "team": "France",
-      "group": "Group I",
+      "team": "Mexico",
+      "group": "Group A",
       "matches_played": 3,
-      "win_probability": 0.9967
+      "win_probability": 0.997
     },
     {
       "rank": 2,
       "team": "Germany",
       "group": "Group E",
       "matches_played": 3,
-      "win_probability": 0.9966
+      "win_probability": 0.9967
     },
     {
       "rank": 3,
-      "team": "Brazil",
-      "group": "Group C",
+      "team": "France",
+      "group": "Group I",
       "matches_played": 3,
-      "win_probability": 0.9956
+      "win_probability": 0.9966
     },
     {
       "rank": 4,
-      "team": "Mexico",
-      "group": "Group A",
+      "team": "Brazil",
+      "group": "Group C",
       "matches_played": 3,
-      "win_probability": 0.9934
+      "win_probability": 0.995
     },
     {
       "rank": 5,
-      "team": "Morocco",
-      "group": "Group C",
-      "matches_played": 3,
-      "win_probability": 0.9917
+      "team": "Colombia",
+      "group": "Group K",
+      "matches_played": 2,
+      "win_probability": 0.9937
     }
   ]
 }
