@@ -1,0 +1,695 @@
+{
+  "updated_at": "29 Juni 2026",
+  "groups": [
+    {
+      "name": "Group A",
+      "complete": true,
+      "teams": [
+        {
+          "name": "Mexico",
+          "played": 3,
+          "wins": 3,
+          "draws": 0,
+          "losses": 0,
+          "gf": 6,
+          "ga": 0,
+          "gd": 6,
+          "pts": 9,
+          "pos": 1
+        },
+        {
+          "name": "South Africa",
+          "played": 3,
+          "wins": 1,
+          "draws": 1,
+          "losses": 1,
+          "gf": 2,
+          "ga": 3,
+          "gd": -1,
+          "pts": 4,
+          "pos": 2
+        },
+        {
+          "name": "Korea Republic",
+          "played": 3,
+          "wins": 1,
+          "draws": 0,
+          "losses": 2,
+          "gf": 2,
+          "ga": 3,
+          "gd": -1,
+          "pts": 3,
+          "pos": 3
+        },
+        {
+          "name": "Czechia",
+          "played": 3,
+          "wins": 0,
+          "draws": 1,
+          "losses": 2,
+          "gf": 2,
+          "ga": 6,
+          "gd": -4,
+          "pts": 1,
+          "pos": 4
+        }
+      ]
+    },
+    {
+      "name": "Group B",
+      "complete": true,
+      "teams": [
+        {
+          "name": "Switzerland",
+          "played": 3,
+          "wins": 2,
+          "draws": 1,
+          "losses": 0,
+          "gf": 7,
+          "ga": 3,
+          "gd": 4,
+          "pts": 7,
+          "pos": 1
+        },
+        {
+          "name": "Canada",
+          "played": 3,
+          "wins": 1,
+          "draws": 1,
+          "losses": 1,
+          "gf": 8,
+          "ga": 3,
+          "gd": 5,
+          "pts": 4,
+          "pos": 2
+        },
+        {
+          "name": "Bosnia and Herzegovina",
+          "played": 3,
+          "wins": 1,
+          "draws": 1,
+          "losses": 1,
+          "gf": 5,
+          "ga": 6,
+          "gd": -1,
+          "pts": 4,
+          "pos": 3
+        },
+        {
+          "name": "Qatar",
+          "played": 3,
+          "wins": 0,
+          "draws": 1,
+          "losses": 2,
+          "gf": 2,
+          "ga": 10,
+          "gd": -8,
+          "pts": 1,
+          "pos": 4
+        }
+      ]
+    },
+    {
+      "name": "Group C",
+      "complete": true,
+      "teams": [
+        {
+          "name": "Brazil",
+          "played": 3,
+          "wins": 2,
+          "draws": 1,
+          "losses": 0,
+          "gf": 7,
+          "ga": 1,
+          "gd": 6,
+          "pts": 7,
+          "pos": 1
+        },
+        {
+          "name": "Morocco",
+          "played": 3,
+          "wins": 2,
+          "draws": 1,
+          "losses": 0,
+          "gf": 6,
+          "ga": 3,
+          "gd": 3,
+          "pts": 7,
+          "pos": 2
+        },
+        {
+          "name": "Scotland",
+          "played": 3,
+          "wins": 1,
+          "draws": 0,
+          "losses": 2,
+          "gf": 1,
+          "ga": 4,
+          "gd": -3,
+          "pts": 3,
+          "pos": 3
+        },
+        {
+          "name": "Haiti",
+          "played": 3,
+          "wins": 0,
+          "draws": 0,
+          "losses": 3,
+          "gf": 2,
+          "ga": 8,
+          "gd": -6,
+          "pts": 0,
+          "pos": 4
+        }
+      ]
+    },
+    {
+      "name": "Group D",
+      "complete": true,
+      "teams": [
+        {
+          "name": "USA",
+          "played": 3,
+          "wins": 2,
+          "draws": 0,
+          "losses": 1,
+          "gf": 8,
+          "ga": 4,
+          "gd": 4,
+          "pts": 6,
+          "pos": 1
+        },
+        {
+          "name": "Australia",
+          "played": 3,
+          "wins": 1,
+          "draws": 1,
+          "losses": 1,
+          "gf": 2,
+          "ga": 2,
+          "gd": 0,
+          "pts": 4,
+          "pos": 2
+        },
+        {
+          "name": "Paraguay",
+          "played": 3,
+          "wins": 1,
+          "draws": 1,
+          "losses": 1,
+          "gf": 2,
+          "ga": 4,
+          "gd": -2,
+          "pts": 4,
+          "pos": 3
+        },
+        {
+          "name": "Türkiye",
+          "played": 3,
+          "wins": 1,
+          "draws": 0,
+          "losses": 2,
+          "gf": 3,
+          "ga": 5,
+          "gd": -2,
+          "pts": 3,
+          "pos": 4
+        }
+      ]
+    },
+    {
+      "name": "Group E",
+      "complete": true,
+      "teams": [
+        {
+          "name": "Germany",
+          "played": 3,
+          "wins": 2,
+          "draws": 0,
+          "losses": 1,
+          "gf": 10,
+          "ga": 4,
+          "gd": 6,
+          "pts": 6,
+          "pos": 1
+        },
+        {
+          "name": "Côte d'Ivoire",
+          "played": 3,
+          "wins": 2,
+          "draws": 0,
+          "losses": 1,
+          "gf": 4,
+          "ga": 2,
+          "gd": 2,
+          "pts": 6,
+          "pos": 2
+        },
+        {
+          "name": "Ecuador",
+          "played": 3,
+          "wins": 1,
+          "draws": 1,
+          "losses": 1,
+          "gf": 2,
+          "ga": 2,
+          "gd": 0,
+          "pts": 4,
+          "pos": 3
+        },
+        {
+          "name": "Curaçao",
+          "played": 3,
+          "wins": 0,
+          "draws": 1,
+          "losses": 2,
+          "gf": 1,
+          "ga": 9,
+          "gd": -8,
+          "pts": 1,
+          "pos": 4
+        }
+      ]
+    },
+    {
+      "name": "Group F",
+      "complete": true,
+      "teams": [
+        {
+          "name": "Netherlands",
+          "played": 3,
+          "wins": 2,
+          "draws": 1,
+          "losses": 0,
+          "gf": 10,
+          "ga": 4,
+          "gd": 6,
+          "pts": 7,
+          "pos": 1
+        },
+        {
+          "name": "Japan",
+          "played": 3,
+          "wins": 1,
+          "draws": 2,
+          "losses": 0,
+          "gf": 7,
+          "ga": 3,
+          "gd": 4,
+          "pts": 5,
+          "pos": 2
+        },
+        {
+          "name": "Sweden",
+          "played": 3,
+          "wins": 1,
+          "draws": 1,
+          "losses": 1,
+          "gf": 7,
+          "ga": 7,
+          "gd": 0,
+          "pts": 4,
+          "pos": 3
+        },
+        {
+          "name": "Tunisia",
+          "played": 3,
+          "wins": 0,
+          "draws": 0,
+          "losses": 3,
+          "gf": 2,
+          "ga": 12,
+          "gd": -10,
+          "pts": 0,
+          "pos": 4
+        }
+      ]
+    },
+    {
+      "name": "Group G",
+      "complete": true,
+      "teams": [
+        {
+          "name": "Belgium",
+          "played": 3,
+          "wins": 1,
+          "draws": 2,
+          "losses": 0,
+          "gf": 6,
+          "ga": 2,
+          "gd": 4,
+          "pts": 5,
+          "pos": 1
+        },
+        {
+          "name": "Egypt",
+          "played": 3,
+          "wins": 1,
+          "draws": 2,
+          "losses": 0,
+          "gf": 5,
+          "ga": 3,
+          "gd": 2,
+          "pts": 5,
+          "pos": 2
+        },
+        {
+          "name": "IR Iran",
+          "played": 3,
+          "wins": 0,
+          "draws": 3,
+          "losses": 0,
+          "gf": 3,
+          "ga": 3,
+          "gd": 0,
+          "pts": 3,
+          "pos": 3
+        },
+        {
+          "name": "New Zealand",
+          "played": 3,
+          "wins": 0,
+          "draws": 1,
+          "losses": 2,
+          "gf": 4,
+          "ga": 10,
+          "gd": -6,
+          "pts": 1,
+          "pos": 4
+        }
+      ]
+    },
+    {
+      "name": "Group H",
+      "complete": true,
+      "teams": [
+        {
+          "name": "Spain",
+          "played": 3,
+          "wins": 2,
+          "draws": 1,
+          "losses": 0,
+          "gf": 5,
+          "ga": 0,
+          "gd": 5,
+          "pts": 7,
+          "pos": 1
+        },
+        {
+          "name": "Cabo Verde",
+          "played": 3,
+          "wins": 0,
+          "draws": 3,
+          "losses": 0,
+          "gf": 2,
+          "ga": 2,
+          "gd": 0,
+          "pts": 3,
+          "pos": 2
+        },
+        {
+          "name": "Uruguay",
+          "played": 3,
+          "wins": 0,
+          "draws": 2,
+          "losses": 1,
+          "gf": 3,
+          "ga": 4,
+          "gd": -1,
+          "pts": 2,
+          "pos": 3
+        },
+        {
+          "name": "Saudi Arabia",
+          "played": 3,
+          "wins": 0,
+          "draws": 2,
+          "losses": 1,
+          "gf": 1,
+          "ga": 5,
+          "gd": -4,
+          "pts": 2,
+          "pos": 4
+        }
+      ]
+    },
+    {
+      "name": "Group I",
+      "complete": true,
+      "teams": [
+        {
+          "name": "France",
+          "played": 3,
+          "wins": 3,
+          "draws": 0,
+          "losses": 0,
+          "gf": 10,
+          "ga": 2,
+          "gd": 8,
+          "pts": 9,
+          "pos": 1
+        },
+        {
+          "name": "Norway",
+          "played": 3,
+          "wins": 2,
+          "draws": 0,
+          "losses": 1,
+          "gf": 8,
+          "ga": 7,
+          "gd": 1,
+          "pts": 6,
+          "pos": 2
+        },
+        {
+          "name": "Senegal",
+          "played": 3,
+          "wins": 1,
+          "draws": 0,
+          "losses": 2,
+          "gf": 8,
+          "ga": 6,
+          "gd": 2,
+          "pts": 3,
+          "pos": 3
+        },
+        {
+          "name": "Iraq",
+          "played": 3,
+          "wins": 0,
+          "draws": 0,
+          "losses": 3,
+          "gf": 1,
+          "ga": 12,
+          "gd": -11,
+          "pts": 0,
+          "pos": 4
+        }
+      ]
+    },
+    {
+      "name": "Group J",
+      "complete": true,
+      "teams": [
+        {
+          "name": "Argentina",
+          "played": 3,
+          "wins": 3,
+          "draws": 0,
+          "losses": 0,
+          "gf": 8,
+          "ga": 1,
+          "gd": 7,
+          "pts": 9,
+          "pos": 1
+        },
+        {
+          "name": "Austria",
+          "played": 3,
+          "wins": 1,
+          "draws": 1,
+          "losses": 1,
+          "gf": 6,
+          "ga": 6,
+          "gd": 0,
+          "pts": 4,
+          "pos": 2
+        },
+        {
+          "name": "Algeria",
+          "played": 3,
+          "wins": 1,
+          "draws": 1,
+          "losses": 1,
+          "gf": 5,
+          "ga": 7,
+          "gd": -2,
+          "pts": 4,
+          "pos": 3
+        },
+        {
+          "name": "Jordan",
+          "played": 3,
+          "wins": 0,
+          "draws": 0,
+          "losses": 3,
+          "gf": 3,
+          "ga": 8,
+          "gd": -5,
+          "pts": 0,
+          "pos": 4
+        }
+      ]
+    },
+    {
+      "name": "Group K",
+      "complete": true,
+      "teams": [
+        {
+          "name": "Colombia",
+          "played": 3,
+          "wins": 2,
+          "draws": 1,
+          "losses": 0,
+          "gf": 4,
+          "ga": 1,
+          "gd": 3,
+          "pts": 7,
+          "pos": 1
+        },
+        {
+          "name": "Portugal",
+          "played": 3,
+          "wins": 1,
+          "draws": 2,
+          "losses": 0,
+          "gf": 6,
+          "ga": 1,
+          "gd": 5,
+          "pts": 5,
+          "pos": 2
+        },
+        {
+          "name": "Congo DR",
+          "played": 3,
+          "wins": 1,
+          "draws": 1,
+          "losses": 1,
+          "gf": 4,
+          "ga": 3,
+          "gd": 1,
+          "pts": 4,
+          "pos": 3
+        },
+        {
+          "name": "Uzbekistan",
+          "played": 3,
+          "wins": 0,
+          "draws": 0,
+          "losses": 3,
+          "gf": 2,
+          "ga": 11,
+          "gd": -9,
+          "pts": 0,
+          "pos": 4
+        }
+      ]
+    },
+    {
+      "name": "Group L",
+      "complete": true,
+      "teams": [
+        {
+          "name": "England",
+          "played": 3,
+          "wins": 2,
+          "draws": 1,
+          "losses": 0,
+          "gf": 6,
+          "ga": 2,
+          "gd": 4,
+          "pts": 7,
+          "pos": 1
+        },
+        {
+          "name": "Croatia",
+          "played": 3,
+          "wins": 2,
+          "draws": 0,
+          "losses": 1,
+          "gf": 5,
+          "ga": 5,
+          "gd": 0,
+          "pts": 6,
+          "pos": 2
+        },
+        {
+          "name": "Ghana",
+          "played": 3,
+          "wins": 1,
+          "draws": 1,
+          "losses": 1,
+          "gf": 2,
+          "ga": 2,
+          "gd": 0,
+          "pts": 4,
+          "pos": 3
+        },
+        {
+          "name": "Panama",
+          "played": 3,
+          "wins": 0,
+          "draws": 0,
+          "losses": 3,
+          "gf": 0,
+          "ga": 4,
+          "gd": -4,
+          "pts": 0,
+          "pos": 4
+        }
+      ]
+    }
+  ],
+  "third_qualifiers": [
+    "Congo DR",
+    "Sweden",
+    "Ecuador",
+    "Ghana",
+    "Bosnia and Herzegovina",
+    "Algeria",
+    "Paraguay",
+    "Senegal"
+  ],
+  "rounds": {
+    "R32": [
+      {
+        "home": "South Africa",
+        "away": "Canada",
+        "home_score": 0,
+        "away_score": 1,
+        "winner": "Canada",
+        "date": "2026-06-28"
+      },
+      {
+        "home": "Brazil",
+        "away": "Japan",
+        "home_score": 2,
+        "away_score": 1,
+        "winner": "Brazil",
+        "date": "2026-06-29"
+      },
+      {
+        "home": "Germany",
+        "away": "Paraguay",
+        "home_score": 1,
+        "away_score": 1,
+        "winner": null,
+        "date": "2026-06-29"
+      }
+    ],
+    "R16": [],
+    "QF": [],
+    "SF": [],
+    "Final": []
+  }
+}

@@ -35,17 +35,18 @@ else
     log_fail "Scraper gagal. Cek koneksi internet atau perubahan API FIFA."
 fi
 
-# ── [2/4] Generate stats untuk visualisasi web ──────────────────────────────
-log_step 2 "Menghasilkan stats_data.json untuk visualisasi web"
+# ── [2/4] Generate stats & bracket data untuk visualisasi web ───────────────
+log_step 2 "Menghasilkan stats_data.json + bracket_data.json untuk web"
 cd "$PRED"
 if python3 generate_stats.py; then
     TEAMS=$(python3 -c "import json; d=json.load(open('../stats_data.json')); print(len(d))")
-    log_ok "stats_data.json diperbarui — $TEAMS tim (analitik web kini live)"
+    GROUPS=$(python3 -c "import json; d=json.load(open('../bracket_data.json')); print(len(d['groups']))")
+    log_ok "stats_data.json — $TEAMS tim | bracket_data.json — $GROUPS grup (competition tree kini live)"
 else
     log_fail "generate_stats.py gagal."
 fi
 
-# ── [2.5] Update angka pertandingan & tanggal di index.html ─────────────────
+# ── update angka pertandingan & tanggal di index.html ───────────────────────
 cd "$PROJ"
 if python3 update_html.py; then
     log_ok "index.html diperbarui (angka pertandingan & tanggal)"
@@ -63,9 +64,9 @@ else
     log_fail "model_klasifikasi.py gagal."
 fi
 
-# ── [4/4] Prediksi peluang per negara ───────────────────────────────────────
-log_step 4 "Prediksi peluang menang per negara (rata-rata statistik → LightGBM)"
-if python3 prediksi_tim.py 2>&1 | grep -E "(Top [0-9]|◀|Disimpan)"; then
+# ── [4/4] Prediksi peluang per negara (hanya tim fase gugur) ────────────────
+log_step 4 "Prediksi peluang menang — 32 tim fase gugur, basis 2 match terakhir"
+if python3 prediksi_tim.py 2>&1 | grep -E "(◀|Disimpan|fase gugur)"; then
     TOP1=$(python3 -c "import json; d=json.load(open('../top5_predictions.json')); t=d['top5'][0]; print(f\"{t['team']} ({t['win_probability']*100:.1f}%)\")")
     log_ok "top5_predictions.json diperbarui — peluang tertinggi: #1 $TOP1"
 else
@@ -80,9 +81,10 @@ echo -e "${GRN}═════════════════════�
 echo ""
 echo "  Output files:"
 echo "    fifa_worldcup2026_stats.csv   ← data mentah pertandingan"
-echo "    stats_data.json               ← grafik & klasemen web"
+echo "    stats_data.json               ← data statistik per tim"
+echo "    bracket_data.json             ← competition tree (grup + fase gugur)"
 echo "    top_models.json               ← panel perbandingan model ML"
-echo "    top5_predictions.json         ← panel prediksi 5 besar"
+echo "    top5_predictions.json         ← panel prediksi 5 besar (32 tim fase gugur)"
 echo ""
 echo "  Buka website untuk melihat pembaruan."
 echo ""

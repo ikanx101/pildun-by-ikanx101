@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
   <style>
     :root {
       --void: #000;
@@ -70,50 +69,49 @@
     .stat-value { font-size: 36px; font-weight: 700; letter-spacing: -.03em; }
     .stat-label { font-size: 13px; color: var(--smoke); margin-top: 6px; letter-spacing: .025em; }
 
-    /* CHART CARD */
+    /* CHART CARD (generic container) */
     .chart-card { border: 1px solid rgba(255,255,255,.08); border-radius: var(--r); padding: 28px; }
     .chart-title { font-size: 16px; font-weight: 600; letter-spacing: .021em; margin-bottom: 6px; }
     .chart-sub { font-size: 13px; color: var(--smoke); margin-bottom: 24px; line-height: 1.5; }
-    .chart-wrap { position: relative; height: 380px; }
-    .chart-wrap.tall { height: 480px; }
-    .insight { margin-top: 20px; padding: 14px 18px; border: 1px solid rgba(255,255,255,.06); border-left: 3px solid var(--plum); border-radius: 12px; background: rgba(128,82,255,.04); }
-    .insight.amber { border-left-color: var(--amber); background: rgba(255,184,41,.04); }
-    .insight.lichen { border-left-color: var(--lichen); background: rgba(21,132,110,.04); }
-    .insight p { font-size: 13px; color: var(--ash); line-height: 1.6; }
-    .insight strong { color: var(--bone); }
 
-    /* TWO-COL */
-    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    /* COMPETITION TREE — section label */
+    .ct-sub { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--smoke); margin-bottom: 16px; }
 
-    /* KLASEMEN */
-    .group-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-    .gtab { font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--smoke); background: transparent; border: 1px solid rgba(255,255,255,.1); border-radius: 100px; padding: 8px 16px; cursor: pointer; transition: all .2s; }
-    .gtab:hover { border-color: rgba(255,255,255,.25); color: var(--ash); }
-    .gtab.active { color: var(--bone); background: var(--plum); border-color: var(--plum); }
-    .gpanel { display: none; }
-    .gpanel.active { display: block; animation: fadeIn .3s ease; }
-    @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
-    .s-table { width: 100%; border-collapse: collapse; }
-    .s-table th { text-align: left; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--smoke); padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,.06); }
-    .s-table th:not(:first-child) { text-align: center; }
-    .s-table td { padding: 14px 12px; border-bottom: 1px solid rgba(255,255,255,.04); font-size: 14px; color: var(--ash); }
-    .s-table td:not(:first-child) { text-align: center; }
-    .s-table tr:last-child td { border-bottom: none; }
-    .s-table tr:nth-child(1) td, .s-table tr:nth-child(2) td { color: var(--bone); }
-    .s-table tr:nth-child(1) td:first-child { border-left: 3px solid var(--lichen); padding-left: 9px; }
-    .s-table tr:nth-child(2) td:first-child { border-left: 3px solid rgba(21,132,110,.35); padding-left: 9px; }
-    .pts { display: inline-block; padding: 3px 9px; border-radius: 100px; font-size: 12px; font-weight: 600; }
-    .pts3 { background: rgba(21,132,110,.2); color: #4ecba3; }
-    .pts1 { background: rgba(255,184,41,.15); color: var(--amber); }
-    .pts0 { background: rgba(255,255,255,.06); color: var(--smoke); }
-    .s-wrap { overflow-x: auto; }
+    /* GROUP SUMMARY GRID */
+    .group-summary-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 8px; }
+    .gs-card { border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 14px 12px; background: rgba(255,255,255,.01); }
+    .gs-header { font-size: 11px; font-weight: 700; color: var(--plum); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 10px; }
+    .gs-team { display: flex; align-items: center; gap: 5px; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,.04); font-size: 11px; color: var(--smoke); }
+    .gs-team:last-child { border-bottom: none; }
+    .gs-team.gs-p1 { color: var(--bone); }
+    .gs-team.gs-p2 { color: var(--ash); }
+    .gs-team.gs-p3ok { color: var(--amber); }
+    .gs-pos { font-size: 9px; flex-shrink: 0; width: 12px; }
+    .gs-flag { font-size: 13px; flex-shrink: 0; line-height: 1; }
+    .gs-name { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .gs-pts { font-size: 12px; font-weight: 700; flex-shrink: 0; }
+    .gs-adv { font-size: 8px; font-weight: 700; background: rgba(21,132,110,.18); color: #4ecba3; border-radius: 4px; padding: 1px 4px; flex-shrink: 0; }
+    .gs-team.gs-p3ok .gs-adv { background: rgba(255,184,41,.15); color: var(--amber); }
 
-    /* WHY CARDS */
-    .cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
-    .card { border: 1px solid rgba(255,255,255,.08); border-radius: var(--r); padding: 28px; }
-    .card-icon { width: 44px; height: 44px; margin-bottom: 20px; }
-    .card-title { font-size: 18px; font-weight: 600; letter-spacing: .021em; margin-bottom: 10px; }
-    .card-text { font-size: 14px; line-height: 1.6; letter-spacing: .025em; color: var(--ash); }
+    /* KNOCKOUT BRACKET */
+    .bracket-scroll { overflow-x: auto; padding-bottom: 12px; }
+    .bracket-track { display: flex; gap: 10px; min-width: max-content; align-items: flex-start; }
+    .bracket-col { width: 196px; flex-shrink: 0; }
+    .br-round-label { font-size: 10px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--smoke); padding: 0 2px 10px; white-space: nowrap; }
+    .br-matches { display: flex; flex-direction: column; justify-content: space-around; height: 1360px; }
+    .br-match { border: 1px solid rgba(255,255,255,.09); border-radius: 10px; overflow: hidden; flex-shrink: 0; background: rgba(255,255,255,.015); transition: border-color .2s; }
+    .br-match:hover { border-color: rgba(255,255,255,.2); }
+    .br-date { font-size: 9px; color: var(--smoke); padding: 5px 10px 2px; }
+    .br-team { display: flex; align-items: center; gap: 6px; padding: 7px 10px; font-size: 11px; color: var(--ash); min-height: 30px; }
+    .br-team + .br-team { border-top: 1px solid rgba(255,255,255,.05); }
+    .br-team.br-won { color: var(--bone); font-weight: 600; background: rgba(21,132,110,.08); }
+    .br-team.br-lost { color: var(--smoke); }
+    .br-team.br-tbd { color: var(--smoke); font-style: italic; }
+    .br-flag { font-size: 13px; flex-shrink: 0; line-height: 1; }
+    .br-name { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .br-score { font-size: 14px; font-weight: 700; color: var(--bone); min-width: 16px; text-align: right; flex-shrink: 0; }
+    .br-team.br-won .br-score { color: #4ecba3; }
+    .br-note { font-size: 9px; color: var(--amber); padding: 2px 10px 5px; }
 
     /* ML MODEL PANEL */
     .ml-podium { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 20px; }
@@ -210,8 +208,7 @@
       .hero-content { max-width: 100%; }
       .section { padding: 60px 28px; }
       .stats-grid { grid-template-columns: repeat(2,1fr); }
-      .two-col { grid-template-columns: 1fr; }
-      .cards { grid-template-columns: repeat(2,1fr); gap: 16px; }
+      .group-summary-grid { grid-template-columns: repeat(3,1fr); }
       footer { flex-direction: column; align-items: flex-start; padding: 24px 28px; gap: 10px; }
       .ml-podium { grid-template-columns: 1fr; }
       .ml-meta-strip { gap: 10px 0; }
@@ -228,10 +225,7 @@
       .section { padding: 48px 20px; }
       .stats-grid { grid-template-columns: repeat(2,1fr); gap: 12px; }
       .stat-value { font-size: 28px; }
-      .chart-wrap { height: 280px; }
-      .chart-wrap.tall { height: 380px; }
-      .cards { grid-template-columns: 1fr; gap: 12px; }
-      .card { padding: 20px 18px; }
+      .group-summary-grid { grid-template-columns: repeat(2,1fr); }
       footer { padding: 20px; }
       .hero-content { position: relative; }
       .hero-content::before { content:''; position:absolute; inset:-28px -20px; background:rgba(0,0,0,.52); filter:blur(22px); border-radius:16px; z-index:-1; pointer-events:none; }
@@ -272,12 +266,12 @@
         <p class="body-text">
           Analisis statistik mendalam berbasis data pertandingan sesungguhnya.
           <strong>75 pertandingan fase grup sudah selesai</strong> —
-          155 variabel statistik dari setiap tim kini tersedia.
+          fase gugur telah dimulai.
         </p>
         <div class="status-block">
           <div class="live-tag"><span class="live-dot"></span>Data Live · 75 Pertandingan</div>
-          <p class="status-caption">MD2 Grup A–J &amp; I selesai · MD2 Grup K–L hampir tuntas (2 laga tersisa) · 48 tim · 155 variabel FIFA.<br>Data diperbarui otomatis setelah setiap pertandingan.</p>
-          <a href="#analytics" class="scroll-cta">Lihat Analisa ↓</a>
+          <p class="status-caption">Fase gugur (Round of 32) telah dimulai · 48 tim · 155 variabel FIFA.<br>Data diperbarui otomatis setelah setiap pertandingan.</p>
+          <a href="#competition-tree" class="scroll-cta">Lihat Bagan ↓</a>
         </div>
       </div>
       <div aria-hidden="true"></div>
@@ -286,87 +280,35 @@
 
   <!-- Stats Overview -->
   <section id="analytics" class="section section-divider">
-    <span class="sec-eye">Fase Grup · Matchday 1 &amp; 2</span>
-    <h2 class="sec-head">Analisa <em>Live</em></h2>
+    <span class="sec-eye">Ringkasan · Data Turnamen</span>
+    <h2 class="sec-head">Status <em>Terkini</em></h2>
     <div class="stats-grid">
       <div class="stat-card plum"><div class="stat-value">75</div><div class="stat-label">Pertandingan Selesai</div></div>
-      <div class="stat-card lichen"><div class="stat-value">48</div><div class="stat-label">Tim Terdata</div></div>
+      <div class="stat-card lichen"><div class="stat-value">32</div><div class="stat-label">Tim Fase Gugur</div></div>
       <div class="stat-card amber"><div class="stat-value">155</div><div class="stat-label">Variabel per Tim</div></div>
       <div class="stat-card bone"><div class="stat-value" style="font-size:22px;line-height:1.3">29 Juni 2026</div><div class="stat-label">Terakhir Diperbarui</div></div>
     </div>
   </section>
 
-  <!-- Klasemen -->
-  <section class="section section-divider">
-    <span class="sec-eye">Standings</span>
-    <h2 class="sec-head">Klasemen <em>Sementara</em></h2>
-    <div class="group-tabs" id="group-tabs"></div>
-    <div class="chart-card">
-      <div class="s-wrap"><div id="group-panels"></div></div>
-    </div>
-  </section>
+  <!-- Competition Tree -->
+  <section id="competition-tree" class="section section-divider">
+    <span class="sec-eye">Fase Gugur · Bagan Turnamen FIFA 2026</span>
+    <h2 class="sec-head">Competition <em>Tree</em></h2>
 
-  <!-- xG vs Goals -->
-  <section class="section section-divider">
-    <span class="sec-eye">Expected Goals Analysis</span>
-    <h2 class="sec-head">xG vs <em>Gol Aktual</em></h2>
-    <div class="chart-card">
-      <div class="chart-title">Efisiensi Finishing Semua Tim</div>
-      <div class="chart-sub">Titik di atas garis diagonal = lebih klinis dari ekspektasi (overperformer). Di bawah = belum memanfaatkan peluang.</div>
-      <div class="chart-wrap"><canvas id="chart-xg"></canvas></div>
-      <div class="insight lichen" id="insight-xg"><p>Memuat insight…</p></div>
+    <!-- Group Summary -->
+    <div class="ct-sub">Hasil Fase Grup — 12 Grup</div>
+    <div class="group-summary-grid" id="group-summary">
+      <p class="ml-error">Memuat data grup…</p>
     </div>
-  </section>
 
-  <!-- Threat + Pressing -->
-  <section class="section section-divider">
-    <span class="sec-eye">Dominasi &amp; Gaya Bermain</span>
-    <h2 class="sec-head">Ancaman &amp; <em>Karakter Tim</em></h2>
-    <div class="two-col">
-      <div class="chart-card">
-        <div class="chart-title">Threat Score — Top 10</div>
-        <div class="chart-sub">Indeks ancaman ke gawang lawan versi FIFA, mencakup kualitas dan posisi setiap tembakan.</div>
-        <div class="chart-wrap"><canvas id="chart-threat"></canvas></div>
-        <div class="insight" id="insight-threat"><p>Memuat insight…</p></div>
+    <!-- Knockout Bracket -->
+    <div class="ct-sub" style="margin-top:36px">Bagan Fase Gugur</div>
+    <div class="chart-card" style="padding:20px 16px 16px;">
+      <div class="bracket-scroll">
+        <div class="bracket-track" id="knockout-bracket">
+          <p class="ml-error">Memuat data bracket…</p>
+        </div>
       </div>
-      <div class="chart-card">
-        <div class="chart-title">Pressing vs Penguasaan Bola</div>
-        <div class="chart-sub">X = possession (%). Y = jumlah pressing defensif. Setiap titik = satu tim.</div>
-        <div class="chart-wrap"><canvas id="chart-pressing"></canvas></div>
-        <div class="insight amber" id="insight-pressing"><p>Memuat insight…</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Conversion + Speed -->
-  <section class="section section-divider">
-    <span class="sec-eye">Efisiensi &amp; Fisik</span>
-    <h2 class="sec-head">Klinisitas &amp; <em>Kecepatan</em></h2>
-    <div class="two-col">
-      <div class="chart-card">
-        <div class="chart-title">Shot Conversion Rate — Top 10</div>
-        <div class="chart-sub">Persentase tembakan yang berbuah gol. Hanya tim yang sudah mencetak gol ditampilkan.</div>
-        <div class="chart-wrap"><canvas id="chart-conversion"></canvas></div>
-        <div class="insight amber" id="insight-conversion"><p>Memuat insight…</p></div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-title">Top Speed — Top 10</div>
-        <div class="chart-sub">Kecepatan lari tertinggi yang tercatat GPS tracking FIFA selama pertandingan berlangsung.</div>
-        <div class="chart-wrap"><canvas id="chart-speed"></canvas></div>
-        <div class="insight lichen" id="insight-speed"><p>Memuat insight…</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Power Ranking -->
-  <section class="section section-divider">
-    <span class="sec-eye">Prediksi Awal · 75 Pertandingan Selesai</span>
-    <h2 class="sec-head">Indeks Kekuatan <em>Sementara</em></h2>
-    <div class="chart-card">
-      <div class="chart-title">Power Ranking — Top 15</div>
-      <div class="chart-sub">Gabungan xG (30%) + Threat Score (25%) + Konversi (20%) + Poin (25%). Berdasarkan performa 75 pertandingan yang telah selesai.</div>
-      <div class="chart-wrap tall"><canvas id="chart-ranking"></canvas></div>
-      <div class="insight" id="insight-ranking"><p>Memuat insight…</p></div>
     </div>
   </section>
 
@@ -381,17 +323,17 @@
 
   <!-- Top 5 Prediction -->
   <section id="top5-pred" class="section section-divider">
-    <span class="sec-eye">ML Prediction · LightGBM · Rata-rata Statistik per Tim</span>
+    <span class="sec-eye">ML Prediction · LightGBM · Rata-rata 2 Pertandingan Terakhir · Tim Fase Gugur</span>
     <h2 class="sec-head">5 Tim Berpeluang <em>Terbaik</em></h2>
     <div class="chart-card" id="pred-panel">
       <p class="ml-error">Memuat prediksi…</p>
     </div>
   </section>
 
-  <!-- Why -->
+  <!-- Methodology -->
   <section class="section section-divider">
     <span class="sec-eye">Metodologi</span>
-    <h2 class="sec-head">Kapan <em>prediksi</em> dirilis?</h2>
+    <h2 class="sec-head">Bagaimana <em>prediksi</em> dibuat?</h2>
     <div class="chart-card" style="display:flex;align-items:flex-start;gap:32px;flex-wrap:wrap;">
       <div style="flex-shrink:0;width:56px;height:56px;border-radius:16px;background:rgba(128,82,255,.12);border:1px solid rgba(128,82,255,.25);display:flex;align-items:center;justify-content:center;">
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
@@ -400,12 +342,13 @@
         </svg>
       </div>
       <div style="flex:1;min-width:260px;">
-        <p style="font-size:18px;font-weight:600;color:#fff;letter-spacing:.021em;margin-bottom:12px;">Analisa berjalan — Matchday 2 hampir tuntas di semua grup</p>
+        <p style="font-size:18px;font-weight:600;color:#fff;letter-spacing:.021em;margin-bottom:12px;">Prediksi berbasis performa fase gugur — diperbarui setiap pertandingan</p>
         <p style="font-size:15px;color:#bdbdbd;line-height:1.7;max-width:68ch;">
-          Dari 75 pertandingan yang telah selesai, Grup A–J dan I sudah tuntas Matchday 2. Grup K dan L hampir rampung — tersisa 2 laga MD2 (Colombia vs Congo DR &amp; Croatia vs Panama). <strong style="color:#fff">Setelah 2 laga tersisa selesai</strong>, seluruh 48 tim akan punya 2 pertandingan dan model prediksi juara akan dijalankan penuh.
+          Dari 75 pertandingan yang telah selesai, seluruh 12 grup sudah tuntas. Fase gugur (Round of 32) telah dimulai — 32 tim lolos.
+          <strong style="color:#fff">Prediksi hanya mengevaluasi 32 tim fase gugur</strong>, menggunakan rata-rata 2 pertandingan terakhir masing-masing tim.
         </p>
         <p style="font-size:15px;color:#bdbdbd;line-height:1.7;max-width:68ch;margin-top:14px;">
-          Yang membuat prediksi ini berbeda: <strong style="color:#fff">model tidak statis</strong>. Setiap kali pertandingan baru selesai, data scraper dijalankan ulang dan model diperbarui otomatis — sehingga power ranking dan prediksi ikut bergerak mengikuti performa terkini setiap tim.
+          Yang membuat prediksi ini berbeda: <strong style="color:#fff">model tidak statis</strong>. Setiap kali pertandingan baru selesai, data scraper dijalankan ulang dan model diperbarui otomatis — sehingga bagan kompetisi dan prediksi ikut bergerak mengikuti performa terkini setiap tim.
         </p>
       </div>
     </div>
@@ -454,244 +397,114 @@
     let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{cancelAnimationFrame(aid);resize();init(cnt());frame();},200);});
   })();
 
-  // ── DATA — dimuat dari /stats_data.json (diperbarui tiap pipeline run) ──
-  fetch('/stats_data.json').then(r=>r.json()).then(function(TD){
-  const TEAMS = Object.entries(TD).map(([name,d])=>({name,...d}));
-  const GROUPS = [...new Set(TEAMS.map(t=>t.group))].sort();
+  // ── COMPETITION TREE ──────────────────────────────────────────────────────
+  (function(){
+    const gsEl = document.getElementById('group-summary');
+    const brEl = document.getElementById('knockout-bracket');
 
-  // ── CHART DEFAULTS ────────────────────────────────────────────────────────
-  Chart.defaults.color = '#9a9a9a';
-  Chart.defaults.borderColor = 'rgba(255,255,255,0.06)';
-  Chart.defaults.font.family = "'Space Grotesk', ui-sans-serif, system-ui";
+    const FLAGS = {
+      "Algeria":"🇩🇿","Argentina":"🇦🇷","Australia":"🇦🇺","Austria":"🇦🇹",
+      "Belgium":"🇧🇪","Bosnia and Herzegovina":"🇧🇦","Brazil":"🇧🇷","Cabo Verde":"🇨🇻",
+      "Canada":"🇨🇦","Colombia":"🇨🇴","Congo DR":"🇨🇩","Croatia":"🇭🇷",
+      "Curaçao":"🇨🇼","Czechia":"🇨🇿","Côte d'Ivoire":"🇨🇮","Ecuador":"🇪🇨",
+      "Egypt":"🇪🇬","England":"🏴󠁧󠁢󠁥󠁮󠁧󠁿","France":"🇫🇷","Germany":"🇩🇪",
+      "Ghana":"🇬🇭","Haiti":"🇭🇹","IR Iran":"🇮🇷","Iraq":"🇮🇶",
+      "Japan":"🇯🇵","Jordan":"🇯🇴","Korea Republic":"🇰🇷","Mexico":"🇲🇽",
+      "Morocco":"🇲🇦","Netherlands":"🇳🇱","New Zealand":"🇳🇿","Norway":"🇳🇴",
+      "Panama":"🇵🇦","Paraguay":"🇵🇾","Portugal":"🇵🇹","Qatar":"🇶🇦",
+      "Saudi Arabia":"🇸🇦","Scotland":"🏴󠁧󠁢󠁳󠁣󠁴󠁿","Senegal":"🇸🇳","South Africa":"🇿🇦",
+      "Spain":"🇪🇸","Sweden":"🇸🇪","Switzerland":"🇨🇭","Tunisia":"🇹🇳",
+      "Türkiye":"🇹🇷","USA":"🇺🇸","Uruguay":"🇺🇾","Uzbekistan":"🇺🇿"
+    };
 
-  const TT = {
-    backgroundColor:'#111', borderColor:'rgba(255,255,255,.12)', borderWidth:1,
-    titleColor:'#fff', bodyColor:'#bdbdbd', padding:12, cornerRadius:8,
-    titleFont:{weight:'600',size:13}, bodyFont:{size:12}
-  };
+    const ROUND_DEFS = [
+      { key: 'R32',   label: 'Round of 32',     count: 16 },
+      { key: 'R16',   label: 'Round of 16',      count: 8  },
+      { key: 'QF',    label: 'Perempat Final',   count: 4  },
+      { key: 'SF',    label: 'Semi Final',        count: 2  },
+      { key: 'Final', label: 'Final',             count: 1  },
+    ];
 
-  // ── KLASEMEN ──────────────────────────────────────────────────────────────
-  const tabsEl=document.getElementById('group-tabs');
-  const panelsEl=document.getElementById('group-panels');
-  GROUPS.forEach((g,i)=>{
-    const letter=g.replace('Group ','');
-    const tab=document.createElement('button');
-    tab.className='gtab'+(i===0?' active':'');
-    tab.textContent=letter;
-    tab.addEventListener('click',()=>{
-      document.querySelectorAll('.gtab').forEach(t=>t.classList.remove('active'));
-      document.querySelectorAll('.gpanel').forEach(p=>p.classList.remove('active'));
-      tab.classList.add('active');
-      document.getElementById('gp-'+g.replace(' ','-')).classList.add('active');
-    });
-    tabsEl.appendChild(tab);
+    const POS_LABELS = ['①','②','③','④'];
 
-    const gt=TEAMS.filter(t=>t.group===g).sort((a,b)=>b.points-a.points||b.gd-a.gd||b.goals_for-a.goals_for);
-    const panel=document.createElement('div');
-    panel.className='gpanel'+(i===0?' active':'');
-    panel.id='gp-'+g.replace(' ','-');
-    panel.innerHTML=`<table class="s-table">
-      <thead><tr><th>Tim</th><th>Main</th><th>M</th><th>S</th><th>K</th><th>GM</th><th>GK</th><th>SG</th><th>Pts</th></tr></thead>
-      <tbody>${gt.map(t=>`<tr>
-        <td>${t.name}</td><td>${t.matches}</td><td>${t.wins}</td><td>${t.draws}</td><td>${t.losses}</td>
-        <td>${t.goals_for}</td><td>${t.goals_against}</td>
-        <td>${t.gd>0?'+':''}${t.gd}</td>
-        <td><span class="pts pts${t.points}">${t.points}</span></td>
-      </tr>`).join('')}</tbody>
-    </table>`;
-    panelsEl.appendChild(panel);
-  });
+    function renderGroups(data) {
+      const top8 = new Set(data.third_qualifiers || []);
+      gsEl.innerHTML = (data.groups || []).map(g => {
+        const rows = g.teams.map((t, i) => {
+          const cls = i === 0 ? 'gs-p1' : i === 1 ? 'gs-p2' : top8.has(t.name) ? 'gs-p3ok' : '';
+          const adv = i < 2 ? '<span class="gs-adv">✓</span>' : top8.has(t.name) ? '<span class="gs-adv">3rd</span>' : '';
+          return `<div class="gs-team ${cls}">
+            <span class="gs-pos">${POS_LABELS[i]||''}</span>
+            <span class="gs-flag">${FLAGS[t.name]||'🏳'}</span>
+            <span class="gs-name">${t.name}</span>
+            <span class="gs-pts">${t.pts}</span>
+            ${adv}
+          </div>`;
+        }).join('');
+        return `<div class="gs-card">
+          <div class="gs-header">${g.name.replace('Group ','Grup ')}</div>
+          ${rows}
+        </div>`;
+      }).join('');
+    }
 
-  // ── LAZY INIT HELPER ─────────────────────────────────────────────────────
-  function lazy(id, fn){
-    const el=document.getElementById(id);
-    if(!el)return;
-    const ob=new IntersectionObserver(e=>{if(e[0].isIntersecting){fn(el);ob.disconnect();}},{threshold:.1});
-    ob.observe(el);
-  }
-
-  // ── xG vs GOALS ───────────────────────────────────────────────────────────
-  lazy('chart-xg', el=>{
-    const axMax=Math.max(...TEAMS.map(t=>Math.max(t.xg,t.goals_for)))+0.5;
-    const names=TEAMS.map(t=>t.name);
-    new Chart(el,{
-      type:'scatter',
-      data:{datasets:[
-        {
-          label:'Tim',
-          data:TEAMS.map(t=>({x:t.xg,y:t.goals_for})),
-          backgroundColor:TEAMS.map(t=>t.goals_for>=t.xg?'rgba(21,132,110,.85)':'rgba(128,82,255,.75)'),
-          pointRadius:7, pointHoverRadius:11, pointBorderWidth:0
-        },
-        {
-          label:'Garis Ekspektasi',type:'line',
-          data:[{x:0,y:0},{x:axMax,y:axMax}],
-          borderColor:'rgba(255,255,255,.18)',borderDash:[4,4],
-          pointRadius:0,borderWidth:1.5,fill:false,tension:0
-        }
-      ]},
-      options:{
-        responsive:true, maintainAspectRatio:false,
-        animation:{duration:1000,easing:'easeOutQuart'},
-        scales:{
-          x:{title:{display:true,text:'Expected Goals (xG)',color:'#9a9a9a',font:{size:12}},min:0,max:axMax,grid:{color:'rgba(255,255,255,.05)'}},
-          y:{title:{display:true,text:'Gol Aktual',color:'#9a9a9a',font:{size:12}},min:0,max:axMax,ticks:{stepSize:1},grid:{color:'rgba(255,255,255,.05)'}}
-        },
-        plugins:{
-          tooltip:{...TT,callbacks:{label:c=>{
-            if(c.datasetIndex===1)return null;
-            const n=names[c.dataIndex],d=(c.parsed.y-c.parsed.x).toFixed(2),s=d>=0?'+':'';
-            return[n,`xG: ${c.parsed.x}  →  Gol: ${c.parsed.y}  (${s}${d})`];
-          }}},
-          legend:{display:false}
-        }
+    function matchCard(m) {
+      if (!m) {
+        return `<div class="br-match">
+          <div class="br-team br-tbd"><span class="br-flag"></span><span class="br-name">TBD</span></div>
+          <div class="br-team br-tbd"><span class="br-flag"></span><span class="br-name">TBD</span></div>
+        </div>`;
       }
-    });
-    const over=TEAMS.reduce((a,b)=>(b.goals_for-b.xg)>(a.goals_for-a.xg)?b:a);
-    const under=TEAMS.reduce((a,b)=>(b.xg-b.goals_for)>(a.xg-a.goals_for)?b:a);
-    document.getElementById('insight-xg').innerHTML=`<p>
-      <strong>Overperformer terbesar:</strong> ${over.name} — cetak ${over.goals_for} gol padahal xG hanya ${over.xg} (+${(over.goals_for-over.xg).toFixed(2)}).&nbsp;
-      <strong>Underperformer terbesar:</strong> ${under.name} — xG ${under.xg} tapi hanya ${under.goals_for} gol (-${(under.xg-under.goals_for).toFixed(2)}).
-      <span style="color:#15846e">●</span> hijau = lebih klinis dari ekspektasi. <span style="color:#8052ff">●</span> ungu = belum memanfaatkan peluang.
-    </p>`;
-  });
+      const w = m.winner;
+      const noWinner = m.home_score !== null && m.away_score !== null && !w;
+      const cls1 = w === m.home ? 'br-won' : (w ? 'br-lost' : '');
+      const cls2 = w === m.away ? 'br-won' : (w ? 'br-lost' : '');
+      const s1 = m.home_score !== null ? `<span class="br-score">${m.home_score}</span>` : '';
+      const s2 = m.away_score !== null ? `<span class="br-score">${m.away_score}</span>` : '';
+      const note = noWinner ? '<div class="br-note">ET/PEN menunggu update</div>' : '';
+      return `<div class="br-match">
+        ${m.date ? `<div class="br-date">${m.date}</div>` : ''}
+        <div class="br-team ${cls1}">
+          <span class="br-flag">${FLAGS[m.home]||'🏳'}</span>
+          <span class="br-name">${m.home}</span>${s1}
+        </div>
+        <div class="br-team ${cls2}">
+          <span class="br-flag">${FLAGS[m.away]||'🏳'}</span>
+          <span class="br-name">${m.away}</span>${s2}
+        </div>
+        ${note}
+      </div>`;
+    }
 
-  // ── THREAT TOP 10 ─────────────────────────────────────────────────────────
-  lazy('chart-threat', el=>{
-    const top=[...TEAMS].sort((a,b)=>b.threat-a.threat).slice(0,10);
-    new Chart(el,{
-      type:'bar',
-      data:{labels:top.map(t=>t.name),datasets:[{
-        data:top.map(t=>t.threat),
-        backgroundColor:top.map((_,i)=>`rgba(128,82,255,${.95-i*.07})`),
-        borderRadius:6,borderSkipped:false
-      }]},
-      options:{
-        indexAxis:'y',responsive:true,maintainAspectRatio:false,
-        animation:{duration:1000,easing:'easeOutQuart'},
-        scales:{x:{grid:{color:'rgba(255,255,255,.05)'}},y:{grid:{display:false},ticks:{color:'#bdbdbd',font:{size:12}}}},
-        plugins:{tooltip:{...TT,callbacks:{label:c=>` Threat: ${c.parsed.x}`}},legend:{display:false}}
-      }
-    });
-    const t1=top[0];
-    document.getElementById('insight-threat').innerHTML=`<p><strong>${t1.name}</strong> memimpin dengan Threat Score <strong>${t1.threat}</strong> — tertinggi di turnamen. Menariknya, threat score tinggi tidak selalu berujung kemenangan.</p>`;
-  });
+    function renderBracket(data) {
+      const rounds = data.rounds || {};
+      brEl.innerHTML = ROUND_DEFS.map(def => {
+        const played = rounds[def.key] || [];
+        const tbd = def.count - played.length;
+        const cards = [
+          ...played.map(m => matchCard(m)),
+          ...Array(Math.max(0, tbd)).fill(null).map(() => matchCard(null))
+        ].join('');
+        return `<div class="bracket-col">
+          <div class="br-round-label">${def.label}</div>
+          <div class="br-matches">${cards}</div>
+        </div>`;
+      }).join('');
+    }
 
-  // ── PRESSING vs POSSESSION ────────────────────────────────────────────────
-  lazy('chart-pressing', el=>{
-    const flt=TEAMS.filter(t=>t.pressing>50);
-    const names=flt.map(t=>t.name);
-    new Chart(el,{
-      type:'scatter',
-      data:{datasets:[{
-        label:'Tim',
-        data:flt.map(t=>({x:t.possession_avg,y:t.pressing})),
-        backgroundColor:'rgba(255,184,41,.78)',
-        pointRadius:7,pointHoverRadius:11,pointBorderWidth:0
-      }]},
-      options:{
-        responsive:true,maintainAspectRatio:false,
-        animation:{duration:1000,easing:'easeOutQuart'},
-        scales:{
-          x:{title:{display:true,text:'Penguasaan Bola (%)',color:'#9a9a9a',font:{size:12}},grid:{color:'rgba(255,255,255,.05)'}},
-          y:{title:{display:true,text:'Jumlah Pressing',color:'#9a9a9a',font:{size:12}},grid:{color:'rgba(255,255,255,.05)'}}
-        },
-        plugins:{
-          tooltip:{...TT,callbacks:{label:c=>{const n=names[c.dataIndex];return[n,`Possession: ${c.parsed.x}%  |  Pressing: ${c.parsed.y}`];}}},
-          legend:{display:false}
-        }
-      }
-    });
-    const mp=flt.reduce((a,b)=>b.pressing>a.pressing?b:a);
-    const pp=flt.reduce((a,b)=>b.possession_avg>a.possession_avg?b:a);
-    document.getElementById('insight-pressing').innerHTML=`<p><strong>${mp.name}</strong> melakukan pressing terbanyak (${mp.pressing}×) dengan hanya ${mp.possession_avg}% possession. <strong>${pp.name}</strong> mendominasi bola (${pp.possession_avg}%) dengan pressing minimal — dua filosofi bermain yang berlawanan.</p>`;
-  });
+    fetch('/bracket_data.json')
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(data => {
+        renderGroups(data);
+        renderBracket(data);
+      })
+      .catch(() => {
+        gsEl.innerHTML = `<p class="ml-error">Data bracket belum tersedia. Jalankan <code>prediksi/generate_stats.py</code> terlebih dahulu.</p>`;
+        brEl.innerHTML = '';
+      });
+  })();
 
-  // ── CONVERSION TOP 10 ─────────────────────────────────────────────────────
-  lazy('chart-conversion', el=>{
-    const top=[...TEAMS].filter(t=>t.goals_for>0).sort((a,b)=>b.conversion-a.conversion).slice(0,10);
-    new Chart(el,{
-      type:'bar',
-      data:{labels:top.map(t=>t.name),datasets:[{
-        data:top.map(t=>t.conversion),
-        backgroundColor:top.map((_,i)=>`rgba(255,184,41,${.95-i*.07})`),
-        borderRadius:6,borderSkipped:false
-      }]},
-      options:{
-        indexAxis:'y',responsive:true,maintainAspectRatio:false,
-        animation:{duration:1000,easing:'easeOutQuart'},
-        scales:{x:{grid:{color:'rgba(255,255,255,.05)'},ticks:{callback:v=>v+'%'}},y:{grid:{display:false},ticks:{color:'#bdbdbd',font:{size:12}}}},
-        plugins:{tooltip:{...TT,callbacks:{label:c=>` Konversi: ${c.parsed.x}%`}},legend:{display:false}}
-      }
-    });
-    const t1=top[0];
-    document.getElementById('insight-conversion').innerHTML=`<p><strong>${t1.name}</strong> paling klinis: <strong>${t1.conversion}%</strong> conversion rate — ${t1.goals_for} gol dari ${t1.shots} tembakan. Tim dengan konversi rendah menyia-nyiakan banyak peluang berbahaya.</p>`;
-  });
-
-  // ── TOP SPEED ─────────────────────────────────────────────────────────────
-  lazy('chart-speed', el=>{
-    const top=[...TEAMS].sort((a,b)=>b.top_speed-a.top_speed).slice(0,10);
-    new Chart(el,{
-      type:'bar',
-      data:{labels:top.map(t=>t.name),datasets:[{
-        data:top.map(t=>t.top_speed),
-        backgroundColor:top.map((_,i)=>`rgba(21,132,110,${.95-i*.07})`),
-        borderRadius:6,borderSkipped:false
-      }]},
-      options:{
-        indexAxis:'y',responsive:true,maintainAspectRatio:false,
-        animation:{duration:1000,easing:'easeOutQuart'},
-        scales:{
-          x:{min:32,max:38,grid:{color:'rgba(255,255,255,.05)'},ticks:{callback:v=>v+' km/h'}},
-          y:{grid:{display:false},ticks:{color:'#bdbdbd',font:{size:12}}}
-        },
-        plugins:{tooltip:{...TT,callbacks:{label:c=>` Top Speed: ${c.parsed.x} km/h`}},legend:{display:false}}
-      }
-    });
-    const t1=top[0];
-    document.getElementById('insight-speed').innerHTML=`<p>Pemain dari <strong>${t1.name}</strong> mencatat kecepatan tertinggi: <strong>${t1.top_speed} km/h</strong> — direkam melalui GPS tracking FIFA selama pertandingan berlangsung.</p>`;
-  });
-
-  // ── POWER RANKING ─────────────────────────────────────────────────────────
-  lazy('chart-ranking', el=>{
-    const mxg=Math.max(...TEAMS.map(t=>t.xg));
-    const mthr=Math.max(...TEAMS.map(t=>t.threat));
-    const mcnv=Math.max(...TEAMS.map(t=>t.conversion));
-    const ranked=[...TEAMS].map(t=>({
-      ...t,
-      score:Math.round(((t.xg/mxg)*.30+(t.threat/mthr)*.25+(t.conversion/mcnv)*.20+(t.points/3)*.25)*100*10)/10
-    })).sort((a,b)=>b.score-a.score).slice(0,15);
-
-    new Chart(el,{
-      type:'bar',
-      data:{labels:ranked.map(t=>t.name),datasets:[{
-        data:ranked.map(t=>t.score),
-        backgroundColor:ranked.map((_,i)=>i===0?'rgba(255,184,41,.95)':i<=2?'rgba(128,82,255,.9)':`rgba(128,82,255,${.72-i*.03})`),
-        borderRadius:6,borderSkipped:false
-      }]},
-      options:{
-        indexAxis:'y',responsive:true,maintainAspectRatio:false,
-        animation:{duration:1200,easing:'easeOutQuart'},
-        scales:{
-          x:{title:{display:true,text:'Indeks Kekuatan (0–100)',color:'#9a9a9a',font:{size:12}},grid:{color:'rgba(255,255,255,.05)'}},
-          y:{grid:{display:false},ticks:{color:'#bdbdbd',font:{size:13}}}
-        },
-        plugins:{
-          tooltip:{...TT,callbacks:{label:c=>{
-            const t=ranked[c.dataIndex];
-            return[` Indeks: ${c.parsed.x}`,` xG: ${t.xg}  |  Threat: ${t.threat}  |  Konversi: ${t.conversion}%  |  Poin: ${t.points}`];
-          }}},
-          legend:{display:false}
-        }
-      }
-    });
-    const t1=ranked[0];
-    document.getElementById('insight-ranking').innerHTML=`<p><strong>${t1.name}</strong> memimpin Power Ranking sementara dengan indeks <strong>${t1.score}</strong> — unggul dalam kombinasi xG, threat score, dan efisiensi konversi. Peringkat ini akan terus diperbarui seiring berjalannya sisa Matchday 2 dan Matchday 3.</p>`;
-  });
-
-  }).catch(function(e){console.warn('stats_data.json tidak ditemukan. Jalankan pipeline terlebih dahulu.',e);});
-
-    // ── TOP 5 PREDICTION PANEL ───────────────────────────────────────────────
+  // ── TOP 5 PREDICTION PANEL ───────────────────────────────────────────────
   (function(){
     const panel = document.getElementById('pred-panel');
     const ROW_CLS = ['r1','r2','r3','r4','r5'];
@@ -741,7 +554,7 @@
           <div>
             <div class="chart-title">Peluang Menang per Pertandingan — Top 5</div>
             <div class="chart-sub" style="margin-bottom:0">
-              Dari ${data.n_teams_evaluated} tim · diperbarui ${data.updated_at}
+              Dari ${data.n_teams_evaluated} tim fase gugur · diperbarui ${data.updated_at}
             </div>
           </div>
           <span class="pred-model-tag">
@@ -756,24 +569,18 @@
             Mengapa prediksi ini akan terus berubah?
           </div>
           <p>
-            Probabilitas dihitung dari <strong>rata-rata seluruh statistik pertandingan tiap tim</strong>
+            Probabilitas dihitung dari <strong>rata-rata 2 pertandingan terakhir tiap tim fase gugur</strong>
             (xG, passing, pressing, sprint distance, dsb.), lalu dimasukkan ke model LightGBM yang dilatih
-            pada data pertandingan nyata. Artinya, setiap kali pertandingan baru selesai dimainkan:
-            <br><br>
-            · <strong>Rata-rata bergeser</strong> — tim yang tampil gemilang di matchday berikutnya akan
-            mendorong rata-rata xG dan threat score-nya naik, sehingga probabilitasnya ikut meningkat.<br>
-            · <strong>Tim yang tampil buruk</strong> akan melihat probabilitasnya turun, bahkan bisa
-            tergeser dari 5 besar.<br>
-            · <strong>Model dilatih ulang</strong> setiap kali script dijalankan menggunakan seluruh data
-            terbaru — bukan snapshot statis.
+            pada data pertandingan nyata. Artinya, setiap kali pertandingan baru selesai dimainkan:<br><br>
+            · <strong>Rata-rata bergeser</strong> — performa terbaru tiap tim langsung mempengaruhi probabilitas.<br>
+            · <strong>Tim yang gugur</strong> tidak lagi dievaluasi di ronde berikutnya.<br>
+            · <strong>Model dilatih ulang</strong> setiap kali script dijalankan menggunakan seluruh data terbaru.
           </p>
         </div>`;
 
-      // Animate bars when scrolled into view
       const ob = new IntersectionObserver(entries => {
         if (!entries[0].isIntersecting) return;
         ob.disconnect();
-        // stagger each bar slightly
         panel.querySelectorAll('.pred-bar-fill').forEach((bar, idx) => {
           setTimeout(() => { bar.style.width = bar.dataset.target + '%'; }, idx * 120);
         });
@@ -832,7 +639,6 @@
         </div>
       `;
 
-      // Animate bars on scroll-in
       const ob = new IntersectionObserver(entries => {
         if (!entries[0].isIntersecting) return;
         ob.disconnect();
