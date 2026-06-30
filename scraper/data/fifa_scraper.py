@@ -16,7 +16,7 @@ HEADERS = {
 
 CALENDAR_API = (
     "https://api.fifa.com/api/v3/calendar/matches"
-    "?language=en&idCompetition=17&idSeason=285023&idStage=289273&count=400"
+    "?language=en&idCompetition=17&idSeason=285023&count=400"
 )
 STATS_API = "https://fdh-api.fifa.com/v1/stats/match/{id_ifes}/teams.json"
 

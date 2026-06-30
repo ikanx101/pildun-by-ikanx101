@@ -1,42 +1,48 @@
 {
-  "updated_at": "2026-06-29",
+  "updated_at": "2026-06-30",
   "model_used": "LightGBM",
-  "n_teams_evaluated": 48,
+  "basis_prediksi": "rata-rata 3 pertandingan terakhir, min 4 pertandingan",
+  "n_teams_evaluated": 6,
   "top5": [
     {
       "rank": 1,
-      "team": "Mexico",
-      "group": "Group A",
-      "matches_played": 3,
-      "win_probability": 0.9957
+      "team": "Brazil",
+      "group": "Group C",
+      "last_stage": "Round of 32",
+      "matches_played": 4,
+      "win_probability": 0.9985
     },
     {
       "rank": 2,
-      "team": "Brazil",
-      "group": "Group C",
-      "matches_played": 3,
-      "win_probability": 0.9945
+      "team": "Japan",
+      "group": "Group F",
+      "last_stage": "Round of 32",
+      "matches_played": 4,
+      "win_probability": 0.5713
     },
     {
       "rank": 3,
-      "team": "Argentina",
-      "group": "Group J",
-      "matches_played": 3,
-      "win_probability": 0.9935
+      "team": "Canada",
+      "group": "Group B",
+      "last_stage": "Round of 32",
+      "matches_played": 4,
+      "win_probability": 0.4501
     },
     {
       "rank": 4,
-      "team": "France",
-      "group": "Group I",
-      "matches_played": 3,
-      "win_probability": 0.9931
+      "team": "Paraguay",
+      "group": "Group D",
+      "last_stage": "Round of 32",
+      "matches_played": 4,
+      "win_probability": 0.0588
     },
     {
       "rank": 5,
-      "team": "Germany",
-      "group": "Group E",
-      "matches_played": 3,
-      "win_probability": 0.9923
+      "team": "South Africa",
+      "group": "Group A",
+      "last_stage": "Round of 32",
+      "matches_played": 4,
+      "win_probability": 0.0163
     }
   ]
 }
