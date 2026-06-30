@@ -2,6 +2,7 @@
 Prediksi 5 Tim Berpeluang Menang Tertinggi — Fase Gugur
 Hanya tim yang lolos ke fase gugur (32 tim) yang dievaluasi.
 Basis prediksi: rata-rata 2 pertandingan terakhir per tim.
+Model yang digunakan: model dengan akurasi CV terbaik (dari top_models.json).
 
 Cara update: jalankan ulang script ini setiap kali data CSV diperbarui.
 Output: ../top5_predictions.json (dibaca langsung oleh website)
@@ -13,7 +14,57 @@ import json
 import warnings
 warnings.filterwarnings("ignore")
 from datetime import date
+
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import (
+    RandomForestClassifier, GradientBoostingClassifier,
+    ExtraTreesClassifier, AdaBoostClassifier, BaggingClassifier
+)
+from sklearn.svm import SVC
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from xgboost import XGBClassifier
 from lightgbm import LGBMClassifier
+
+# ── 0. Tentukan model terbaik dari top_models.json ────────────────────────────
+MODEL_REGISTRY = {
+    "Logistic Regression":          (LogisticRegression(max_iter=1000, random_state=42), True),
+    "Linear Discriminant Analysis": (LinearDiscriminantAnalysis(solver="eigen", shrinkage="auto"), True),
+    "Naive Bayes":                  (GaussianNB(), False),
+    "K-Nearest Neighbors":          (KNeighborsClassifier(n_neighbors=5), True),
+    "Decision Tree":                (DecisionTreeClassifier(random_state=42), False),
+    "Bagging":                      (BaggingClassifier(random_state=42), False),
+    "Random Forest":                (RandomForestClassifier(n_estimators=200, random_state=42), False),
+    "Extra Trees":                  (ExtraTreesClassifier(n_estimators=200, random_state=42), False),
+    "AdaBoost":                     (AdaBoostClassifier(n_estimators=100, random_state=42), False),
+    "Gradient Boosting":            (GradientBoostingClassifier(n_estimators=100, random_state=42), False),
+    "XGBoost":                      (XGBClassifier(n_estimators=100, eval_metric="logloss",
+                                                    random_state=42, verbosity=0), False),
+    "LightGBM":                     (LGBMClassifier(n_estimators=100, random_state=42, verbose=-1), False),
+    "SVM (RBF)":                    (SVC(kernel="rbf", probability=True, random_state=42), True),
+    "SVM (Linear)":                 (SVC(kernel="linear", probability=True, random_state=42), True),
+}
+
+try:
+    with open("../top_models.json", encoding="utf-8") as f:
+        top_models_data = json.load(f)
+    best_model_name = top_models_data["top3"][0]["model"]
+    best_accuracy   = top_models_data["top3"][0]["accuracy"]
+except Exception:
+    best_model_name = "LightGBM"
+    best_accuracy   = None
+
+if best_model_name not in MODEL_REGISTRY:
+    print(f"  ⚠ Model '{best_model_name}' tidak ada di registry, fallback ke LightGBM")
+    best_model_name = "LightGBM"
+
+base_clf, needs_scaling = MODEL_REGISTRY[best_model_name]
+print(f"Model terpilih : {best_model_name}" +
+      (f" (Acc CV={best_accuracy:.4f})" if best_accuracy else ""))
 
 # ── 1. Load & prep data ───────────────────────────────────────────────────────
 df = pd.read_csv("../fifa_worldcup2026_stats.csv")
@@ -35,8 +86,12 @@ feature_cols = [c for c in df.columns if c not in drop_cols + ["result"]]
 X = df[feature_cols].fillna(0)
 y = (df["result"] == "win").astype(int)
 
-# ── 2. Latih LightGBM pada seluruh data ──────────────────────────────────────
-model = LGBMClassifier(n_estimators=100, random_state=42, verbose=-1)
+# ── 2. Latih model terbaik pada seluruh data ─────────────────────────────────
+if needs_scaling:
+    model = Pipeline([("scaler", StandardScaler()), ("clf", base_clf)])
+else:
+    model = base_clf
+
 model.fit(X, y)
 print(f"Model dilatih  : {len(X)} baris, {len(feature_cols)} fitur")
 print(f"Distribusi label: win={y.sum()}, not win={(y==0).sum()}")
@@ -44,7 +99,6 @@ print(f"Distribusi label: win={y.sum()}, not win={(y==0).sum()}")
 # ── 3. Tentukan tim yang masuk fase gugur ─────────────────────────────────────
 group_df = df[df["stage"] == "First Stage"].copy()
 
-# Hitung klasemen per grup (First Stage saja)
 groups = {}
 for grp_name in sorted(group_df["group"].dropna().unique()):
     if not grp_name:
@@ -131,7 +185,8 @@ top5 = result_df.head(5)
 
 payload = {
     "updated_at":        str(date.today()),
-    "model_used":        "LightGBM",
+    "model_used":        best_model_name,
+    "model_accuracy":    best_accuracy,
     "basis_prediksi":    "rata-rata 2 pertandingan terakhir, hanya tim fase gugur (32 tim)",
     "n_teams_evaluated": len(result_df),
     "top5": [

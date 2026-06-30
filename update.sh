@@ -109,8 +109,8 @@ log_step 2 "Menghasilkan stats_data.json + bracket_data.json untuk web"
 cd "$PRED"
 if "$PYTHON" generate_stats.py; then
     TEAMS=$("$PYTHON" -c "import json; d=json.load(open('../stats_data.json')); print(len(d))")
-    GROUPS=$("$PYTHON" -c "import json; d=json.load(open('../bracket_data.json')); print(len(d['groups']))")
-    log_ok "stats_data.json — $TEAMS tim | bracket_data.json — $GROUPS grup (competition tree kini live)"
+    NUM_GROUPS=$("$PYTHON" -c "import json; d=json.load(open('../bracket_data.json')); print(len(d['groups']))")
+    log_ok "stats_data.json — $TEAMS tim | bracket_data.json — $NUM_GROUPS grup (competition tree kini live)"
 else
     log_fail "generate_stats.py gagal."
 fi
@@ -126,21 +126,15 @@ fi
 # ── [3/4] Training & evaluasi model ML ──────────────────────────────────────
 log_step 3 "Training & evaluasi 14 model klasifikasi ML"
 cd "$PRED"
-if "$PYTHON" model_klasifikasi.py 2>&1 | grep -E "(Acc=|TABEL|Model dilatih|Disimpan)"; then
-    BEST=$("$PYTHON" -c "import json; d=json.load(open('../top_models.json')); m=d['top3'][0]; print(f\"{m['model']} — Acc={m['accuracy']*100:.2f}%\")")
-    log_ok "top_models.json diperbarui — model terbaik: $BEST"
-else
-    log_fail "model_klasifikasi.py gagal."
-fi
+"$PYTHON" model_klasifikasi.py || log_fail "model_klasifikasi.py gagal."
+BEST=$("$PYTHON" -c "import json; d=json.load(open('../top_models.json')); m=d['top3'][0]; print(f\"{m['model']} — Acc={m['accuracy']*100:.2f}%\")")
+log_ok "top_models.json diperbarui — model terbaik: $BEST"
 
 # ── [4/4] Prediksi peluang per negara (hanya tim fase gugur) ────────────────
 log_step 4 "Prediksi peluang menang — 32 tim fase gugur, basis 2 match terakhir"
-if "$PYTHON" prediksi_tim.py 2>&1 | grep -E "(◀|Disimpan|fase gugur)"; then
-    TOP1=$("$PYTHON" -c "import json; d=json.load(open('../top5_predictions.json')); t=d['top5'][0]; print(f\"{t['team']} ({t['win_probability']*100:.1f}%)\")")
-    log_ok "top5_predictions.json diperbarui — peluang tertinggi: #1 $TOP1"
-else
-    log_fail "prediksi_tim.py gagal."
-fi
+"$PYTHON" prediksi_tim.py || log_fail "prediksi_tim.py gagal."
+TOP1=$("$PYTHON" -c "import json; d=json.load(open('../top5_predictions.json')); t=d['top5'][0]; print(f\"{t['team']} ({t['win_probability']*100:.1f}%)\")")
+log_ok "top5_predictions.json diperbarui — peluang tertinggi: #1 $TOP1"
 
 # ── Summary ──────────────────────────────────────────────────────────────────
 echo ""

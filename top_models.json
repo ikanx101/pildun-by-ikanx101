@@ -7,26 +7,26 @@
     {
       "rank": 1,
       "model": "Linear Discriminant Analysis",
-      "accuracy": 0.8408,
-      "accuracy_std": 0.1438,
-      "f1": 0.7506,
-      "auc_roc": 0.8598
+      "accuracy": 0.8542,
+      "accuracy_std": 0.1328,
+      "f1": 0.7746,
+      "auc_roc": 0.8528
     },
     {
       "rank": 2,
-      "model": "Gradient Boosting",
-      "accuracy": 0.835,
-      "accuracy_std": 0.0857,
-      "f1": 0.7514,
-      "auc_roc": 0.9139
+      "model": "LightGBM",
+      "accuracy": 0.8542,
+      "accuracy_std": 0.1148,
+      "f1": 0.7695,
+      "auc_roc": 0.9029
     },
     {
       "rank": 3,
-      "model": "XGBoost",
-      "accuracy": 0.8279,
-      "accuracy_std": 0.0753,
-      "f1": 0.7239,
-      "auc_roc": 0.8904
+      "model": "Gradient Boosting",
+      "accuracy": 0.8425,
+      "accuracy_std": 0.0889,
+      "f1": 0.7739,
+      "auc_roc": 0.9084
     }
   ]
 }
