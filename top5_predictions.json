@@ -6,43 +6,43 @@
   "top5": [
     {
       "rank": 1,
-      "team": "Argentina",
-      "group": "Group J",
-      "last_stage": "First Stage",
-      "matches_played": 3,
-      "win_probability": 0.9971
-    },
-    {
-      "rank": 2,
-      "team": "Spain",
-      "group": "Group H",
-      "last_stage": "First Stage",
-      "matches_played": 3,
-      "win_probability": 0.9971
-    },
-    {
-      "rank": 3,
-      "team": "Brazil",
-      "group": "Group C",
-      "last_stage": "Round of 32",
-      "matches_played": 4,
-      "win_probability": 0.9963
-    },
-    {
-      "rank": 4,
       "team": "Mexico",
       "group": "Group A",
       "last_stage": "First Stage",
       "matches_played": 3,
-      "win_probability": 0.9961
+      "win_probability": 0.9975
     },
     {
-      "rank": 5,
+      "rank": 2,
       "team": "France",
       "group": "Group I",
       "last_stage": "First Stage",
       "matches_played": 3,
-      "win_probability": 0.994
+      "win_probability": 0.9967
+    },
+    {
+      "rank": 3,
+      "team": "Spain",
+      "group": "Group H",
+      "last_stage": "First Stage",
+      "matches_played": 3,
+      "win_probability": 0.9959
+    },
+    {
+      "rank": 4,
+      "team": "Brazil",
+      "group": "Group C",
+      "last_stage": "Round of 32",
+      "matches_played": 4,
+      "win_probability": 0.9917
+    },
+    {
+      "rank": 5,
+      "team": "Morocco",
+      "group": "Group C",
+      "last_stage": "Round of 32",
+      "matches_played": 4,
+      "win_probability": 0.9903
     }
   ]
 }

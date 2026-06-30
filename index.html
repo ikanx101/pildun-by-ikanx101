@@ -77,22 +77,6 @@
     /* COMPETITION TREE — section label */
     .ct-sub { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--smoke); margin-bottom: 16px; }
 
-    /* GROUP SUMMARY GRID */
-    .group-summary-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 8px; }
-    .gs-card { border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 14px 12px; background: rgba(255,255,255,.01); }
-    .gs-header { font-size: 11px; font-weight: 700; color: var(--plum); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 10px; }
-    .gs-team { display: flex; align-items: center; gap: 5px; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,.04); font-size: 11px; color: var(--smoke); }
-    .gs-team:last-child { border-bottom: none; }
-    .gs-team.gs-p1 { color: var(--bone); }
-    .gs-team.gs-p2 { color: var(--ash); }
-    .gs-team.gs-p3ok { color: var(--amber); }
-    .gs-pos { font-size: 9px; flex-shrink: 0; width: 12px; }
-    .gs-flag { font-size: 13px; flex-shrink: 0; line-height: 1; }
-    .gs-name { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .gs-pts { font-size: 12px; font-weight: 700; flex-shrink: 0; }
-    .gs-adv { font-size: 8px; font-weight: 700; background: rgba(21,132,110,.18); color: #4ecba3; border-radius: 4px; padding: 1px 4px; flex-shrink: 0; }
-    .gs-team.gs-p3ok .gs-adv { background: rgba(255,184,41,.15); color: var(--amber); }
-
     /* KNOCKOUT BRACKET */
     .bracket-scroll { overflow-x: auto; padding-bottom: 12px; }
     .bracket-track { display: flex; gap: 10px; min-width: max-content; align-items: flex-start; }
@@ -208,7 +192,6 @@
       .hero-content { max-width: 100%; }
       .section { padding: 60px 28px; }
       .stats-grid { grid-template-columns: repeat(2,1fr); }
-      .group-summary-grid { grid-template-columns: repeat(3,1fr); }
       footer { flex-direction: column; align-items: flex-start; padding: 24px 28px; gap: 10px; }
       .ml-podium { grid-template-columns: 1fr; }
       .ml-meta-strip { gap: 10px 0; }
@@ -225,7 +208,6 @@
       .section { padding: 48px 20px; }
       .stats-grid { grid-template-columns: repeat(2,1fr); gap: 12px; }
       .stat-value { font-size: 28px; }
-      .group-summary-grid { grid-template-columns: repeat(2,1fr); }
       footer { padding: 20px; }
       .hero-content { position: relative; }
       .hero-content::before { content:''; position:absolute; inset:-28px -20px; background:rgba(0,0,0,.52); filter:blur(22px); border-radius:16px; z-index:-1; pointer-events:none; }
@@ -295,14 +277,8 @@
     <span class="sec-eye">Fase Gugur · Bagan Turnamen FIFA 2026</span>
     <h2 class="sec-head">Competition <em>Tree</em></h2>
 
-    <!-- Group Summary -->
-    <div class="ct-sub">Hasil Fase Grup — 12 Grup</div>
-    <div class="group-summary-grid" id="group-summary">
-      <p class="ml-error">Memuat data grup…</p>
-    </div>
-
     <!-- Knockout Bracket -->
-    <div class="ct-sub" style="margin-top:36px">Bagan Fase Gugur</div>
+    <div class="ct-sub">Bagan Fase Gugur</div>
     <div class="chart-card" style="padding:20px 16px 16px;">
       <div class="bracket-scroll">
         <div class="bracket-track" id="knockout-bracket">
@@ -399,7 +375,6 @@
 
   // ── COMPETITION TREE ──────────────────────────────────────────────────────
   (function(){
-    const gsEl = document.getElementById('group-summary');
     const brEl = document.getElementById('knockout-bracket');
 
     const FLAGS = {
@@ -424,29 +399,6 @@
       { key: 'SF',    label: 'Semi Final',        count: 2  },
       { key: 'Final', label: 'Final',             count: 1  },
     ];
-
-    const POS_LABELS = ['①','②','③','④'];
-
-    function renderGroups(data) {
-      const top8 = new Set(data.third_qualifiers || []);
-      gsEl.innerHTML = (data.groups || []).map(g => {
-        const rows = g.teams.map((t, i) => {
-          const cls = i === 0 ? 'gs-p1' : i === 1 ? 'gs-p2' : top8.has(t.name) ? 'gs-p3ok' : '';
-          const adv = i < 2 ? '<span class="gs-adv">✓</span>' : top8.has(t.name) ? '<span class="gs-adv">3rd</span>' : '';
-          return `<div class="gs-team ${cls}">
-            <span class="gs-pos">${POS_LABELS[i]||''}</span>
-            <span class="gs-flag">${FLAGS[t.name]||'🏳'}</span>
-            <span class="gs-name">${t.name}</span>
-            <span class="gs-pts">${t.pts}</span>
-            ${adv}
-          </div>`;
-        }).join('');
-        return `<div class="gs-card">
-          <div class="gs-header">${g.name.replace('Group ','Grup ')}</div>
-          ${rows}
-        </div>`;
-      }).join('');
-    }
 
     function matchCard(m) {
       if (!m) {
@@ -495,12 +447,10 @@
     fetch('/bracket_data.json')
       .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(data => {
-        renderGroups(data);
         renderBracket(data);
       })
       .catch(() => {
-        gsEl.innerHTML = `<p class="ml-error">Data bracket belum tersedia. Jalankan <code>prediksi/generate_stats.py</code> terlebih dahulu.</p>`;
-        brEl.innerHTML = '';
+        brEl.innerHTML = `<p class="ml-error">Data bracket belum tersedia. Jalankan <code>prediksi/generate_stats.py</code> terlebih dahulu.</p>`;
       });
   })();
 

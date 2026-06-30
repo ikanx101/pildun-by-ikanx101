@@ -24,13 +24,82 @@ echo "  ╚═╝     ╚═╝╚══════╝╚═════╝  �
 echo -e "  FIFA World Cup 2026 — Update Pipeline${NC}"
 echo ""
 
+# ── Pre-check: pastikan Python & dependencies aman ───────────────────────────
+log_step 0 "Pre-check Python environment & dependencies"
+
+# Gunakan PYTHON yang pasti (fallback: cukup `python3`)
+PYTHON=""
+for try_py in \
+    "/home/ikanx101/aurogen-0.2.0-linux-x64/runtime/python/bin/python3" \
+    "/usr/bin/python3" \
+    "$(command -v python3 2>/dev/null || true)"; do
+    if [ -x "$try_py" ]; then
+        PYTHON="$try_py"
+        break
+    fi
+done
+[ -z "$PYTHON" ] && log_fail "Python3 tidak ditemukan di sistem."
+
+echo "  Using: $PYTHON ($($PYTHON --version 2>&1))"
+PIP="$(dirname "$PYTHON")/pip3"
+[ ! -x "$PIP" ] && PIP="pip3"
+
+# Cek satu-satu, install otomatis kalau kurang
+DEPS=(
+    "sklearn:scikit-learn"
+    "lightgbm:lightgbm"
+    "xgboost:xgboost"
+    "numpy:numpy"
+    "pandas:pandas"
+    "requests:requests"
+)
+MISSING=()
+for dep in "${DEPS[@]}"; do
+    MOD="${dep%%:*}"
+    PKG="${dep##*:}"
+    if ! "$PYTHON" -c "import $MOD" 2>/dev/null; then
+        MISSING+=("$PKG")
+    fi
+done
+
+if [ ${#MISSING[@]} -gt 0 ]; then
+    echo -e "${YLW}  ⚠ Module berikut belum terinstall: ${MISSING[*]}${NC}"
+    echo -e "${YLW}  → Menginstall otomatis...${NC}"
+    for pkg in "${MISSING[@]}"; do
+        echo "    Installing $pkg..."
+        if "$PIP" install "$pkg" 2>&1 | tail -1; then
+            log_ok "  $pkg terinstall"
+        else
+            log_fail "Gagal install $pkg. Coba: pip3 install $pkg"
+        fi
+    done
+    # Verifikasi ulang
+    for dep in "${DEPS[@]}"; do
+        MOD="${dep%%:*}"
+        PKG="${dep##*:}"
+        "$PYTHON" -c "import $MOD" 2>/dev/null || log_fail "$PKG masih gagal di-import setelah install."
+    done
+    echo -e "${GRN}  ✅ Semua dependencies berhasil diinstall${NC}"
+fi
+
+# Tampilkan versi
+"$PYTHON" -c "
+import sklearn, lightgbm, xgboost, numpy, pandas
+print(f'  scikit-learn {sklearn.__version__} | lightgbm {lightgbm.__version__} | xgboost {xgboost.__version__}')
+print(f'  numpy {numpy.__version__} | pandas {pandas.__version__}')
+" && log_ok "Python dependencies OK"
+
+# Export PYTHON supaya dipakai di step selanjutnya
+export PYTHON
+echo "  PYTHON=$PYTHON"
+
 # ── [1/4] Scrape data terbaru dari FIFA API ──────────────────────────────────
 log_step 1 "Scraping data terbaru dari FIFA API"
 cd "$PROJ"
-if python3 scraper/data/fifa_scraper.py; then
-    ROWS=$(python3 -c "import csv; print(sum(1 for _ in open('fifa_worldcup2026_stats.csv'))-1)")
+if "$PYTHON" scraper/data/fifa_scraper.py; then
+    ROWS=$("$PYTHON" -c "import csv; print(sum(1 for _ in open('fifa_worldcup2026_stats.csv'))-1)")
     MATCHES=$((ROWS / 2))
-    log_ok "fifa_worldcup2026_stats.csv diperbarui — $MATCHES pertandingan, $ROWS baris"
+    log_ok "fifa_worldcup2026_stats.csv — $MATCHES pertandingan, $ROWS baris"
 else
     log_fail "Scraper gagal. Cek koneksi internet atau perubahan API FIFA."
 fi
@@ -38,9 +107,9 @@ fi
 # ── [2/4] Generate stats & bracket data untuk visualisasi web ───────────────
 log_step 2 "Menghasilkan stats_data.json + bracket_data.json untuk web"
 cd "$PRED"
-if python3 generate_stats.py; then
-    TEAMS=$(python3 -c "import json; d=json.load(open('../stats_data.json')); print(len(d))")
-    GROUPS=$(python3 -c "import json; d=json.load(open('../bracket_data.json')); print(len(d['groups']))")
+if "$PYTHON" generate_stats.py; then
+    TEAMS=$("$PYTHON" -c "import json; d=json.load(open('../stats_data.json')); print(len(d))")
+    GROUPS=$("$PYTHON" -c "import json; d=json.load(open('../bracket_data.json')); print(len(d['groups']))")
     log_ok "stats_data.json — $TEAMS tim | bracket_data.json — $GROUPS grup (competition tree kini live)"
 else
     log_fail "generate_stats.py gagal."
@@ -48,7 +117,7 @@ fi
 
 # ── update angka pertandingan & tanggal di index.html ───────────────────────
 cd "$PROJ"
-if python3 update_html.py; then
+if "$PYTHON" update_html.py; then
     log_ok "index.html diperbarui (angka pertandingan & tanggal)"
 else
     log_fail "update_html.py gagal."
@@ -57,8 +126,8 @@ fi
 # ── [3/4] Training & evaluasi model ML ──────────────────────────────────────
 log_step 3 "Training & evaluasi 14 model klasifikasi ML"
 cd "$PRED"
-if python3 model_klasifikasi.py 2>&1 | grep -E "(Acc=|TABEL|Model dilatih|Disimpan)"; then
-    BEST=$(python3 -c "import json; d=json.load(open('../top_models.json')); m=d['top3'][0]; print(f\"{m['model']} — Acc={m['accuracy']*100:.2f}%\")")
+if "$PYTHON" model_klasifikasi.py 2>&1 | grep -E "(Acc=|TABEL|Model dilatih|Disimpan)"; then
+    BEST=$("$PYTHON" -c "import json; d=json.load(open('../top_models.json')); m=d['top3'][0]; print(f\"{m['model']} — Acc={m['accuracy']*100:.2f}%\")")
     log_ok "top_models.json diperbarui — model terbaik: $BEST"
 else
     log_fail "model_klasifikasi.py gagal."
@@ -66,8 +135,8 @@ fi
 
 # ── [4/4] Prediksi peluang per negara (hanya tim fase gugur) ────────────────
 log_step 4 "Prediksi peluang menang — 32 tim fase gugur, basis 2 match terakhir"
-if python3 prediksi_tim.py 2>&1 | grep -E "(◀|Disimpan|fase gugur)"; then
-    TOP1=$(python3 -c "import json; d=json.load(open('../top5_predictions.json')); t=d['top5'][0]; print(f\"{t['team']} ({t['win_probability']*100:.1f}%)\")")
+if "$PYTHON" prediksi_tim.py 2>&1 | grep -E "(◀|Disimpan|fase gugur)"; then
+    TOP1=$("$PYTHON" -c "import json; d=json.load(open('../top5_predictions.json')); t=d['top5'][0]; print(f\"{t['team']} ({t['win_probability']*100:.1f}%)\")")
     log_ok "top5_predictions.json diperbarui — peluang tertinggi: #1 $TOP1"
 else
     log_fail "prediksi_tim.py gagal."
