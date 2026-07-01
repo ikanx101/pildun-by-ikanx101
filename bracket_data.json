@@ -1,5 +1,5 @@
 {
-  "updated_at": "30 Juni 2026",
+  "updated_at": "1 Juli 2026",
   "groups": [
     {
       "name": "Group A",
@@ -709,6 +709,14 @@
         "away_score": 0,
         "winner": "France",
         "date": "2026-06-30"
+      },
+      {
+        "home": "Mexico",
+        "away": "Ecuador",
+        "home_score": 2,
+        "away_score": 0,
+        "winner": "Mexico",
+        "date": "2026-07-01"
       }
     ],
     "R16": [],

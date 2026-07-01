@@ -1,32 +1,32 @@
 {
   "updated_at": "2026-07-01",
-  "n_samples": 156,
+  "n_samples": 158,
   "n_features": 132,
   "cv_folds": 10,
   "top3": [
     {
       "rank": 1,
-      "model": "Logistic Regression",
-      "accuracy": 0.8387,
-      "accuracy_std": 0.1116,
-      "f1": 0.7555,
-      "auc_roc": 0.8817
+      "model": "LightGBM",
+      "accuracy": 0.8475,
+      "accuracy_std": 0.0814,
+      "f1": 0.7681,
+      "auc_roc": 0.9032
     },
     {
       "rank": 2,
-      "model": "Gradient Boosting",
-      "accuracy": 0.8333,
-      "accuracy_std": 0.0874,
-      "f1": 0.7667,
-      "auc_roc": 0.9047
+      "model": "XGBoost",
+      "accuracy": 0.8471,
+      "accuracy_std": 0.0728,
+      "f1": 0.7674,
+      "auc_roc": 0.9143
     },
     {
       "rank": 3,
-      "model": "Linear Discriminant Analysis",
-      "accuracy": 0.8262,
-      "accuracy_std": 0.0785,
-      "f1": 0.7311,
-      "auc_roc": 0.8783
+      "model": "AdaBoost",
+      "accuracy": 0.8233,
+      "accuracy_std": 0.0778,
+      "f1": 0.7407,
+      "auc_roc": 0.8932
     }
   ]
 }
