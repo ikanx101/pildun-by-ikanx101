@@ -1,7 +1,7 @@
 {
   "updated_at": "2026-07-01",
-  "model_used": "Linear Discriminant Analysis",
-  "model_accuracy": 0.8442,
+  "model_used": "Logistic Regression",
+  "model_accuracy": 0.8387,
   "basis_prediksi": "rata-rata 2 pertandingan terakhir, hanya tim fase gugur (32 tim)",
   "n_teams_evaluated": 32,
   "top5": [
@@ -9,9 +9,9 @@
       "rank": 1,
       "team": "France",
       "group": "Group I",
-      "last_stage": "First Stage",
-      "matches_played": 3,
-      "win_probability": 0.9998
+      "last_stage": "Round of 32",
+      "matches_played": 4,
+      "win_probability": 0.9994
     },
     {
       "rank": 2,
@@ -19,31 +19,31 @@
       "group": "Group B",
       "last_stage": "First Stage",
       "matches_played": 3,
-      "win_probability": 0.9993
+      "win_probability": 0.9883
     },
     {
       "rank": 3,
+      "team": "Croatia",
+      "group": "Group L",
+      "last_stage": "First Stage",
+      "matches_played": 3,
+      "win_probability": 0.9839
+    },
+    {
+      "rank": 4,
       "team": "Argentina",
       "group": "Group J",
       "last_stage": "First Stage",
       "matches_played": 3,
-      "win_probability": 0.9986
-    },
-    {
-      "rank": 4,
-      "team": "Brazil",
-      "group": "Group C",
-      "last_stage": "Round of 32",
-      "matches_played": 4,
-      "win_probability": 0.9967
+      "win_probability": 0.9819
     },
     {
       "rank": 5,
-      "team": "Spain",
-      "group": "Group H",
+      "team": "England",
+      "group": "Group L",
       "last_stage": "First Stage",
       "matches_played": 3,
-      "win_probability": 0.9966
+      "win_probability": 0.9638
     }
   ]
 }
