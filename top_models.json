@@ -6,27 +6,27 @@
   "top3": [
     {
       "rank": 1,
-      "model": "LightGBM",
-      "accuracy": 0.85,
-      "accuracy_std": 0.0558,
-      "f1": 0.7853,
-      "auc_roc": 0.9146
+      "model": "Gradient Boosting",
+      "accuracy": 0.8667,
+      "accuracy_std": 0.0567,
+      "f1": 0.8177,
+      "auc_roc": 0.9426
     },
     {
       "rank": 2,
-      "model": "Gradient Boosting",
-      "accuracy": 0.8389,
-      "accuracy_std": 0.058,
-      "f1": 0.7732,
-      "auc_roc": 0.9401
+      "model": "XGBoost",
+      "accuracy": 0.8556,
+      "accuracy_std": 0.0567,
+      "f1": 0.7911,
+      "auc_roc": 0.9268
     },
     {
       "rank": 3,
-      "model": "Random Forest",
-      "accuracy": 0.8167,
-      "accuracy_std": 0.0995,
-      "f1": 0.7081,
-      "auc_roc": 0.8713
+      "model": "LightGBM",
+      "accuracy": 0.8556,
+      "accuracy_std": 0.0567,
+      "f1": 0.7954,
+      "auc_roc": 0.9161
     }
   ]
 }

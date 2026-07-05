@@ -1,49 +1,49 @@
 {
   "updated_at": "2026-07-05",
-  "model_used": "LightGBM",
-  "model_accuracy": 0.85,
-  "basis_prediksi": "rata-rata 2 pertandingan terakhir, hanya tim fase gugur (32 tim)",
-  "n_teams_evaluated": 32,
+  "model_used": "Gradient Boosting",
+  "model_accuracy": 0.8667,
+  "basis_prediksi": "rata-rata 2 pertandingan terakhir, hanya tim fase 16 besar",
+  "n_teams_evaluated": 16,
   "top5": [
     {
       "rank": 1,
-      "team": "Brazil",
-      "group": "Group C",
+      "team": "Mexico",
+      "group": "Group A",
+      "last_stage": "Round of 32",
+      "matches_played": 4,
+      "win_probability": 0.9987
+    },
+    {
+      "rank": 2,
+      "team": "Spain",
+      "group": "Group H",
+      "last_stage": "Round of 32",
+      "matches_played": 4,
+      "win_probability": 0.998
+    },
+    {
+      "rank": 3,
+      "team": "England",
+      "group": "Group L",
       "last_stage": "Round of 32",
       "matches_played": 4,
       "win_probability": 0.9961
     },
     {
-      "rank": 2,
+      "rank": 4,
       "team": "Belgium",
       "group": "Group G",
       "last_stage": "Round of 32",
       "matches_played": 4,
-      "win_probability": 0.9947
-    },
-    {
-      "rank": 3,
-      "team": "Senegal",
-      "group": "Group I",
-      "last_stage": "Round of 32",
-      "matches_played": 4,
-      "win_probability": 0.9935
-    },
-    {
-      "rank": 4,
-      "team": "England",
-      "group": "Group L",
-      "last_stage": "Round of 32",
-      "matches_played": 4,
-      "win_probability": 0.9877
+      "win_probability": 0.9915
     },
     {
       "rank": 5,
-      "team": "Mexico",
-      "group": "Group A",
-      "last_stage": "Round of 32",
-      "matches_played": 4,
-      "win_probability": 0.985
+      "team": "France",
+      "group": "Group I",
+      "last_stage": "Round of 16",
+      "matches_played": 5,
+      "win_probability": 0.9758
     }
   ]
 }

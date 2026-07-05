@@ -77,25 +77,43 @@
     /* COMPETITION TREE — section label */
     .ct-sub { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--smoke); margin-bottom: 16px; }
 
-    /* KNOCKOUT BRACKET */
+    /* KNOCKOUT BRACKET — grid ala bagan resmi: kolom ronde + kolom konektor */
     .bracket-scroll { overflow-x: auto; padding-bottom: 12px; }
-    .bracket-track { display: flex; gap: 10px; min-width: max-content; align-items: flex-start; }
-    .bracket-col { width: 196px; flex-shrink: 0; }
-    .br-round-label { font-size: 10px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--smoke); padding: 0 2px 10px; white-space: nowrap; }
-    .br-matches { display: flex; flex-direction: column; justify-content: space-around; height: 1360px; }
-    .br-match { border: 1px solid rgba(255,255,255,.09); border-radius: 10px; overflow: hidden; flex-shrink: 0; background: rgba(255,255,255,.015); transition: border-color .2s; }
-    .br-match:hover { border-color: rgba(255,255,255,.2); }
-    .br-date { font-size: 9px; color: var(--smoke); padding: 5px 10px 2px; }
-    .br-team { display: flex; align-items: center; gap: 6px; padding: 7px 10px; font-size: 11px; color: var(--ash); min-height: 30px; }
-    .br-team + .br-team { border-top: 1px solid rgba(255,255,255,.05); }
-    .br-team.br-won { color: var(--bone); font-weight: 600; background: rgba(21,132,110,.08); }
+    .bracket-grid {
+      display: grid; min-width: 1050px; column-gap: 6px;
+      grid-template-columns:
+        minmax(0,1.12fr) clamp(18px,2vw,36px) minmax(0,1fr) clamp(18px,2vw,36px)
+        minmax(0,1fr) clamp(18px,2vw,36px) minmax(0,1fr) clamp(18px,2vw,36px) minmax(0,1fr);
+      grid-template-rows: 40px repeat(96, 20px);
+    }
+    .br-round-label { grid-row: 1; align-self: start; display: flex; align-items: center; justify-content: space-between; height: 32px; padding: 0 12px; border: 1px solid rgba(255,255,255,.12); border-radius: 8px; background: rgba(255,255,255,.03); font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--bone); white-space: nowrap; }
+    .br-round-count { color: var(--smoke); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-weight: 600; }
+    .br-match { display: flex; flex-direction: column; justify-content: center; gap: 3px; padding: 6px 7px; border: 1px solid rgba(255,255,255,.11); border-radius: 10px; background: rgba(255,255,255,.02); transition: border-color .2s, background .2s, transform .2s; animation: brIn .55s cubic-bezier(.16,1,.3,1) both; }
+    .br-match:hover { border-color: rgba(255,255,255,.28); background: rgba(255,255,255,.045); transform: translateY(-2px); }
+    @keyframes brIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+    .br-head { display: flex; align-items: center; justify-content: space-between; padding: 0 2px; }
+    .br-mnum { font-size: 9px; font-weight: 700; letter-spacing: .08em; color: var(--smoke); }
+    .br-badge { font-size: 8.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; border-radius: 4px; padding: 2px 6px; line-height: 1.4; }
+    .br-badge.ft { background: var(--amber); color: #1a1200; }
+    .br-badge.soon { border: 1px solid rgba(255,255,255,.2); color: var(--smoke); }
+    .br-team { display: grid; grid-template-columns: 18px 1fr auto; align-items: center; gap: 6px; height: 26px; padding: 0 6px; border-radius: 6px; font-size: 11.5px; color: var(--ash); }
+    .br-team.br-won { background: rgba(255,184,41,.13); color: var(--bone); font-weight: 600; }
+    .br-team.br-won .br-score { color: var(--amber); }
     .br-team.br-lost { color: var(--smoke); }
-    .br-team.br-tbd { color: var(--smoke); font-style: italic; }
-    .br-flag { font-size: 13px; flex-shrink: 0; line-height: 1; }
-    .br-name { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .br-score { font-size: 14px; font-weight: 700; color: var(--bone); min-width: 16px; text-align: right; flex-shrink: 0; }
-    .br-team.br-won .br-score { color: #4ecba3; }
-    .br-note { font-size: 9px; color: var(--amber); padding: 2px 10px 5px; }
+    .br-team.br-tbd .br-name { color: var(--smoke); font-style: italic; font-size: 10.5px; }
+    .br-flag { font-size: 13px; line-height: 1; text-align: center; }
+    .br-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .br-score { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; font-weight: 700; color: var(--bone); min-width: 14px; text-align: right; }
+    .br-pen { font-size: 8.5px; color: var(--amber); padding: 0 6px; letter-spacing: .03em; }
+    .br-conn { position: relative; pointer-events: none; opacity: 0; animation: connIn .6s ease both; }
+    @keyframes connIn { to { opacity: 1; } }
+    .br-conn span { position: absolute; }
+    .br-conn .c1 { left: 0; right: 50%; top: 25%; border-top: 1px solid rgba(128,82,255,.45); }
+    .br-conn .c2 { left: 0; right: 50%; top: 75%; border-top: 1px solid rgba(128,82,255,.45); }
+    .br-conn .cv { left: 50%; top: 25%; bottom: 25%; border-left: 1px solid rgba(128,82,255,.45); }
+    .br-conn .co { left: 50%; right: 0; top: 50%; border-top: 1px solid rgba(128,82,255,.45); }
+    .br-champ { display: flex; align-items: center; gap: 9px; padding: 0 12px; border: 1px solid rgba(255,184,41,.3); border-radius: 10px; background: rgba(255,184,41,.05); font-size: 11px; font-weight: 700; letter-spacing: .04em; color: var(--amber); animation: brIn .55s .6s cubic-bezier(.16,1,.3,1) both; }
+    .br-champ .br-champ-name { color: var(--bone); font-weight: 600; }
 
     /* ML MODEL PANEL */
     .ml-podium { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 20px; }
@@ -252,7 +270,7 @@
         </p>
         <div class="status-block">
           <div class="live-tag"><span class="live-dot"></span>Data Live · <span id="live-tag-count">78</span> Pertandingan</div>
-          <p class="status-caption">Fase gugur (Round of 32) telah dimulai · 48 tim · 155 variabel FIFA.<br>Data diperbarui otomatis setelah setiap pertandingan.</p>
+          <p class="status-caption">Babak 16 besar telah dimulai · 48 tim · 155 variabel FIFA.<br>Data diperbarui otomatis setelah setiap pertandingan.</p>
           <a href="#competition-tree" class="scroll-cta">Lihat Bagan ↓</a>
         </div>
       </div>
@@ -266,7 +284,7 @@
     <h2 class="sec-head">Status <em>Terkini</em></h2>
     <div class="stats-grid">
       <div class="stat-card plum"><div class="stat-value" id="stat-match-count">78</div><div class="stat-label">Pertandingan Selesai</div></div>
-      <div class="stat-card lichen"><div class="stat-value">32</div><div class="stat-label">Tim Fase Gugur</div></div>
+      <div class="stat-card lichen"><div class="stat-value">16</div><div class="stat-label">Tim Fase 16 Besar</div></div>
       <div class="stat-card amber"><div class="stat-value">155</div><div class="stat-label">Variabel per Tim</div></div>
       <div class="stat-card bone"><div class="stat-value" id="stat-last-date" style="font-size:22px;line-height:1.3">30 Juni 2026</div><div class="stat-label">Terakhir Diperbarui</div></div>
     </div>
@@ -281,8 +299,8 @@
     <div class="ct-sub">Bagan Fase Gugur</div>
     <div class="chart-card" style="padding:20px 16px 16px;">
       <div class="bracket-scroll">
-        <div class="bracket-track" id="knockout-bracket">
-          <p class="ml-error">Memuat data bracket…</p>
+        <div class="bracket-grid" id="knockout-bracket">
+          <p class="ml-error" style="grid-column:1 / -1">Memuat data bracket…</p>
         </div>
       </div>
     </div>
@@ -299,7 +317,7 @@
 
   <!-- Top 5 Prediction -->
   <section id="top5-pred" class="section section-divider">
-    <span class="sec-eye">ML Prediction · Model Akurasi Terbaik · Rata-rata 2 Pertandingan Terakhir · Tim Fase Gugur</span>
+    <span class="sec-eye">ML Prediction · Model Akurasi Terbaik · Rata-rata 2 Pertandingan Terakhir · Tim Fase 16 Besar</span>
     <h2 class="sec-head">5 Tim Berpeluang <em>Terbaik</em></h2>
     <div class="chart-card" id="pred-panel">
       <p class="ml-error">Memuat prediksi…</p>
@@ -320,8 +338,8 @@
       <div style="flex:1;min-width:260px;">
         <p style="font-size:18px;font-weight:600;color:#fff;letter-spacing:.021em;margin-bottom:12px;">Prediksi berbasis performa fase gugur — diperbarui setiap pertandingan</p>
         <p style="font-size:15px;color:#bdbdbd;line-height:1.7;max-width:68ch;">
-          Dari 90 pertandingan yang telah selesai, seluruh 12 grup sudah tuntas. Fase gugur (Round of 32) telah dimulai — 32 tim lolos.
-          <strong style="color:#fff">Prediksi hanya mengevaluasi 32 tim fase gugur</strong>, menggunakan rata-rata 2 pertandingan terakhir masing-masing tim.
+          Dari 90 pertandingan yang telah selesai, seluruh 12 grup sudah tuntas. Babak 16 besar telah dimulai — 16 tim tersisa.
+          <strong style="color:#fff">Prediksi hanya mengevaluasi 16 tim fase 16 besar</strong>, menggunakan rata-rata 2 pertandingan terakhir masing-masing tim.
         </p>
         <p style="font-size:15px;color:#bdbdbd;line-height:1.7;max-width:68ch;margin-top:14px;">
           Yang membuat prediksi ini berbeda: <strong style="color:#fff">model tidak statis</strong>. Setiap kali pertandingan baru selesai, data scraper dijalankan ulang dan model diperbarui otomatis — sehingga bagan kompetisi dan prediksi ikut bergerak mengikuti performa terkini setiap tim.
@@ -392,56 +410,156 @@
       "Türkiye":"🇹🇷","USA":"🇺🇸","Uruguay":"🇺🇾","Uzbekistan":"🇺🇿"
     };
 
+    // ── Struktur bagan resmi FIFA 2026 (nomor pertandingan M73–M104) ────────
+    // Pasangan Round of 32 (fakta historis, semua sudah dimainkan)
+    const R32_PAIRS = {
+      73: ['South Africa','Canada'],  74: ['Germany','Paraguay'],
+      75: ['Netherlands','Morocco'],  76: ['Brazil','Japan'],
+      77: ['France','Sweden'],        78: ["Côte d'Ivoire",'Norway'],
+      79: ['Mexico','Ecuador'],       80: ['England','Congo DR'],
+      81: ['USA','Bosnia and Herzegovina'], 82: ['Belgium','Senegal'],
+      83: ['Portugal','Croatia'],     84: ['Spain','Austria'],
+      85: ['Switzerland','Algeria'],  86: ['Argentina','Cabo Verde'],
+      87: ['Colombia','Ghana'],       88: ['Australia','Egypt'],
+    };
+    // Alur pemenang: slot → [feed atas, feed bawah]
+    const FEEDS = {
+      89:[74,77], 90:[73,75], 93:[83,84], 94:[81,82],
+      91:[76,78], 92:[79,80], 95:[86,88], 96:[85,87],
+      97:[89,90], 98:[93,94], 99:[91,92], 100:[95,96],
+      101:[97,98], 102:[99,100], 104:[101,102],
+    };
+    // Pemenang adu penalti yang belum terekam scraper (hapus jika data sudah lengkap)
+    const MANUAL_WINNERS = { 88: 'Egypt' };
+    // Jadwal resmi laga yang belum dimainkan
+    const SCHEDULE = {
+      91:'5 Jul', 92:'6 Jul', 93:'6 Jul', 94:'7 Jul', 95:'7 Jul', 96:'7 Jul',
+      97:'9 Jul', 98:'10 Jul', 99:'11 Jul', 100:'11 Jul',
+      101:'15 Jul', 102:'16 Jul', 104:'19 Jul',
+    };
+    // Geometri kolom: start = baris slot pertama, pitch = jarak antar slot (baris)
     const ROUND_DEFS = [
-      { key: 'R32',   label: 'Round of 32',     count: 16 },
-      { key: 'R16',   label: 'Round of 16',      count: 8  },
-      { key: 'QF',    label: 'Perempat Final',   count: 4  },
-      { key: 'SF',    label: 'Semi Final',        count: 2  },
-      { key: 'Final', label: 'Final',             count: 1  },
+      { key:'R32',   label:'Round of 32',    col:1, start:2,  pitch:6,  slots:[74,77,73,75,83,84,81,82,76,78,79,80,86,88,85,87] },
+      { key:'R16',   label:'Round of 16',    col:3, start:5,  pitch:12, slots:[89,90,93,94,91,92,95,96] },
+      { key:'QF',    label:'Perempat Final', col:5, start:11, pitch:24, slots:[97,98,99,100] },
+      { key:'SF',    label:'Semi Final',     col:7, start:23, pitch:48, slots:[101,102] },
+      { key:'Final', label:'Final',          col:9, start:47, pitch:0,  slots:[104] },
     ];
 
-    function matchCard(m) {
-      if (!m) {
-        return `<div class="br-match">
-          <div class="br-team br-tbd"><span class="br-flag"></span><span class="br-name">TBD</span></div>
-          <div class="br-team br-tbd"><span class="br-flag"></span><span class="br-name">TBD</span></div>
-        </div>`;
-      }
-      const w = m.winner;
-      const noWinner = m.home_score !== null && m.away_score !== null && !w;
-      const cls1 = w === m.home ? 'br-won' : (w ? 'br-lost' : '');
-      const cls2 = w === m.away ? 'br-won' : (w ? 'br-lost' : '');
-      const s1 = m.home_score !== null ? `<span class="br-score">${m.home_score}</span>` : '';
-      const s2 = m.away_score !== null ? `<span class="br-score">${m.away_score}</span>` : '';
-      const note = noWinner ? '<div class="br-note">ET/PEN menunggu update</div>' : '';
-      return `<div class="br-match">
-        ${m.date ? `<div class="br-date">${m.date}</div>` : ''}
-        <div class="br-team ${cls1}">
-          <span class="br-flag">${FLAGS[m.home]||'🏳'}</span>
-          <span class="br-name">${m.home}</span>${s1}
-        </div>
-        <div class="br-team ${cls2}">
-          <span class="br-flag">${FLAGS[m.away]||'🏳'}</span>
-          <span class="br-name">${m.away}</span>${s2}
-        </div>
-        ${note}
-      </div>`;
+    function fmtDate(iso) {
+      if (!iso) return '';
+      const B = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+      const p = String(iso).split('-');
+      return p.length === 3 ? `${parseInt(p[2],10)} ${B[parseInt(p[1],10)-1]}` : iso;
     }
 
     function renderBracket(data) {
       const rounds = data.rounds || {};
-      brEl.innerHTML = ROUND_DEFS.map(def => {
-        const played = rounds[def.key] || [];
-        const tbd = def.count - played.length;
-        const cards = [
-          ...played.map(m => matchCard(m)),
-          ...Array(Math.max(0, tbd)).fill(null).map(() => matchCard(null))
-        ].join('');
-        return `<div class="bracket-col">
-          <div class="br-round-label">${def.label}</div>
-          <div class="br-matches">${cards}</div>
-        </div>`;
-      }).join('');
+
+      // Resolusi slot: petakan hasil scraper ke nomor pertandingan resmi
+      const slotMatch  = {};  // num → match hasil scraper
+      const slotTeams  = {};  // num → [tim atas, tim bawah] (null jika belum diketahui)
+      const slotWinner = {};  // num → nama tim pemenang (null jika belum ada)
+
+      Object.entries(R32_PAIRS).forEach(([num, pair]) => {
+        num = +num;
+        const m = (rounds.R32 || []).find(x => pair.includes(x.home) && pair.includes(x.away));
+        slotMatch[num] = m || null;
+        slotTeams[num] = m ? [m.home, m.away] : pair.slice();
+        slotWinner[num] = (m && m.winner) || MANUAL_WINNERS[num] || null;
+      });
+
+      ROUND_DEFS.slice(1).forEach(def => {
+        const used = new Set();
+        def.slots.forEach(num => {
+          const [fa, fb] = FEEDS[num];
+          const pool = (slotTeams[fa] || []).concat(slotTeams[fb] || []).filter(Boolean);
+          const m = (rounds[def.key] || []).find(x =>
+            !used.has(x) && pool.includes(x.home) && pool.includes(x.away));
+          if (m) used.add(m);
+          slotMatch[num] = m || null;
+          if (m) {
+            // Orientasi baris mengikuti feed; sekaligus simpulkan pemenang adu
+            // penalti di ronde sebelumnya (tim yang maju = pemenang feed-nya)
+            const fromA = (slotTeams[fa] || []).includes(m.home) ? m.home : m.away;
+            const fromB = fromA === m.home ? m.away : m.home;
+            slotTeams[num] = [fromA, fromB];
+            if (!slotWinner[fa]) slotWinner[fa] = fromA;
+            if (!slotWinner[fb]) slotWinner[fb] = fromB;
+          } else {
+            slotTeams[num] = [slotWinner[fa], slotWinner[fb]];
+          }
+          slotWinner[num] = (m && m.winner) || slotWinner[num] || null;
+        });
+      });
+
+      // Render
+      const parts = [];
+      let cardIdx = 0;
+
+      ROUND_DEFS.forEach((def, ci) => {
+        parts.push(`<div class="br-round-label" style="grid-column:${def.col}">
+          <span>${def.label}</span><span class="br-round-count">${def.slots.length}</span>
+        </div>`);
+
+        def.slots.forEach((num, i) => {
+          const row = def.start + i * def.pitch;
+          const m = slotMatch[num];
+          const [tA, tB] = slotTeams[num] || [null, null];
+          const w = slotWinner[num];
+          const played = !!(m && m.home_score !== null && m.away_score !== null);
+          const drawn  = played && m.home_score === m.away_score;
+
+          const badge = played
+            ? '<span class="br-badge ft">FT</span>'
+            : `<span class="br-badge soon">${(m && fmtDate(m.date)) || SCHEDULE[num] || 'TBD'}</span>`;
+
+          const scoreOf = t => {
+            if (!played) return '–';
+            return t === m.home ? m.home_score : m.away_score;
+          };
+          const teamRow = (t, feed) => {
+            if (!t) return `<div class="br-team br-tbd"><span class="br-flag">·</span>
+              <span class="br-name">Pemenang M${feed}</span><span class="br-score">–</span></div>`;
+            let cls = '';
+            if (w) cls = t === w ? 'br-won' : (played ? 'br-lost' : '');
+            return `<div class="br-team ${cls}">
+              <span class="br-flag">${FLAGS[t] || '🏳'}</span>
+              <span class="br-name">${t}</span>
+              <span class="br-score">${scoreOf(t)}</span></div>`;
+          };
+
+          let note = '';
+          if (drawn && w) note = `<div class="br-pen">${w} menang adu penalti</div>`;
+          else if (drawn && !w) note = '<div class="br-pen">Menunggu hasil adu penalti</div>';
+
+          parts.push(`<div class="br-match" style="grid-column:${def.col};grid-row:${row} / span 5;animation-delay:${ci * 90 + i * 16}ms">
+            <div class="br-head"><span class="br-mnum">M${num}</span>${badge}</div>
+            ${teamRow(tA, (FEEDS[num] || [])[0])}
+            ${teamRow(tB, (FEEDS[num] || [])[1])}
+            ${note}
+          </div>`);
+          cardIdx++;
+        });
+      });
+
+      // Konektor siku di kolom selang (2,4,6,8)
+      [[2,8,12],[4,4,24],[6,2,48],[8,1,96]].forEach(([col, count, span], gi) => {
+        for (let i = 0; i < count; i++) {
+          parts.push(`<div class="br-conn" style="grid-column:${col};grid-row:${2 + i * span} / span ${span};animation-delay:${200 + gi * 120 + i * 25}ms" aria-hidden="true">
+            <span class="c1"></span><span class="c2"></span><span class="cv"></span><span class="co"></span>
+          </div>`);
+        }
+      });
+
+      // Kartu juara di bawah kartu final
+      const champ = slotWinner[104];
+      parts.push(`<div class="br-champ" style="grid-column:9;grid-row:54 / span 3">
+        <span>🏆</span><span>Juara:</span>
+        <span class="br-champ-name">${champ ? `${FLAGS[champ] || ''} ${champ}` : 'TBD'}</span>
+      </div>`);
+
+      brEl.innerHTML = parts.join('');
     }
 
     fetch('/bracket_data.json')
@@ -450,7 +568,7 @@
         renderBracket(data);
       })
       .catch(() => {
-        brEl.innerHTML = `<p class="ml-error">Data bracket belum tersedia. Jalankan <code>prediksi/generate_stats.py</code> terlebih dahulu.</p>`;
+        brEl.innerHTML = `<p class="ml-error" style="grid-column:1 / -1">Data bracket belum tersedia. Jalankan <code>prediksi/generate_stats.py</code> terlebih dahulu.</p>`;
       });
   })();
 
@@ -504,7 +622,7 @@
           <div>
             <div class="chart-title">Peluang Menang per Pertandingan — Top 5</div>
             <div class="chart-sub" style="margin-bottom:0">
-              Dari ${data.n_teams_evaluated} tim fase gugur · diperbarui ${data.updated_at}
+              Dari ${data.n_teams_evaluated} tim fase 16 besar · diperbarui ${data.updated_at}
             </div>
           </div>
           <span class="pred-model-tag">

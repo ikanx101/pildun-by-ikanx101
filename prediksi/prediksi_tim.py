@@ -1,6 +1,6 @@
 """
-Prediksi 5 Tim Berpeluang Menang Tertinggi — Fase Gugur
-Hanya tim yang lolos ke fase gugur (32 tim) yang dievaluasi.
+Prediksi 5 Tim Berpeluang Menang Tertinggi — Fase 16 Besar
+Hanya tim yang lolos ke fase 16 besar (16 tim) yang dievaluasi.
 Basis prediksi: rata-rata 2 pertandingan terakhir per tim.
 Model yang digunakan: model dengan akurasi CV terbaik (dari top_models.json).
 
@@ -96,55 +96,55 @@ model.fit(X, y)
 print(f"Model dilatih  : {len(X)} baris, {len(feature_cols)} fitur")
 print(f"Distribusi label: win={y.sum()}, not win={(y==0).sum()}")
 
-# ── 3. Tentukan tim yang masuk fase gugur ─────────────────────────────────────
-group_df = df[df["stage"] == "First Stage"].copy()
+# ── 3. Tentukan tim yang lolos ke fase 16 besar ───────────────────────────────
+# Sumber 1: pemenang Round of 32 di waktu normal (result == "win" di CSV)
+r32 = df[df["stage"] == "Round of 32"]
+r16_teams = set(r32.loc[r32["result"] == "win", "team"])
 
-groups = {}
-for grp_name in sorted(group_df["group"].dropna().unique()):
-    if not grp_name:
-        continue
-    grp_rows = group_df[group_df["group"] == grp_name]
-    teams_info = {}
-    for team_name, team_rows in grp_rows.groupby("team"):
-        gf  = int(team_rows["team_goals"].sum())
-        ga  = int(team_rows["opponent_goals"].sum())
-        w   = int((team_rows["team_goals"] > team_rows["opponent_goals"]).sum())
-        d   = int((team_rows["team_goals"] == team_rows["opponent_goals"]).sum())
-        pts = 3 * w + d
-        teams_info[team_name] = {
-            "pts": pts, "gd": gf - ga, "gf": gf, "group": grp_name
-        }
-    sorted_teams = sorted(
-        teams_info.items(),
-        key=lambda x: (-x[1]["pts"], -x[1]["gd"], -x[1]["gf"], x[0])
-    )
-    groups[grp_name] = sorted_teams
+# Sumber 2: tim yang sudah bermain di babak 16 besar atau setelahnya pasti lolos.
+# Ini menangkap pemenang lewat babak tambahan/penalti yang skornya seri di CSV.
+post_r32 = df[~df["stage"].isin(["First Stage", "Round of 32"])]
+r16_teams |= set(post_r32["team"])
 
-# Top 2 per grup → 24 tim
-top2_teams = set()
-third_candidates = []
-for grp_name, sorted_teams in groups.items():
-    top2_teams.add(sorted_teams[0][0])
-    top2_teams.add(sorted_teams[1][0])
-    if len(sorted_teams) >= 3:
-        t = sorted_teams[2]
-        third_candidates.append({
-            "name": t[0],
-            "pts": t[1]["pts"], "gd": t[1]["gd"], "gf": t[1]["gf"],
-            "group": t[1]["group"]
-        })
+# Sumber 3: field "winner" di bracket_data.json (termasuk pemenang adu penalti
+# yang laganya belum tercatat di babak berikutnya)
+try:
+    with open("../bracket_data.json", encoding="utf-8") as f:
+        bracket = json.load(f)
+    for m in bracket.get("rounds", {}).get("R32", []):
+        if m.get("winner"):
+            r16_teams.add(m["winner"])
+    for rnd in ("R16", "QF", "SF", "Final"):
+        for m in bracket.get("rounds", {}).get(rnd, []):
+            for side in ("home", "away"):
+                if m.get(side):
+                    r16_teams.add(m[side])
+except Exception as e:
+    print(f"  ⚠ bracket_data.json tidak terbaca ({e}), pakai data CSV saja")
 
-# 8 tim terbaik peringkat 3 → total 32 tim
-third_candidates.sort(key=lambda x: (-x["pts"], -x["gd"], -x["gf"], x["name"]))
-top8_third = set(t["name"] for t in third_candidates[:8])
+# Sumber 4: override manual — pemenang adu penalti yang belum terekam di
+# CSV maupun bracket_data.json. Hapus entri jika data scraper sudah lengkap.
+MANUAL_QUALIFIERS = {
+    "Egypt",  # menang adu penalti vs Australia (R32, 3 Juli 2026)
+}
+r16_teams |= MANUAL_QUALIFIERS
 
-knockout_teams = top2_teams | top8_third
-print(f"\nTim lolos fase gugur: {len(knockout_teams)} tim")
-print(f"  Top-2 per grup: {len(top2_teams)} tim")
-print(f"  3rd terbaik   : {', '.join(sorted(top8_third))}")
+# Laga R32 yang pemenangnya belum bisa ditentukan dari sumber di atas
+unresolved = []
+for _, m in r32.drop_duplicates("match_id").iterrows():
+    if m["team"] not in r16_teams and m["opponent"] not in r16_teams:
+        unresolved.append(f"{m['team']} vs {m['opponent']}")
 
-# ── 4. Ambil rata-rata 2 pertandingan terakhir per tim fase gugur ─────────────
-df_ko = df[df["team"].isin(knockout_teams)].copy()
+print(f"\nTim lolos fase 16 besar: {len(r16_teams)} tim")
+print(f"  {', '.join(sorted(r16_teams))}")
+if unresolved:
+    print(f"  ⚠ Pemenang belum diketahui (seri, hasil penalti belum tersedia): "
+          f"{'; '.join(unresolved)}")
+if len(r16_teams) != 16:
+    print(f"  ⚠ Jumlah tim ≠ 16 — data babak 32 besar kemungkinan belum lengkap")
+
+# ── 4. Ambil rata-rata 2 pertandingan terakhir per tim 16 besar ───────────────
+df_ko = df[df["team"].isin(r16_teams)].copy()
 
 df_last2 = (
     df_ko.sort_values("date")
@@ -166,7 +166,7 @@ proba = model.predict_proba(team_avg)[:, 1]
 
 result_df = (
     pd.DataFrame({"team": team_avg.index.tolist(), "win_probability": proba})
-    .merge(team_meta[team_meta["team"].isin(knockout_teams)], on="team")
+    .merge(team_meta[team_meta["team"].isin(r16_teams)], on="team")
     .sort_values("win_probability", ascending=False)
     .reset_index(drop=True)
 )
@@ -187,7 +187,7 @@ payload = {
     "updated_at":        str(date.today()),
     "model_used":        best_model_name,
     "model_accuracy":    best_accuracy,
-    "basis_prediksi":    "rata-rata 2 pertandingan terakhir, hanya tim fase gugur (32 tim)",
+    "basis_prediksi":    "rata-rata 2 pertandingan terakhir, hanya tim fase 16 besar",
     "n_teams_evaluated": len(result_df),
     "top5": [
         {
@@ -205,4 +205,4 @@ payload = {
 with open("../top5_predictions.json", "w", encoding="utf-8") as f:
     json.dump(payload, f, indent=2, ensure_ascii=False)
 
-print(f"\nDisimpan ke ../top5_predictions.json ({len(result_df)} tim fase gugur dievaluasi)")
+print(f"\nDisimpan ke ../top5_predictions.json ({len(result_df)} tim fase 16 besar dievaluasi)")

@@ -130,8 +130,8 @@ cd "$PRED"
 BEST=$("$PYTHON" -c "import json; d=json.load(open('../top_models.json')); m=d['top3'][0]; print(f\"{m['model']} — Acc={m['accuracy']*100:.2f}%\")")
 log_ok "top_models.json diperbarui — model terbaik: $BEST"
 
-# ── [4/4] Prediksi peluang per negara (hanya tim fase gugur) ────────────────
-log_step 4 "Prediksi peluang menang — 32 tim fase gugur, basis 2 match terakhir"
+# ── [4/4] Prediksi peluang per negara (hanya tim fase 16 besar) ──────────────
+log_step 4 "Prediksi peluang menang — tim fase 16 besar, basis 2 match terakhir"
 "$PYTHON" prediksi_tim.py || log_fail "prediksi_tim.py gagal."
 TOP1=$("$PYTHON" -c "import json; d=json.load(open('../top5_predictions.json')); t=d['top5'][0]; print(f\"{t['team']} ({t['win_probability']*100:.1f}%)\")")
 log_ok "top5_predictions.json diperbarui — peluang tertinggi: #1 $TOP1"
@@ -147,7 +147,7 @@ echo "    fifa_worldcup2026_stats.csv   ← data mentah pertandingan"
 echo "    stats_data.json               ← data statistik per tim"
 echo "    bracket_data.json             ← competition tree (grup + fase gugur)"
 echo "    top_models.json               ← panel perbandingan model ML"
-echo "    top5_predictions.json         ← panel prediksi 5 besar (32 tim fase gugur)"
+echo "    top5_predictions.json         ← panel prediksi 5 besar (tim fase 16 besar)"
 echo ""
 echo "  Buka website untuk melihat pembaruan."
 echo ""
