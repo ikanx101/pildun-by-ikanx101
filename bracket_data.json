@@ -1,5 +1,5 @@
 {
-  "updated_at": "2 Juli 2026",
+  "updated_at": "4 Juli 2026",
   "groups": [
     {
       "name": "Group A",
@@ -749,9 +749,66 @@
         "away_score": 0,
         "winner": "Spain",
         "date": "2026-07-02"
+      },
+      {
+        "home": "Portugal",
+        "away": "Croatia",
+        "home_score": 2,
+        "away_score": 1,
+        "winner": "Portugal",
+        "date": "2026-07-02"
+      },
+      {
+        "home": "Switzerland",
+        "away": "Algeria",
+        "home_score": 2,
+        "away_score": 0,
+        "winner": "Switzerland",
+        "date": "2026-07-03"
+      },
+      {
+        "home": "Australia",
+        "away": "Egypt",
+        "home_score": 1,
+        "away_score": 1,
+        "winner": null,
+        "date": "2026-07-03"
+      },
+      {
+        "home": "Argentina",
+        "away": "Cabo Verde",
+        "home_score": 3,
+        "away_score": 2,
+        "winner": "Argentina",
+        "date": "2026-07-03"
+      },
+      {
+        "home": "Colombia",
+        "away": "Ghana",
+        "home_score": 1,
+        "away_score": 0,
+        "winner": "Colombia",
+        "date": "2026-07-04"
       }
     ],
-    "R16": [],
+    "R16": [
+      {
+        "home": "Canada",
+        "away": "Morocco",
+        "home_score": 0,
+        "away_score": 3,
+        "winner": "Morocco",
+        "date": "2026-07-04"
+      },
+      {
+        "home": "Paraguay",
+        "away": "France",
+        "home_score": 0,
+        "away_score": 1,
+        "winner": "France",
+        "date": "2026-07-04"
+      }
+    ],
     "QF": [],
     "SF": [],
     "Final": []
