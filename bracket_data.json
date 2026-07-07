@@ -1,5 +1,5 @@
 {
-  "updated_at": "5 Juli 2026",
+  "updated_at": "6 Juli 2026",
   "groups": [
     {
       "name": "Group A",
@@ -815,6 +815,22 @@
         "away_score": 2,
         "winner": "Norway",
         "date": "2026-07-05"
+      },
+      {
+        "home": "Mexico",
+        "away": "England",
+        "home_score": 2,
+        "away_score": 3,
+        "winner": "England",
+        "date": "2026-07-06"
+      },
+      {
+        "home": "Portugal",
+        "away": "Spain",
+        "home_score": 0,
+        "away_score": 1,
+        "winner": "Spain",
+        "date": "2026-07-06"
       }
     ],
     "QF": [],

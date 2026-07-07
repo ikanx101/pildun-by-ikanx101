@@ -1,49 +1,49 @@
 {
-  "updated_at": "2026-07-06",
-  "model_used": "LightGBM",
-  "model_accuracy": 0.8409,
+  "updated_at": "2026-07-07",
+  "model_used": "Gradient Boosting",
+  "model_accuracy": 0.8757,
   "basis_prediksi": "rata-rata 2 pertandingan terakhir, hanya tim fase 16 besar",
   "n_teams_evaluated": 16,
   "top5": [
     {
       "rank": 1,
-      "team": "Belgium",
-      "group": "Group G",
-      "last_stage": "Round of 32",
-      "matches_played": 4,
-      "win_probability": 0.9954
-    },
-    {
-      "rank": 2,
-      "team": "France",
+      "team": "Norway",
       "group": "Group I",
       "last_stage": "Round of 16",
       "matches_played": 5,
-      "win_probability": 0.9917
+      "win_probability": 0.9985
+    },
+    {
+      "rank": 2,
+      "team": "Spain",
+      "group": "Group H",
+      "last_stage": "Round of 16",
+      "matches_played": 5,
+      "win_probability": 0.9976
     },
     {
       "rank": 3,
-      "team": "Spain",
-      "group": "Group H",
-      "last_stage": "Round of 32",
-      "matches_played": 4,
-      "win_probability": 0.9897
+      "team": "England",
+      "group": "Group L",
+      "last_stage": "Round of 16",
+      "matches_played": 5,
+      "win_probability": 0.9926
     },
     {
       "rank": 4,
-      "team": "Mexico",
-      "group": "Group A",
-      "last_stage": "Round of 32",
-      "matches_played": 4,
-      "win_probability": 0.9844
-    },
-    {
-      "rank": 5,
       "team": "Morocco",
       "group": "Group C",
       "last_stage": "Round of 16",
       "matches_played": 5,
-      "win_probability": 0.9814
+      "win_probability": 0.9884
+    },
+    {
+      "rank": 5,
+      "team": "Belgium",
+      "group": "Group G",
+      "last_stage": "Round of 32",
+      "matches_played": 4,
+      "win_probability": 0.9816
     }
   ]
 }

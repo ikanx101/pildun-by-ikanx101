@@ -30,6 +30,7 @@ log_step 0 "Pre-check Python environment & dependencies"
 # Gunakan PYTHON yang pasti (fallback: cukup `python3`)
 PYTHON=""
 for try_py in \
+    "$PROJ/.venv/bin/python3" \
     "/home/ikanx101/aurogen-0.2.0-linux-x64/runtime/python/bin/python3" \
     "/usr/bin/python3" \
     "$(command -v python3 2>/dev/null || true)"; do
