@@ -1,33 +1,33 @@
 {
   "updated_at": "2026-07-07",
-  "model_used": "Gradient Boosting",
-  "model_accuracy": 0.8757,
+  "model_used": "LightGBM",
+  "model_accuracy": 0.8775,
   "basis_prediksi": "rata-rata 2 pertandingan terakhir, hanya tim fase 16 besar",
   "n_teams_evaluated": 16,
   "top5": [
     {
       "rank": 1,
-      "team": "Norway",
-      "group": "Group I",
-      "last_stage": "Round of 16",
-      "matches_played": 5,
-      "win_probability": 0.9985
-    },
-    {
-      "rank": 2,
       "team": "Spain",
       "group": "Group H",
       "last_stage": "Round of 16",
       "matches_played": 5,
-      "win_probability": 0.9976
+      "win_probability": 0.9991
+    },
+    {
+      "rank": 2,
+      "team": "Norway",
+      "group": "Group I",
+      "last_stage": "Round of 16",
+      "matches_played": 5,
+      "win_probability": 0.9987
     },
     {
       "rank": 3,
-      "team": "England",
-      "group": "Group L",
+      "team": "France",
+      "group": "Group I",
       "last_stage": "Round of 16",
       "matches_played": 5,
-      "win_probability": 0.9926
+      "win_probability": 0.9916
     },
     {
       "rank": 4,
@@ -35,15 +35,15 @@
       "group": "Group C",
       "last_stage": "Round of 16",
       "matches_played": 5,
-      "win_probability": 0.9884
+      "win_probability": 0.9802
     },
     {
       "rank": 5,
-      "team": "Belgium",
-      "group": "Group G",
-      "last_stage": "Round of 32",
-      "matches_played": 4,
-      "win_probability": 0.9816
+      "team": "England",
+      "group": "Group L",
+      "last_stage": "Round of 16",
+      "matches_played": 5,
+      "win_probability": 0.9587
     }
   ]
 }

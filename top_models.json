@@ -1,32 +1,32 @@
 {
   "updated_at": "2026-07-07",
-  "n_samples": 186,
+  "n_samples": 188,
   "n_features": 132,
   "cv_folds": 10,
   "top3": [
     {
       "rank": 1,
-      "model": "Gradient Boosting",
-      "accuracy": 0.8757,
-      "accuracy_std": 0.0606,
-      "f1": 0.8298,
-      "auc_roc": 0.9477
+      "model": "LightGBM",
+      "accuracy": 0.8775,
+      "accuracy_std": 0.0534,
+      "f1": 0.8213,
+      "auc_roc": 0.9399
     },
     {
       "rank": 2,
-      "model": "XGBoost",
-      "accuracy": 0.8599,
-      "accuracy_std": 0.0604,
-      "f1": 0.8146,
-      "auc_roc": 0.9269
+      "model": "Gradient Boosting",
+      "accuracy": 0.8664,
+      "accuracy_std": 0.0742,
+      "f1": 0.8112,
+      "auc_roc": 0.9405
     },
     {
       "rank": 3,
-      "model": "LightGBM",
-      "accuracy": 0.8596,
-      "accuracy_std": 0.0659,
-      "f1": 0.8041,
-      "auc_roc": 0.9479
+      "model": "XGBoost",
+      "accuracy": 0.8561,
+      "accuracy_std": 0.0535,
+      "f1": 0.8022,
+      "auc_roc": 0.9451
     }
   ]
 }
