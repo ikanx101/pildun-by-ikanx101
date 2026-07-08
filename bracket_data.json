@@ -839,6 +839,22 @@
         "away_score": 4,
         "winner": "Belgium",
         "date": "2026-07-07"
+      },
+      {
+        "home": "Argentina",
+        "away": "Egypt",
+        "home_score": 3,
+        "away_score": 2,
+        "winner": "Argentina",
+        "date": "2026-07-07"
+      },
+      {
+        "home": "Switzerland",
+        "away": "Colombia",
+        "home_score": 0,
+        "away_score": 0,
+        "winner": null,
+        "date": "2026-07-07"
       }
     ],
     "QF": [],
