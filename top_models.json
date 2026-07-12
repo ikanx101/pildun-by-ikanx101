@@ -1,32 +1,32 @@
 {
-  "updated_at": "2026-07-08",
-  "n_samples": 192,
+  "updated_at": "2026-07-12",
+  "n_samples": 200,
   "n_features": 132,
   "cv_folds": 10,
   "top3": [
     {
       "rank": 1,
-      "model": "Gradient Boosting",
-      "accuracy": 0.8484,
-      "accuracy_std": 0.1067,
-      "f1": 0.7687,
-      "auc_roc": 0.9122
+      "model": "Linear Discriminant Analysis",
+      "accuracy": 0.85,
+      "accuracy_std": 0.0548,
+      "f1": 0.7905,
+      "auc_roc": 0.9019
     },
     {
       "rank": 2,
-      "model": "LightGBM",
-      "accuracy": 0.8382,
-      "accuracy_std": 0.0766,
-      "f1": 0.7605,
-      "auc_roc": 0.9228
+      "model": "Gradient Boosting",
+      "accuracy": 0.84,
+      "accuracy_std": 0.0831,
+      "f1": 0.7622,
+      "auc_roc": 0.929
     },
     {
       "rank": 3,
       "model": "AdaBoost",
-      "accuracy": 0.8332,
-      "accuracy_std": 0.0697,
-      "f1": 0.7689,
-      "auc_roc": 0.9031
+      "accuracy": 0.84,
+      "accuracy_std": 0.07,
+      "f1": 0.7831,
+      "auc_roc": 0.905
     }
   ]
 }
