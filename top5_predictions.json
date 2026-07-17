@@ -1,41 +1,41 @@
 {
-  "updated_at": "2026-07-12",
-  "model_used": "Linear Discriminant Analysis",
-  "model_accuracy": 0.85,
+  "updated_at": "2026-07-17",
+  "model_used": "XGBoost",
+  "model_accuracy": 0.8636,
   "basis_prediksi": "rata-rata 2 pertandingan terakhir, hanya tim fase 16 besar",
   "n_teams_evaluated": 16,
   "top5": [
     {
       "rank": 1,
-      "team": "England",
-      "group": "Group L",
-      "last_stage": "Quarter-final",
-      "matches_played": 6,
-      "win_probability": 0.9978
+      "team": "Argentina",
+      "group": "Group J",
+      "last_stage": "Semi-final",
+      "matches_played": 7,
+      "win_probability": 0.996
     },
     {
       "rank": 2,
       "team": "France",
       "group": "Group I",
-      "last_stage": "Quarter-final",
-      "matches_played": 6,
-      "win_probability": 0.9972
+      "last_stage": "Semi-final",
+      "matches_played": 7,
+      "win_probability": 0.9901
     },
     {
       "rank": 3,
       "team": "Spain",
       "group": "Group H",
-      "last_stage": "Quarter-final",
-      "matches_played": 6,
-      "win_probability": 0.9884
+      "last_stage": "Semi-final",
+      "matches_played": 7,
+      "win_probability": 0.8407
     },
     {
       "rank": 4,
-      "team": "Argentina",
-      "group": "Group J",
-      "last_stage": "Quarter-final",
-      "matches_played": 6,
-      "win_probability": 0.9868
+      "team": "Brazil",
+      "group": "Group C",
+      "last_stage": "Round of 16",
+      "matches_played": 5,
+      "win_probability": 0.8177
     },
     {
       "rank": 5,
@@ -43,7 +43,7 @@
       "group": "Group G",
       "last_stage": "Quarter-final",
       "matches_played": 6,
-      "win_probability": 0.7096
+      "win_probability": 0.6351
     }
   ]
 }
